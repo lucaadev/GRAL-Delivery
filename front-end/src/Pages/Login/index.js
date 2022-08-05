@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import schemaLogin from '../../utils/schemaLogin';
 
@@ -67,14 +68,13 @@ function Login() {
       <button
         type="button"
         data-testid="common_login__button-register"
-        // disabled={ validEmailAndPassword }
-        // onClick={ handleClickLogin }
+        onClick={ useNavigate('/register') }
       >
         Ainda não tenho conta
       </button>
       { errorDB !== '' && (
         <section>
-          <span>{errorDB}</span>
+          <span data-testid="common_login__element-invalid-email">{errorDB}</span>
         </section>)}
     </section>
   );
