@@ -12,6 +12,9 @@ function AuthGuard({ children }) {
     // testa se usuario esta logado
     navigate('/login');
   }, [navigate]);
+
+  // condicional se os dados do usuario estao preenchidos no context e inserir Loading ate estar.
+
   return children;
 }
 
