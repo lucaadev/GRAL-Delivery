@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import schemaRegister from '../../utils/schemaRegister';
@@ -10,15 +10,17 @@ function Register() {
     email: '',
     password: '',
   });
+  const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
-  const checkRegister = async () => {
+  const checkRegister = useCallback(async () => {
     try {
       await schemaRegister.validate(register);
+      setIsDisabled(false);
     } catch (error) {
-      console.log(error);
+      setIsDisabled(true);
     }
-  };
+  }, [register]);
 
   const handleChange = ({ target }) => {
     setRegister((prevState) => ({
@@ -29,7 +31,6 @@ function Register() {
 
   const handleClickRegister = async () => {
     try {
-      checkRegister();
       const { data } = await axiosInstance.post('/register', { ...register });
       console.log(data);
       // setToken(data);
@@ -38,6 +39,8 @@ function Register() {
       setErrorDB(error.response.data.message);
     }
   };
+
+  useEffect(() => checkRegister(), [checkRegister]);
 
   return (
     <section>
@@ -66,12 +69,13 @@ function Register() {
         type="button"
         data-testid="common_register__button-register"
         onClick={ handleClickRegister }
+        disabled={ isDisabled }
       >
         Cadastrar
       </button>
       { errorDB !== '' && (
         <section>
-          <span data-testid="common_register__element-invalid_register ">{errorDB}</span>
+          <span data-testid="common_register__element-invalid_register">{errorDB}</span>
         </section>)}
     </section>
   );

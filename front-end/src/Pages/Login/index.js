@@ -21,15 +21,6 @@ function Login() {
     }
   }, [login]);
 
-  // const checkLogin = async () => {
-  //   try {
-  //     await schemaLogin.validate(login);
-  //     setIsDisabled(false);
-  //   } catch (error) {
-  //     setIsDisabled(true);
-  //   }
-  // };
-
   const handleChange = ({ target }) => {
     setLogin((prevState) => ({
       ...prevState,
@@ -83,7 +74,7 @@ function Login() {
       <button
         type="button"
         data-testid="common_login__button-register"
-        onClick={ useNavigate('/register') }
+        onClick={ () => navigate('/register') }
       >
         Ainda não tenho conta
       </button>
