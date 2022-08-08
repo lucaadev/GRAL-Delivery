@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import schemaLogin from '../../utils/schemaLogin';
 
 function Login() {
+  const navigate = useNavigate();
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -10,14 +12,14 @@ function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
-  const checkLogin = async () => {
+  const checkLogin = useCallback(async () => {
     try {
       await schemaLogin.validate(login);
       setIsDisabled(false);
     } catch (error) {
       setIsDisabled(true);
     }
-  };
+  }, [login]);
 
   const handleChange = ({ target }) => {
     setLogin((prevState) => ({
@@ -29,16 +31,15 @@ function Login() {
   const handleClickLogin = async () => {
     try {
       const { data } = await axiosInstance.post('/login', { ...login });
-      console.log(data);
+      console.log({ data });
       // setToken(data);
-      // navigate('/tasks');
+      navigate('/customer/products');
     } catch (error) {
       setErrorDB(error.response.data.message);
     }
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => checkLogin(), [login]);
+  useEffect(() => checkLogin(), [checkLogin]);
 
   return (
     <section>
@@ -47,14 +48,20 @@ function Login() {
         data-testid="common_login__input-email"
         name="email"
         value={ login.email }
-        onChange={ handleChange }
+        onChange={ (event) => {
+          handleChange(event);
+          checkLogin();
+        } }
       />
       <input
         type="password"
         data-testid="common_login__input-password"
         name="password"
         value={ login.password }
-        onChange={ handleChange }
+        onChange={ (event) => {
+          handleChange(event);
+          checkLogin();
+        } }
       />
       <button
         type="button"
@@ -67,14 +74,13 @@ function Login() {
       <button
         type="button"
         data-testid="common_login__button-register"
-        // disabled={ validEmailAndPassword }
-        // onClick={ handleClickLogin }
+        onClick={ () => navigate('/register') }
       >
         Ainda não tenho conta
       </button>
       { errorDB !== '' && (
         <section>
-          <span>{errorDB}</span>
+          <span data-testid="common_login__element-invalid-email">{errorDB}</span>
         </section>)}
     </section>
   );
