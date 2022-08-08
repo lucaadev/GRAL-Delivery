@@ -24,9 +24,15 @@ function Card({ id, title, price, image }) {
     ));
   };
 
-  const delItem = () => {
+  const delItem = (productId) => {
     if (itemValue === 0) setItemValue(0);
     if (itemValue !== 0) setItemValue(itemValue - 1);
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    cart.forEach((item) => {
+      if (item.id === productId && item.quantity > 0) item.quantity -= 1;
+    });
+    const newCart = cart.filter((item) => item.quantity > 0);
+    localStorage.setItem('cart', JSON.stringify(newCart));
   };
 
   return (
@@ -45,7 +51,7 @@ function Card({ id, title, price, image }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-rm-item-${id}` }
-        onClick={ delItem }
+        onClick={ () => { delItem(id); } }
       >
         -
       </button>
