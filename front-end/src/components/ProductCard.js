@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 
 function Card({ id, title, price, image }) {
   return (
-    <section className="product-card">
+    <section className="product-card" key={ id }>
       <span data-testid={ `customer_products__element-card-title-${id}` }>{title}</span>
-      <span data-testid={ `customer_products__element-card-price-${id}` }>{price}</span>
+      <span data-testid={ `customer_products__element-card-price-${id}` }>
+        R$
+        {' '}
+        {price}
+      </span>
       <img
         src={ image }
         alt="product-card"
@@ -37,7 +41,7 @@ function Card({ id, title, price, image }) {
 }
 
 Card.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
