@@ -2,12 +2,26 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function Card({ id, title, price, image }) {
-  // console.log(image);
-
   const [itemValue, setItemValue] = useState(0);
 
-  const addItem = () => {
+  const addItem = (name, value, productId) => {
     setItemValue(itemValue + 1);
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const checkProductCart = cart.find((item) => item.id === productId);
+    const newItemCart = {
+      id: productId,
+      title: name,
+      price: value,
+      quantity: 1,
+    };
+    if (!checkProductCart) {
+      cart.push(newItemCart);
+    } else {
+      checkProductCart.quantity += 1;
+    }
+    localStorage.setItem('cart', JSON.stringify(
+      cart,
+    ));
   };
 
   const delItem = () => {
@@ -45,7 +59,7 @@ function Card({ id, title, price, image }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }
-        onClick={ addItem }
+        onClick={ () => { addItem(title, price, id); } }
       >
         +
       </button>

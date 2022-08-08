@@ -5,6 +5,7 @@ import CartBtn from '../../components/CartBtn';
 import axiosInstance from '../../utils/axiosInstance';
 
 function Products() {
+  localStorage.setItem('cart', JSON.stringify([]));
   const [products, setProducts] = useState([]);
   const getAllProducts = async () => {
     try {
