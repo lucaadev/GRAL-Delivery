@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Header() {
+  const clearStorage = () => {
+    localStorage.setItem('userData', null);
+  };
   return (
     <section>
       <section className="navbar">
@@ -25,6 +28,7 @@ function Header() {
         <Link
           to="/"
           data-testid="customer_products__element-navbar-link-logout"
+          onClick={ clearStorage }
         >
           Sair
         </Link>

@@ -32,8 +32,13 @@ function Register() {
   const handleClickRegister = async () => {
     try {
       const { data } = await axiosInstance.post('/register', { ...register });
-      console.log(data);
-      // setToken(data);
+      const storageInfo = {
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        token: data.token,
+      };
+      localStorage.setItem('userData', JSON.stringify(storageInfo));
       navigate('/customer/products');
     } catch (error) {
       setErrorDB(error.response.data.message);
