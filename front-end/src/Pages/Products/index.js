@@ -8,18 +8,19 @@ function Products() {
   const [products, setProducts] = useState([]);
   const getAllProducts = async () => {
     try {
-      const allProducts = await axiosInstance.get('/products');
-      setProducts(allProducts);
+      const { data } = await axiosInstance.get('/products');
+      setProducts(data);
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => getAllProducts());
+  useEffect(() => getAllProducts(), []);
+  console.log(products);
   return (
     <section className="main-products">
       <Header />
       <section className="main-products-cards">
-        { products.map((product, i) => (
+        { products.length !== 0 && products.map((product, i) => (
           <Card
             key={ i }
             id={ product.id }

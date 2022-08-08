@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Card({ id, title, price, image }) {
+  console.log(image);
   return (
     <section className="product-card" key={ id }>
       <span data-testid={ `customer_products__element-card-title-${id}` }>{title}</span>
@@ -41,7 +42,7 @@ function Card({ id, title, price, image }) {
 }
 
 Card.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
