@@ -8,7 +8,7 @@ function Card({ id, title, price, image }) {
       <span data-testid={ `customer_products__element-card-price-${id}` }>{price}</span>
       <img
         src={ image }
-        alt="produtc-card"
+        alt="product-card"
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
       <button
