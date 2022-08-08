@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from '../../components/Navbar';
 
 function Products() {
   return (
-    <h1>Lista de produtos aqui</h1>
+    <section>
+      <Header />
+    </section>
   );
 }
 
