@@ -8,8 +8,8 @@ const messageUnauthorized = errorThrow(401, 'Token Not Found');
 const messageInvalidToken = errorThrow(401, 'Expired Or Invalid Token');
 
 const validateAuth = (req, _res, next) => {
-    const token = req.headers.authorization;
-    
+    // const { token } = req.headers.Authorization;
+    console.log('Back', req.headers);
     if (!token) next(messageUnauthorized);
 
     jwt.verify(token, secretKey, configJWT.algorithm, (error, userInfo) => {

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function Card({ id, title, price, image }) {
   const [itemValue, setItemValue] = useState(0);
-
   const addItem = (name, value, productId) => {
     setItemValue(itemValue + 1);
     const cart = JSON.parse(localStorage.getItem('cart'));
@@ -39,7 +38,7 @@ function Card({ id, title, price, image }) {
     <section className="product-card" key={ id }>
       <span data-testid={ `customer_products__element-card-title-${id}` }>{title}</span>
       <span data-testid={ `customer_products__element-card-price-${id}` }>
-        {price.replace(/\./, ',')}
+        {price}
       </span>
       <img
         src={ image }

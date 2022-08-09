@@ -7,11 +7,13 @@ import axiosInstance from '../../utils/axiosInstance';
 
 function Products() {
   // const navigate = useNavigate();
+  const { token } = JSON.parse(localStorage.getItem('user'));
   localStorage.setItem('cart', JSON.stringify([]));
   // const cart = JSON.parse(localStorage.getItem('cart'));
   const { name } = JSON.parse(localStorage.getItem('user'));
   const [products, setProducts] = useState([]);
   // const [totalValue, setTotalValue] = useState(0);
+  // const teste = products.map((item) => item.price.replace(/\./, ','));
   const getAllProducts = async () => {
     try {
       const { data } = await axiosInstance.get('/products');
@@ -19,11 +21,11 @@ function Products() {
     } catch (error) {
       console.log(error);
       // navigate('/login');
-      localStorage.setItem('user', '');
+      // localStorage.setItem('user', '');
     }
   };
   useEffect(() => getAllProducts(), []);
-  // console.log(products);
+  console.log(token);
   return (
     <section className="main-products">
       <Header userName={ name } />
