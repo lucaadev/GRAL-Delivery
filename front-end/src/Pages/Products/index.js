@@ -7,16 +7,19 @@ import axiosInstance from '../../utils/axiosInstance';
 
 function Products() {
   // const navigate = useNavigate();
-  const { token } = JSON.parse(localStorage.getItem('user'));
   localStorage.setItem('cart', JSON.stringify([]));
   // const cart = JSON.parse(localStorage.getItem('cart'));
   const { name } = JSON.parse(localStorage.getItem('user'));
   const [products, setProducts] = useState([]);
   // const [totalValue, setTotalValue] = useState(0);
-  // const teste = products.map((item) => item.price.replace(/\./, ','));
   const getAllProducts = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const config = {
+      headers: { Authorization: token },
+    };
     try {
-      const { data } = await axiosInstance.get('/products');
+      const { data } = await axiosInstance
+        .get('/products', config);
       setProducts(data);
     } catch (error) {
       console.log(error);
@@ -25,20 +28,27 @@ function Products() {
     }
   };
   useEffect(() => getAllProducts(), []);
-  console.log(token);
   return (
     <section className="main-products">
       <Header userName={ name } />
       <section className="main-products-cards">
-        { products.length !== 0 && products.map((product, i) => (
-          <Card
-            key={ i }
-            id={ product.id }
-            title={ product.name }
-            price={ product.price }
-            image={ product.url_image }
-          />
-        ))}
+        { products.length !== 0 && products
+          .map(({ id, name: productName, price, url_Image: urlImage }, i) => {
+            const priceFormat = `${price}`.replace('.', ',');
+            console.log(
+              priceFormat,
+              { id, productName, price, urlImage },
+            );
+            return (
+              <Card
+                key={ i }
+                id={ id }
+                title={ productName }
+                price={ priceFormat }
+                url_image={ urlImage }
+              />
+            );
+          })}
       </section>
       <CartBtn price={ 0 } />
     </section>
