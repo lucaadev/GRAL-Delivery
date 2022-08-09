@@ -20,6 +20,7 @@ function Products() {
     try {
       const { data } = await axiosInstance
         .get('/products', config);
+      console.log({ data });
       setProducts(data);
     } catch (error) {
       console.log(error);
@@ -33,7 +34,7 @@ function Products() {
       <Header userName={ name } />
       <section className="main-products-cards">
         { products.length !== 0 && products
-          .map(({ id, name: productName, price, url_Image: urlImage }, i) => {
+          .map(({ id, name: productName, price, url_image: urlImage }, i) => {
             const priceFormat = `${price}`.replace('.', ',');
             return (
               <Card
@@ -41,7 +42,7 @@ function Products() {
                 id={ id }
                 title={ productName }
                 price={ priceFormat }
-                url_image={ urlImage }
+                image={ urlImage }
               />
             );
           })}
