@@ -39,8 +39,6 @@ function Card({ id, title, price, image }) {
     <section className="product-card" key={ id }>
       <span data-testid={ `customer_products__element-card-title-${id}` }>{title}</span>
       <span data-testid={ `customer_products__element-card-price-${id}` }>
-        R$
-        {' '}
         {price}
       </span>
       <img
