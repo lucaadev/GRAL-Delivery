@@ -11,5 +11,23 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'users'
   });
 
+  User.associate = ({ Sale }) => {
+    User.hasMany(Sale, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+      hooks: true, 
+      foreignKey: 'user_id', 
+      as: 'userSales' })
+  };
+
+  User.associate = ({ Sale }) => {
+    User.hasMany(Sale, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+      hooks: true, 
+      foreignKey: 'seller_id', 
+      as: 'sellerSales' })
+  };
+
   return User;
 };

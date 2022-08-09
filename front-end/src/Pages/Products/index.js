@@ -35,10 +35,6 @@ function Products() {
         { products.length !== 0 && products
           .map(({ id, name: productName, price, url_Image: urlImage }, i) => {
             const priceFormat = `${price}`.replace('.', ',');
-            console.log(
-              priceFormat,
-              { id, productName, price, urlImage },
-            );
             return (
               <Card
                 key={ i }
