@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Navbar';
 import Card from '../../components/ProductCard';
 import CartBtn from '../../components/CartBtn';
 import axiosInstance from '../../utils/axiosInstance';
 
 function Products() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   localStorage.setItem('cart', JSON.stringify([]));
   // const cart = JSON.parse(localStorage.getItem('cart'));
   const { name } = JSON.parse(localStorage.getItem('user'));
@@ -18,7 +18,7 @@ function Products() {
       setProducts(data);
     } catch (error) {
       console.log(error);
-      navigate('/login');
+      // navigate('/login');
       localStorage.setItem('user', '');
     }
   };
