@@ -6,6 +6,7 @@ const productsRoute = require('../routes/products.route');
 const errorHandler = require('../middlewares/errorHandler');
 
 const app = express();
+app.use(express.static(`${__dirname}/../..`));
 
 app.use(express.json());
 app.use(cors());
