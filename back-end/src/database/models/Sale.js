@@ -39,21 +39,21 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Sale.associate = ({ User }) => {
-    Sale.hasMany(User, {
+    Sale.belongsTo(User, {
       onDelete: 'cascade',
       onUpdate: 'cascade', 
-      hooks: true, 
-      foreignKey: 'id', 
-      sourceKey: 'user_id'
-  });
-      Sale.hasMany(User, {
-        onDelete: 'cascade',
-        onUpdate: 'cascade', 
-        hooks: true, 
-        foreignKey: 'id',
-        sourceKey: 'seller_id'
-    });
-    };
+      foreignKey: 'user_id',
+      as: 'userId'
+    })
+    
+    Sale.belongsTo(User, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade', 
+      foreignKey: 'seller_id',
+      as: 'sellerId'
+    })
+  }
+
 
   return Sale;
 };

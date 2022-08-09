@@ -2,18 +2,15 @@ const { Sale, User } = require('../database/models');
 
 const createNewSale = async (body) => {
   const saleCreated = await Sale.create(body);
-  console.log({ saleCreated });
   return saleCreated;
   };
 
-const getAllSales = async () => {
+const getAllSales = async (payload) => {
   const sales = await Sale.findAll({
-    include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-//       { model: User,
-// as: 'seller',
-// through: {
-//         attributes: { exclude: ['password'] } } },
+    ...payload,
+    include: [      
+      { model: User, as: 'userId', attributes: { exclude: ['password'] } },
+      { model: User, as: 'sellerId', attributes: { exclude: ['password'] } },
     ],
   });
   return sales;

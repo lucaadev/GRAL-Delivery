@@ -11,22 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'users'
   });
 
-User.associate = ({ Sale }) => {
-  User.belongsToMany(Sale, {
-    onDelete: 'cascade',
-    onUpdate: 'cascade',
-    hooks: true, 
-      through: 'SalesTable',
-      foreignKey: 'user_id'
-});
-User.belongsToMany(Sale, {
-  onDelete: 'cascade',
-  onUpdate: 'cascade',
-  hooks: true, 
-    through: 'SalesTable',
-    foreignKey: 'seller_id'
-});
-}
-
   return User;
 };
