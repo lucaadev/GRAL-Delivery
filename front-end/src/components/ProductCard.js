@@ -76,7 +76,7 @@ function Card({ id, title, price, image }) {
 Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
 };
 

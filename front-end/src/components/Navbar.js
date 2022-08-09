@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function Header() {
+function Header({ userName }) {
   const clearStorage = () => {
-    localStorage.setItem('userData', null);
+    localStorage.setItem('user', null);
   };
   return (
     <section>
@@ -23,10 +24,10 @@ function Header() {
         <span
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          Nome de usuário
+          {userName}
         </span>
         <Link
-          to="/"
+          to="/login"
           data-testid="customer_products__element-navbar-link-logout"
           onClick={ clearStorage }
         >
@@ -36,5 +37,9 @@ function Header() {
     </section>
   );
 }
+
+Header.propTypes = {
+  userName: PropTypes.string.isRequired,
+};
 
 export default Header;

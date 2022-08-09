@@ -6,6 +6,7 @@ import axiosInstance from '../../utils/axiosInstance';
 
 function Products() {
   localStorage.setItem('cart', JSON.stringify([]));
+  const { name } = JSON.parse(localStorage.getItem('user'));
   const [products, setProducts] = useState([]);
   const getAllProducts = async () => {
     try {
@@ -19,7 +20,7 @@ function Products() {
   console.log(products);
   return (
     <section className="main-products">
-      <Header />
+      <Header userName={ name } />
       <section className="main-products-cards">
         { products.length !== 0 && products.map((product, i) => (
           <Card

@@ -38,7 +38,7 @@ function Register() {
         role: data.role,
         token: data.token,
       };
-      localStorage.setItem('userData', JSON.stringify(storageInfo));
+      localStorage.setItem('user', JSON.stringify(storageInfo));
       navigate('/customer/products');
     } catch (error) {
       setErrorDB(error.response.data.message);
