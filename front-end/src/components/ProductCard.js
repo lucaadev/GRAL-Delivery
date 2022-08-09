@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import cartContext from '../utils/context';
 
 function Card({ id, title, price, image }) {
+  const { cartValue, setCartValue } = useContext(cartContext);
   const [itemValue, setItemValue] = useState(0);
   const addItem = (name, value, productId) => {
     setItemValue(itemValue + 1);
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const checkProductCart = cart.find((item) => item.id === productId);
     const newItemCart = {
       id: productId,
@@ -21,6 +23,9 @@ function Card({ id, title, price, image }) {
     localStorage.setItem('cart', JSON.stringify(
       cart,
     ));
+    const teste = cart
+      .reduce((acc, curr) => acc + (curr.quantity * parseFloat(curr.price)), cartValue);
+    setCartValue(teste);
   };
 
   const delItem = (productId) => {
@@ -32,6 +37,9 @@ function Card({ id, title, price, image }) {
     });
     const newCart = cart.filter((item) => item.quantity > 0);
     localStorage.setItem('cart', JSON.stringify(newCart));
+    const teste = cart
+      .reduce((acc, curr) => acc + (curr.quantity * parseFloat(curr.price)), cartValue);
+    setCartValue(teste);
   };
 
   return (
