@@ -20,7 +20,6 @@ function Products() {
     try {
       const { data } = await axiosInstance
         .get('/products', config);
-      console.log({ data });
       setProducts(data);
     } catch (error) {
       console.log(error);
