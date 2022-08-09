@@ -9,7 +9,6 @@ const messageInvalidToken = errorThrow(401, 'Expired Or Invalid Token');
 
 const validateAuth = (req, _res, next) => {
     const token = req.headers.authorization;
-    // console.log(req.headers.authorization);
     if (!token || !secretKey) {
         next(messageUnauthorized);
     }  
