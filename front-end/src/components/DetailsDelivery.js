@@ -7,7 +7,9 @@ function DetailsDelivery({ sellerName }) {
       <label htmlFor="vendedor-responsavel">
         P.Vendedor Responsável:
         { sellerName }
-        <select id="">
+        {' '}
+
+        <select data-testid="customer_checkout__select-seller">
           <option value="vendedor">Vendedora 1</option>
           <option value="vendedor">Vendedora 2</option>
         </select>
@@ -16,6 +18,7 @@ function DetailsDelivery({ sellerName }) {
       <label htmlFor="endereco">
         Endereço:
         <input
+          data-testid="customer_checkout__input-address"
           type="text"
           id="endereco"
           name="endereco"
@@ -28,7 +31,13 @@ function DetailsDelivery({ sellerName }) {
 
       <label htmlFor="numero">
         Número:
-        <input type="number" id="numero" name="numero" max="100" />
+        <input
+          data-testid="customer_checkout__input-addressNumber"
+          type="number"
+          id="numero"
+          name="numero"
+          max="100"
+        />
       </label>
     </form>
   </section>;

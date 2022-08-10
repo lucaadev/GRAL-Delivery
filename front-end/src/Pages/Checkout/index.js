@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import DetailsDelivery from '../../components/DetailsDelivery';
 import Header from '../../components/Navbar';
 import TableRow from '../../components/TableRow';
 import cartContext from '../../utils/context';
@@ -6,6 +8,7 @@ import cartContext from '../../utils/context';
 function Checkout() {
   const { cartValue } = useContext(cartContext);
   const { name } = JSON.parse(localStorage.getItem('user'));
+  const navigate = useNavigate();
   const cart = JSON.parse(localStorage.getItem('cart'));
   return (
     <section className="main-checkout">
@@ -32,7 +35,16 @@ function Checkout() {
           </span>
         </section>
       </section>
-      <section className="details-checkout" />
+      <section className="details-checkout">
+        <DetailsDelivery />
+        <button
+          type="button"
+          data-testid="customer_checkout__button-submit-order"
+          onClick={ () => navigate('/customer/orders') }
+        >
+          Finalizar pedido
+        </button>
+      </section>
     </section>
 
   );
