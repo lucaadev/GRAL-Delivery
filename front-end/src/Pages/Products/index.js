@@ -7,8 +7,9 @@ import axiosInstance from '../../utils/axiosInstance';
 import cartContext from '../../utils/context';
 
 function Products() {
-  const { cartValue } = useContext(cartContext);
-  // localStorage.setItem('cart', JSON.stringify([]));
+  const { cartValue, setCartValue } = useContext(cartContext);
+  const totalPrice = JSON.parse(localStorage.getItem('cartValue'));
+  setCartValue(totalPrice);
   const { name } = JSON.parse(localStorage.getItem('user'));
   const [products, setProducts] = useState([]);
   const getAllProducts = async () => {
@@ -38,12 +39,13 @@ function Products() {
                 id={ id }
                 title={ productName }
                 price={ priceFormat }
+                floatPrice={ price }
                 url_image={ urlImage }
               />
             );
           })}
       </section>
-      <CartBtn price={ cartValue } />
+      <CartBtn price={ cartValue && cartValue.toFixed(2) } />
     </section>
   );
 }

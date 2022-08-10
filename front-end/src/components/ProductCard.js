@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import cartContext from '../utils/context';
 
-function Card({ id, title, price, image }) {
-  const { cartValue, setCartValue } = useContext(cartContext);
+function Card({ id, title, price, floatPrice, image }) {
+  const { setCartValue } = useContext(cartContext);
   const [itemValue, setItemValue] = useState(0);
   const addItem = (name, value, productId) => {
     setItemValue(itemValue + 1);
@@ -23,9 +23,11 @@ function Card({ id, title, price, image }) {
     localStorage.setItem('cart', JSON.stringify(
       cart,
     ));
-    const teste = cart
-      .reduce((acc, curr) => acc + (curr.quantity * parseFloat(curr.price)), cartValue);
-    setCartValue(teste);
+    const total = cart
+      .reduce((acc, curr) => acc
+      + (curr.quantity * parseFloat(curr.price)), 0);
+    setCartValue(total);
+    localStorage.setItem('cartValue', total);
   };
 
   const delItem = (productId) => {
@@ -37,9 +39,11 @@ function Card({ id, title, price, image }) {
     });
     const newCart = cart.filter((item) => item.quantity > 0);
     localStorage.setItem('cart', JSON.stringify(newCart));
-    const teste = cart
-      .reduce((acc, curr) => acc + (curr.quantity * parseFloat(curr.price)), cartValue);
-    setCartValue(teste);
+    const total = cart
+      .reduce((acc, curr) => acc
+      + (curr.quantity * parseFloat(curr.price)), 0);
+    setCartValue(total);
+    localStorage.setItem('cartValue', total);
   };
 
   return (
@@ -70,7 +74,7 @@ function Card({ id, title, price, image }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }
-        onClick={ () => { addItem(title, price, id); } }
+        onClick={ () => { addItem(title, floatPrice, id); } }
       >
         +
       </button>
@@ -82,6 +86,7 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
+  floatPrice: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
 };
 
