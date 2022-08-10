@@ -31,7 +31,7 @@ function Products() {
       <Header userName={ name } />
       <section className="main-products-cards">
         { products.length !== 0 && products
-          .map(({ id, name: productName, price, url_Image: urlImage }, i) => {
+          .map(({ id, name: productName, price, url_image: urlImage }, i) => {
             const priceFormat = `${price}`.replace('.', ',');
             return (
               <Card
