@@ -1,84 +1,34 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cartContext from '../utils/context';
+import sumCart from '../utils/sumCart';
 
 function Card({ id, title, price, floatPrice, image }) {
   const { setCartValue } = useContext(cartContext);
   const [itemValue, setItemValue] = useState(0);
 
-  const addItem = (name, value, quantity, productId) => {
-    setItemValue(itemValue + quantity);
+  const updateLocalStorage = useCallback(() => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const checkProductCart = cart.find((item) => item.id === productId);
+    const checkProductCart = cart.find((item) => item.id === id);
     const newItemCart = {
-      id: productId,
-      title: name,
-      price: value,
-      quantity,
+      id,
+      title,
+      price: floatPrice,
+      quantity: itemValue,
     };
     if (!checkProductCart) {
       cart.push(newItemCart);
     } else {
-      checkProductCart.quantity += quantity;
+      checkProductCart.quantity = itemValue;
     }
-    localStorage.setItem('cart', JSON.stringify(
-      cart,
-    ));
-    const total = cart
-      .reduce((acc, curr) => acc
-      + (curr.quantity * parseFloat(curr.price)), 0);
-    setCartValue(total);
-    localStorage.setItem('cartValue', total);
-  };
-
-  const delItem = (productId) => {
-    if (itemValue === 0) setItemValue(0);
-    if (itemValue !== 0) setItemValue(itemValue - 1);
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    cart.forEach((item) => {
-      if (item.id === productId && item.quantity > 0) item.quantity -= 1;
-    });
     const newCart = cart.filter((item) => item.quantity > 0);
     localStorage.setItem('cart', JSON.stringify(newCart));
-    const total = cart
-      .reduce((acc, curr) => acc
-      + (curr.quantity * parseFloat(curr.price)), 0);
-    setCartValue(total);
-    localStorage.setItem('cartValue', total);
-  };
+    const totalCartValue = sumCart(newCart);
+    setCartValue(totalCartValue);
+    localStorage.setItem('cartValue', totalCartValue);
+  }, [itemValue, id, floatPrice, title, setCartValue]);
 
-  // const changeItem = (name, value, quantity, productId) => {
-  //   const checkProductCart = cart.find((item) => item.id === productId);
-  //   if (!checkProductCart) {
-  //     addItem(name, value, quantity, productId);
-  //   } else {
-  //     checkProductCart.quantity += quantity;
-  //   }
-  // };
-  // const changeItem = (name, value, quantity, productId) => {
-  //   setItemValue(quantity);
-  //   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  //   const checkProductCart = cart.find((item) => item.id === productId);
-  //   const newItemCart = {
-  //     id: productId,
-  //     title: name,
-  //     price: value,
-  //     quantity,
-  //   };
-  //   if (!checkProductCart) {
-  //     cart.push(newItemCart);
-  //   } else {
-  //     checkProductCart.quantity += quantity;
-  //   }
-  //   localStorage.setItem('cart', JSON.stringify(
-  //     cart,
-  //   ));
-  //   const total = cart
-  //     .reduce((acc, curr) => acc
-  //     + (curr.quantity * parseFloat(curr.price)), 0);
-  //   setCartValue(total);
-  //   localStorage.setItem('cartValue', total);
-  // };
+  useEffect(() => updateLocalStorage(), [updateLocalStorage]);
 
   return (
     <section className="product-card" key={ id }>
@@ -95,7 +45,8 @@ function Card({ id, title, price, floatPrice, image }) {
       <button
         type="button"
         data-testid={ `customer_products__button-card-rm-item-${id}` }
-        onClick={ () => { delItem(id); } }
+        onClick={ () => (itemValue > 0 ? setItemValue((prevState) => prevState - 1)
+          : setItemValue(0)) }
       >
         -
       </button>
@@ -104,15 +55,12 @@ function Card({ id, title, price, floatPrice, image }) {
         data-testid={ `customer_products__input-card-quantity-${id}` }
         name="quantity"
         value={ itemValue }
-        onChange={ (e) => {
-          console.log(e.target.value);
-          changeItem(title, floatPrice, Number(e.target.value), id);
-        } }
+        onChange={ ({ target: { value } }) => { setItemValue(Number(value)); } }
       />
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }
-        onClick={ () => { addItem(title, floatPrice, 1, id); } }
+        onClick={ () => setItemValue((prevState) => prevState + 1) }
       >
         +
       </button>
