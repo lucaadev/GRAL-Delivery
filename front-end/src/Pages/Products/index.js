@@ -47,7 +47,7 @@ function Products() {
             );
           })}
       </section>
-      <CartBtn price={ cartValue ? Number(cartValue.toFixed(2)) : 0.00 } />
+      <CartBtn price={ cartValue || 0.00 } />
     </section>
   );
 }

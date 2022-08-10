@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CartBtn({ price }) {
   const navigate = useNavigate();
-  const priceFormat = price.toString().replace('.', ',');
+  const priceFormat = price.toFixed(2).replace('.', ',');
   return (
     <button
       type="button"
