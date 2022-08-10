@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const errorThrow = require('../utils/errorThrow');
-const { createToken } = require('../utils/generateToken');
+const { createToken } = require('../utils/createToken');
 const { getUserByEmail } = require('./usersService');
 
 const createLogin = async (email, password) => {
