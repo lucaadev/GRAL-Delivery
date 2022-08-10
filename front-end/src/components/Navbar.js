@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 function Header({ userName }) {
   const clearStorage = () => {
+    localStorage.clear();
     localStorage.setItem('user', '');
   };
   return (
