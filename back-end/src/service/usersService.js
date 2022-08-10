@@ -18,6 +18,6 @@ const getUserById = async (id) => {
 const createNewUser = async (data) => {
   const newUser = await User.create(data);
   return newUser;
-}
+};
 
 module.exports = { getUserByEmail, createNewUser, getUserById, getUsersByRole };
