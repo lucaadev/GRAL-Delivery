@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import cartContext from '../utils/context';
+import sumCart from '../utils/sumCart';
 
 function TableRow({ index, id, title, quantity, price, subTotal }) {
+  const { setCartValue } = useContext(cartContext);
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  const removeItem = () => {
+    const newCart = cart.filter((item) => item.id !== id);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    const newTotal = sumCart(newCart);
+    setCartValue(newTotal);
+  };
   return (
     <table className="products-table">
       <thead>
@@ -39,6 +49,7 @@ function TableRow({ index, id, title, quantity, price, subTotal }) {
             <button
               type="button"
               data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+              onClick={ () => removeItem() }
             >
               Remover
             </button>

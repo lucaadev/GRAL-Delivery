@@ -4,29 +4,24 @@ import TableRow from '../../components/TableRow';
 import cartContext from '../../utils/context';
 
 function Checkout() {
-  const teste = {
-    name: 'heineken',
-    q: 6,
-    v: 4,
-    t: 24,
-  };
   const { cartValue } = useContext(cartContext);
   const { name } = JSON.parse(localStorage.getItem('user'));
-  const arr = [teste];
+  const cart = JSON.parse(localStorage.getItem('cart'));
   return (
     <section className="main-checkout">
       <Header userName={ name } />
       <span>Finalizar pedido</span>
       <section>
         {
-          arr.map((item, i) => (
+          cart.map((item, i) => (
             <TableRow
               key={ i }
               index={ i }
-              title={ item.name }
-              quantity={ item.q }
-              price={ item.v }
-              subTotal={ item.t }
+              id={ item.id }
+              title={ item.title }
+              quantity={ item.quantity }
+              price={ item.price }
+              subTotal={ Number((item.quantity * item.price).toFixed(2)) }
             />
           ))
         }

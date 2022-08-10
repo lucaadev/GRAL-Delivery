@@ -1,17 +1,41 @@
 import React from 'react';
-ypes from ''prop-types;
+import PropTypes from 'prop-types';
 
-function DetailsDelivery ({ userName }) {
-    <section className="delivery-details">
-        <form>
-            <div>
-                <label for="vendedor-responsavel">P.Vendedor Responsável</label>
-                <input type="text" id="nome" />
-            </div>
-        </form>
-    </section>
+function DetailsDelivery({ sellerName }) {
+  <section className="delivery-details">
+    <form>
+      <label htmlFor="vendedor-responsavel">
+        P.Vendedor Responsável:
+        { sellerName }
+        <select id="">
+          <option value="vendedor">Vendedora 1</option>
+          <option value="vendedor">Vendedora 2</option>
+        </select>
+      </label>
+
+      <label htmlFor="endereco">
+        Endereço:
+        <input
+          type="text"
+          id="endereco"
+          name="endereco"
+          required
+          minLength="4"
+          maxLength="100"
+          size="10"
+        />
+      </label>
+
+      <label htmlFor="numero">
+        Número:
+        <input type="number" id="numero" name="numero" max="100" />
+      </label>
+    </form>
+  </section>;
 }
-rropT;
-Pop;
-mport;
-i;
+
+DetailsDelivery.propTypes = {
+  sellerName: PropTypes.string.isRequired,
+};
+
+export default DetailsDelivery;
