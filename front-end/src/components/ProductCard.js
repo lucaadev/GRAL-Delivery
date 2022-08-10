@@ -1,38 +1,34 @@
-import React, { useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import cartContext from '../utils/context';
+import sumCart from '../utils/sumCart';
 
-function Card({ id, title, price, image }) {
+function Card({ id, title, price, floatPrice, image }) {
+  const { setCartValue } = useContext(cartContext);
   const [itemValue, setItemValue] = useState(0);
-  const addItem = (name, value, productId) => {
-    setItemValue(itemValue + 1);
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    const checkProductCart = cart.find((item) => item.id === productId);
+
+  const updateLocalStorage = useCallback(() => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const checkProductCart = cart.find((item) => item.id === id);
     const newItemCart = {
-      id: productId,
-      title: name,
-      price: value,
-      quantity: 1,
+      id,
+      title,
+      price: floatPrice,
+      quantity: itemValue,
     };
     if (!checkProductCart) {
       cart.push(newItemCart);
     } else {
-      checkProductCart.quantity += 1;
+      checkProductCart.quantity = itemValue;
     }
-    localStorage.setItem('cart', JSON.stringify(
-      cart,
-    ));
-  };
-
-  const delItem = (productId) => {
-    if (itemValue === 0) setItemValue(0);
-    if (itemValue !== 0) setItemValue(itemValue - 1);
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    cart.forEach((item) => {
-      if (item.id === productId && item.quantity > 0) item.quantity -= 1;
-    });
     const newCart = cart.filter((item) => item.quantity > 0);
     localStorage.setItem('cart', JSON.stringify(newCart));
-  };
+    const totalCartValue = sumCart(newCart);
+    setCartValue(totalCartValue);
+    localStorage.setItem('cartValue', totalCartValue);
+  }, [itemValue, id, floatPrice, title, setCartValue]);
+
+  useEffect(() => updateLocalStorage(), [updateLocalStorage]);
 
   return (
     <section className="product-card" key={ id }>
@@ -43,26 +39,28 @@ function Card({ id, title, price, image }) {
       <img
         src={ image }
         alt="product-card"
+        style={ { width: '50px' } }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
       <button
         type="button"
         data-testid={ `customer_products__button-card-rm-item-${id}` }
-        onClick={ () => { delItem(id); } }
+        onClick={ () => (itemValue > 0 ? setItemValue((prevState) => prevState - 1)
+          : setItemValue(0)) }
       >
         -
       </button>
       <input
-        type="text"
+        type="number"
         data-testid={ `customer_products__input-card-quantity-${id}` }
         name="quantity"
         value={ itemValue }
-        onChange={ (e) => { setItemValue(Number(e.target.value)); } }
+        onChange={ ({ target: { value } }) => { setItemValue(Number(value)); } }
       />
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }
-        onClick={ () => { addItem(title, price, id); } }
+        onClick={ () => setItemValue((prevState) => prevState + 1) }
       >
         +
       </button>
@@ -74,6 +72,7 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
+  floatPrice: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
 };
 
