@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../utils/axiosInstance';
-import schemaRegister from '../../utils/schemaRegister';
+import axiosInstance from '../../utils/axios/axiosInstance';
+import schemaRegister from '../../utils/schemas/schemaRegister';
 
 function Register() {
   const navigate = useNavigate();

@@ -1,10 +1,11 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import cartContext from '../utils/context';
-import sumCart from '../utils/sumCart';
+import DeliveryContext from '../../utils/context/DeliveryContext';
+import sumCart from '../../utils/helpers/sumCart';
+import Input from '../Input';
 
 function Card({ id, title, price, floatPrice, image }) {
-  const { setCartValue } = useContext(cartContext);
+  const { setCartValue } = useContext(DeliveryContext);
   const [itemValue, setItemValue] = useState(0);
 
   const updateLocalStorage = useCallback(() => {
@@ -50,13 +51,21 @@ function Card({ id, title, price, floatPrice, image }) {
       >
         -
       </button>
-      <input
+      <Input
+        type="number"
+        dataTestid={ `customer_products__input-card-quantity-${id}` }
+        name="quantity"
+        value={ itemValue }
+        onChangefn={ ({ target: { value } }) => { setItemValue(Number(value)); } }
+        labelText=""
+      />
+      {/* <input
         type="number"
         data-testid={ `customer_products__input-card-quantity-${id}` }
         name="quantity"
         value={ itemValue }
         onChange={ ({ target: { value } }) => { setItemValue(Number(value)); } }
-      />
+      /> */}
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }

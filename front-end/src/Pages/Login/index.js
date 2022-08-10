@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../utils/axiosInstance';
-import schemaLogin from '../../utils/schemaLogin';
+import Input from '../../components/Input';
+import axiosInstance from '../../utils/axios/axiosInstance';
+import schemaLogin from '../../utils/schemas/schemaLogin';
 
 function Login() {
   const navigate = useNavigate();
@@ -48,7 +49,18 @@ function Login() {
 
   return (
     <section>
-      <input
+      <Input
+        type="text"
+        dataTestid="common_login__input-email"
+        labelText="Email"
+        name="email"
+        value={ login.email }
+        onChangefn={ (event) => {
+          handleChange(event);
+          checkLogin();
+        } }
+      />
+      {/* <input
         type="text"
         data-testid="common_login__input-email"
         name="email"
@@ -57,8 +69,19 @@ function Login() {
           handleChange(event);
           checkLogin();
         } }
+      /> */}
+      <Input
+        type="password"
+        dataTestid="common_login__input-password"
+        labelText="Password"
+        name="password"
+        value={ login.password }
+        onChangefn={ (event) => {
+          handleChange(event);
+          checkLogin();
+        } }
       />
-      <input
+      {/* <input
         type="password"
         data-testid="common_login__input-password"
         name="password"
@@ -67,7 +90,7 @@ function Login() {
           handleChange(event);
           checkLogin();
         } }
-      />
+      /> */}
       <button
         type="button"
         data-testid="common_login__button-login"
