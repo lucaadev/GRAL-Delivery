@@ -8,8 +8,6 @@ import cartContext from '../../utils/context';
 
 function Products() {
   const { cartValue, setCartValue } = useContext(cartContext);
-  const totalPrice = JSON.parse(localStorage.getItem('cartValue'));
-  setCartValue(totalPrice);
   const { name } = JSON.parse(localStorage.getItem('user'));
   const [products, setProducts] = useState([]);
   const getAllProducts = async () => {
@@ -25,7 +23,11 @@ function Products() {
       console.log(error);
     }
   };
-  useEffect(() => getAllProducts(), []);
+  useEffect(() => {
+    const totalPrice = JSON.parse(localStorage.getItem('cartValue'));
+    setCartValue(totalPrice);
+    getAllProducts();
+  }, [setCartValue]);
   return (
     <section className="main-products">
       <Header userName={ name } />
@@ -40,12 +42,12 @@ function Products() {
                 title={ productName }
                 price={ priceFormat }
                 floatPrice={ price }
-                url_image={ urlImage }
+                image={ urlImage }
               />
             );
           })}
       </section>
-      <CartBtn price={ cartValue && cartValue.toFixed(2) } />
+      <CartBtn price={ cartValue && Number(cartValue.toFixed(2)) } />
     </section>
   );
 }

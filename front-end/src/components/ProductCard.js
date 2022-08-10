@@ -55,6 +55,7 @@ function Card({ id, title, price, floatPrice, image }) {
       <img
         src={ image }
         alt="product-card"
+        style={ { width: '50px' } }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
       <button
@@ -86,7 +87,7 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  floatPrice: PropTypes.number.isRequired,
+  floatPrice: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
 };
 
