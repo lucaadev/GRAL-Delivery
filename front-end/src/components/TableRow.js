@@ -14,16 +14,6 @@ function TableRow({ index, id, title, quantity, price, subTotal }) {
   };
   return (
     <table className="products-table">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Descrição</th>
-          <th>Quantidade</th>
-          <th>Valor unitário</th>
-          <th>Sub-total</th>
-          <th>Remover item</th>
-        </tr>
-      </thead>
       <tbody>
         <tr key={ id }>
           <td

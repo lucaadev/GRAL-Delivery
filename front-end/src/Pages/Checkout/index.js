@@ -16,6 +16,16 @@ function Checkout() {
       <Header userName={ name } />
       <span>Finalizar pedido</span>
       <section>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Valor unitário</th>
+            <th>Sub-total</th>
+            <th>Remover item</th>
+          </tr>
+        </thead>
         {
           cart.map((item, i) => {
             const priceFormat = `${item.price}`.replace('.', ',');
