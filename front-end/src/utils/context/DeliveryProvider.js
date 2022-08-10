@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import cartContext from './context';
+import DeliveryContext from './DeliveryContext';
 
-function Provider({ children }) {
+function DeliveryProvider({ children }) {
   const [cartValue, setCartValue] = useState(0);
   const value = React.useMemo(() => ({
     cartValue, setCartValue,
   }), [cartValue]);
 
   return (
-    <cartContext.Provider value={ value }>
+    <DeliveryContext.Provider value={ value }>
       {children}
-    </cartContext.Provider>
+    </DeliveryContext.Provider>
   );
 }
 
-Provider.propTypes = {
+DeliveryProvider.propTypes = {
   children: PropTypes.string,
 }.isRequired;
 
-export default Provider;
+export default DeliveryProvider;

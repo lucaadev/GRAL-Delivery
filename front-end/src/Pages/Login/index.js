@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../utils/axiosInstance';
-import schemaLogin from '../../utils/schemaLogin';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import axiosInstance from '../../utils/axios/axiosInstance';
+import schemaLogin from '../../utils/schemas/schemaLogin';
 
 function Login() {
   const navigate = useNavigate();
@@ -40,7 +42,8 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(storageInfo));
       navigate('/customer/products');
     } catch (error) {
-      setErrorDB(error.response.data.message);
+      console.log(error);
+      setErrorDB(error?.response?.data?.message);
     }
   };
 
@@ -48,41 +51,41 @@ function Login() {
 
   return (
     <section>
-      <input
+      <Input
         type="text"
-        data-testid="common_login__input-email"
+        dataTestid="common_login__input-email"
+        labelText="Email"
         name="email"
         value={ login.email }
-        onChange={ (event) => {
+        onChangefn={ (event) => {
           handleChange(event);
           checkLogin();
         } }
       />
-      <input
+      <Input
         type="password"
-        data-testid="common_login__input-password"
+        dataTestid="common_login__input-password"
+        labelText="Password"
         name="password"
         value={ login.password }
-        onChange={ (event) => {
+        onChangefn={ (event) => {
           handleChange(event);
           checkLogin();
         } }
       />
-      <button
-        type="button"
-        data-testid="common_login__button-login"
+      <Button
+        dataTestid="common_login__button-login"
         disabled={ isDisabled }
-        onClick={ handleClickLogin }
+        onClickfn={ handleClickLogin }
       >
         Login
-      </button>
-      <button
-        type="button"
-        data-testid="common_login__button-register"
-        onClick={ () => navigate('/register') }
+      </Button>
+      <Button
+        dataTestid="common_login__button-register"
+        onClickfn={ () => navigate('/register') }
       >
         Ainda não tenho conta
-      </button>
+      </Button>
       { errorDB !== '' && (
         <section>
           <span data-testid="common_login__element-invalid-email">{errorDB}</span>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 // import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Navbar';
+import Header from '../../components/NavBar';
 import Card from '../../components/ProductCard';
 import CartBtn from '../../components/CartBtn';
-import axiosInstance from '../../utils/axiosInstance';
-import cartContext from '../../utils/context';
+import axiosInstance from '../../utils/axios/axiosInstance';
+import DeliveryContext from '../../utils/context/DeliveryContext';
 
 function Products() {
-  const { cartValue, setCartValue } = useContext(cartContext);
+  const { cartValue, setCartValue } = useContext(DeliveryContext);
   const { name } = JSON.parse(localStorage.getItem('user'));
   const [products, setProducts] = useState([]);
   const getAllProducts = async () => {
