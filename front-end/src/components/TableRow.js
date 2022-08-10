@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import cartContext from '../utils/context';
-import sumCart from '../utils/sumCart';
+import cartContext from '../utils/context/DeliveryContext';
+import sumCart from '../utils/helpersFunctions/sumCart';
 
 function TableRow({ index, id, title, quantity, price, subTotal }) {
   const { setCartValue } = useContext(cartContext);

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DetailsDelivery from '../../components/DetailsDelivery';
-import Header from '../../components/Navbar';
+import Header from '../../components/NavBar';
 import TableRow from '../../components/TableRow';
-import cartContext from '../../utils/context';
+import cartContext from '../../utils/context/DeliveryContext';
 
 function Checkout() {
   const { cartValue } = useContext(cartContext);
