@@ -5,20 +5,21 @@ import cartContext from '../utils/context';
 function Card({ id, title, price, floatPrice, image }) {
   const { setCartValue } = useContext(cartContext);
   const [itemValue, setItemValue] = useState(0);
-  const addItem = (name, value, productId) => {
-    setItemValue(itemValue + 1);
+
+  const addItem = (name, value, quantity, productId) => {
+    setItemValue(itemValue + quantity);
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const checkProductCart = cart.find((item) => item.id === productId);
     const newItemCart = {
       id: productId,
       title: name,
       price: value,
-      quantity: 1,
+      quantity,
     };
     if (!checkProductCart) {
       cart.push(newItemCart);
     } else {
-      checkProductCart.quantity += 1;
+      checkProductCart.quantity += quantity;
     }
     localStorage.setItem('cart', JSON.stringify(
       cart,
@@ -46,6 +47,39 @@ function Card({ id, title, price, floatPrice, image }) {
     localStorage.setItem('cartValue', total);
   };
 
+  // const changeItem = (name, value, quantity, productId) => {
+  //   const checkProductCart = cart.find((item) => item.id === productId);
+  //   if (!checkProductCart) {
+  //     addItem(name, value, quantity, productId);
+  //   } else {
+  //     checkProductCart.quantity += quantity;
+  //   }
+  // };
+  // const changeItem = (name, value, quantity, productId) => {
+  //   setItemValue(quantity);
+  //   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  //   const checkProductCart = cart.find((item) => item.id === productId);
+  //   const newItemCart = {
+  //     id: productId,
+  //     title: name,
+  //     price: value,
+  //     quantity,
+  //   };
+  //   if (!checkProductCart) {
+  //     cart.push(newItemCart);
+  //   } else {
+  //     checkProductCart.quantity += quantity;
+  //   }
+  //   localStorage.setItem('cart', JSON.stringify(
+  //     cart,
+  //   ));
+  //   const total = cart
+  //     .reduce((acc, curr) => acc
+  //     + (curr.quantity * parseFloat(curr.price)), 0);
+  //   setCartValue(total);
+  //   localStorage.setItem('cartValue', total);
+  // };
+
   return (
     <section className="product-card" key={ id }>
       <span data-testid={ `customer_products__element-card-title-${id}` }>{title}</span>
@@ -66,16 +100,19 @@ function Card({ id, title, price, floatPrice, image }) {
         -
       </button>
       <input
-        type="text"
+        type="number"
         data-testid={ `customer_products__input-card-quantity-${id}` }
         name="quantity"
         value={ itemValue }
-        onChange={ (e) => { setItemValue(Number(e.target.value)); } }
+        onChange={ (e) => {
+          console.log(e.target.value);
+          changeItem(title, floatPrice, Number(e.target.value), id);
+        } }
       />
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }
-        onClick={ () => { addItem(title, floatPrice, id); } }
+        onClick={ () => { addItem(title, floatPrice, 1, id); } }
       >
         +
       </button>
