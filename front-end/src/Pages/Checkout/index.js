@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../../components/Navbar';
 
 function Checkout() {
+  const { name } = JSON.parse(localStorage.getItem('user'));
   return (
-    <h1>Checkout aqui</h1>
+    <section>
+      <Header userName={ name } />
+    </section>
 
   );
 }
