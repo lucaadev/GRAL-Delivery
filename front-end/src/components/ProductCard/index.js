@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-import sumCart from '../../utils/helpers/sumCart';
+import sumCart from '../../utils/helpersFunctions/sumCart';
 import Input from '../Input';
 
 function Card({ id, title, price, floatPrice, image }) {

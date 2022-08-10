@@ -4,6 +4,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import schemaLogin from '../../utils/schemas/schemaLogin';
+import { deliveryStorage } from '../../utils/helpersFunctions/localStorage';
 
 function Login() {
   const navigate = useNavigate();
@@ -33,16 +34,19 @@ function Login() {
   const handleClickLogin = async () => {
     try {
       const { data } = await axiosInstance.post('/login', { ...login });
+      console.log(data);
       const storageInfo = {
         name: data.name,
         email: data.email,
         role: data.role,
         token: data.token,
       };
-      localStorage.setItem('user', JSON.stringify(storageInfo));
+      deliveryStorage.add('users', data);
+      localStorage.setItem('user', JSON.stringify(data));
       navigate('/customer/products');
     } catch (error) {
-      setErrorDB(error.response.data.message);
+      console.log(error);
+      setErrorDB(error?.response?.data?.message);
     }
   };
 
