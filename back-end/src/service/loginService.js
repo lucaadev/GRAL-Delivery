@@ -1,19 +1,13 @@
 const md5 = require('md5');
 const errorThrow = require('../utils/errorThrow');
-const { generateToken } = require('../utils/generateToken');
-const { User } = require('../database/models');
-
-const createToken = async (data) => {
-  const token = generateToken(data);
-  return { token, ...data };
-};
+const { createToken } = require('../utils/createToken');
+const { getUserByEmail } = require('./usersService');
 
 const createLogin = async (email, password) => {
-    const user = await User.findOne({ where: { email } });
-    const data = user && user.dataValues;
-    const cryptoPassword = md5(password);
-    
-    if (!user || data.password !== cryptoPassword) throw errorThrow(404, 'Invalid data');
+    const userExists = await getUserByEmail(email);
+    const data = userExists && userExists.dataValues;
+    const cryptoPassword = md5(password);    
+    if (!userExists || data.password !== cryptoPassword) throw errorThrow(404, 'Invalid data');
     const { password: omitPassword, ...userData } = data;
     return createToken(userData);
 };

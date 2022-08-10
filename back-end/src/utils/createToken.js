@@ -10,4 +10,9 @@ const configJWT = {
 
 const generateToken = (payload) => jwt.sign({ payload }, secretKey, configJWT);
 
-module.exports = { generateToken, configJWT };
+const createToken = (data) => { 
+    const token = generateToken(data);
+    return { token, ...data };
+};
+
+module.exports = { createToken, configJWT };

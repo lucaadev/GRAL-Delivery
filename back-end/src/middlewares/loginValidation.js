@@ -1,5 +1,5 @@
 const errorThrow = require('../utils/errorThrow');
-const joiLogin = require('../joi/loginSchema');
+const joiLogin = require('../schemas/loginSchema');
 
 const loginValidation = (req, _res, next) => {
   const { error } = joiLogin.validate(req.body);
