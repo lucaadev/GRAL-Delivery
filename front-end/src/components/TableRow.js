@@ -65,8 +65,8 @@ TableRow.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  subTotal: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
+  subTotal: PropTypes.string.isRequired,
 };
 
 export default TableRow;

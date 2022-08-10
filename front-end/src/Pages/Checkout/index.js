@@ -7,6 +7,7 @@ import cartContext from '../../utils/context';
 
 function Checkout() {
   const { cartValue } = useContext(cartContext);
+  const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
   const { name } = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const cart = JSON.parse(localStorage.getItem('cart'));
@@ -35,12 +36,12 @@ function Checkout() {
         <section>
           Total: R$
           <span data-testid="customer_checkout__element-order-total-price">
-            {cartValue ? Number(cartValue.toFixed(2)) : 0.00}
+            {cartValue ? cartValueFormat : 0.00}
           </span>
         </section>
       </section>
       <section className="details-checkout">
-        <DetailsDelivery />
+        <DetailsDelivery sellerName="Aqui recebe um array com vendedores" />
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
