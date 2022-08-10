@@ -1,7 +1,7 @@
 const { Sale, User } = require('../database/models');
 
 const createNewSale = async (body) => {
-  const saleCreated = await Sale.create(body);
+  const saleCreated = await Sale.create({...body, status: "pendente"});
   return saleCreated;
   };
 
@@ -16,4 +16,10 @@ const getAllSales = async (payload) => {
   return sales;
 };
 
-module.exports = { createNewSale, getAllSales };
+const getSaleById = async (id, key) => {
+  const saleById = await getAllSales({where: { [key]: id }});
+  return saleById;
+};
+
+
+module.exports = { createNewSale, getAllSales, getSaleById};
