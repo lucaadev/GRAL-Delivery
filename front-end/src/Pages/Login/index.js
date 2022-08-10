@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button';
 import Input from '../../components/Input';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import schemaLogin from '../../utils/schemas/schemaLogin';
@@ -60,16 +61,6 @@ function Login() {
           checkLogin();
         } }
       />
-      {/* <input
-        type="text"
-        data-testid="common_login__input-email"
-        name="email"
-        value={ login.email }
-        onChange={ (event) => {
-          handleChange(event);
-          checkLogin();
-        } }
-      /> */}
       <Input
         type="password"
         dataTestid="common_login__input-password"
@@ -81,31 +72,19 @@ function Login() {
           checkLogin();
         } }
       />
-      {/* <input
-        type="password"
-        data-testid="common_login__input-password"
-        name="password"
-        value={ login.password }
-        onChange={ (event) => {
-          handleChange(event);
-          checkLogin();
-        } }
-      /> */}
-      <button
-        type="button"
-        data-testid="common_login__button-login"
+      <Button
+        dataTestid="common_login__button-login"
         disabled={ isDisabled }
-        onClick={ handleClickLogin }
+        onClickfn={ handleClickLogin }
       >
         Login
-      </button>
-      <button
-        type="button"
-        data-testid="common_login__button-register"
-        onClick={ () => navigate('/register') }
+      </Button>
+      <Button
+        dataTestid="common_login__button-register"
+        onClickfn={ () => navigate('/register') }
       >
         Ainda não tenho conta
-      </button>
+      </Button>
       { errorDB !== '' && (
         <section>
           <span data-testid="common_login__element-invalid-email">{errorDB}</span>
