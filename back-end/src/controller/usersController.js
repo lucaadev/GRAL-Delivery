@@ -12,8 +12,9 @@ const getUserById = async (req, res, next) => {
 
 const getUsersRole = async (req, res, next) => {
   try {
-    const { role } = req.body;
-    // const { role } = req.query;
+    // const { role } = req.body;
+    console.log(req.query)
+    const { role } = req.query;
       const userById = await usersService.getUsersByRole(role);
       return res.status(201).json(userById);
   } catch (error) {
