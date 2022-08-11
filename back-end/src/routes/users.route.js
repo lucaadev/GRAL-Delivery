@@ -7,7 +7,4 @@ users.get('/', usersController.getAllUsers);
 users.get('/search', usersController.getUsersRole);
 users.get('/:id', usersController.getUserById);
 
-
-
-
 module.exports = users;
