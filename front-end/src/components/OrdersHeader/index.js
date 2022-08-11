@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
-function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
+function OrdersHeader({ id, orderNum, seller, orderDate, orderStatus }) {
   return (
     <section>
       <span
@@ -22,9 +22,7 @@ function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
       >
         { orderDate }
       </span>
-      {/* data-testid={ `customer_orders__element-delivery-status-${id}` } */}
-
-      <span>
+      <span data-testid={ `customer_orders__element-delivery-status-${id}` }>
         { orderStatus }
       </span>
 
@@ -39,6 +37,7 @@ function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
 }
 
 OrdersHeader.propTypes = {
+  id: PropTypes.string.isRequired,
   orderNum: PropTypes.string.isRequired,
   seller: PropTypes.string.isRequired,
   orderDate: PropTypes.string.isRequired,

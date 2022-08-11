@@ -1,18 +1,13 @@
 import React from 'react';
 import Header from '../../components/NavBar';
-import OrdersHeader from '../../components/OrdersHeader';
+import OrderCard from '../../components/OrderCard';
 
 function Order() {
   const { name } = JSON.parse(localStorage.getItem('user'));
   return (
     <section>
       <Header userName={ name } />
-      <OrdersHeader
-        orderNum="Pedido 101"
-        seller="Xablau"
-        orderDate="10/01/1999"
-        orderStatus="Entregue"
-      />
+      <OrderCard id={ 1 } orderStatus="Entregue" orderDate="10/10/2020" price={ 100 } />
     </section>
   );
 }
