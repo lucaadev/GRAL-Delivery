@@ -30,7 +30,7 @@ function Checkout() {
   const getSellers = async () => {
     try {
       const { data } = await axiosInstance
-        .get('/users');
+        .get('/users/search?role=seller');
       console.log(data);
     } catch (error) {
       console.log(error);
