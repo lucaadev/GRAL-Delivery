@@ -21,9 +21,9 @@ function Checkout() {
       headers: { Authorization: token },
     };
     try {
+      const value = { ...sale, userId, totalPice: cartValue };
       const { data } = await axiosInstance
-        .post('/sales', { ...sale, userId, [sale.totalPice]: cartValue }, config);
-      const value = { ...sale, userId, [sale.totalPice]: cartValue };
+        .post('/sales', { ...value }, config);
       console.log({ value });
       navigate(`/customer/orders/${data.id}`);
     } catch (error) {

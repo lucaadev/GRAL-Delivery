@@ -7,7 +7,6 @@ function DeliveryProvider({ children }) {
   const [sale, setSale] = useState({
     userId: '',
     sellerId: '0',
-    totalPrice: '',
     deliveryAddress: '',
     deliveryNumber: '',
   });
