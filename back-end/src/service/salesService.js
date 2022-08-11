@@ -1,7 +1,7 @@
 const { Sale, User } = require('../database/models');
 
 const createNewSale = async (body) => {
-  const saleCreated = await Sale.create({ ...body, status: 'pendente' });
+  const saleCreated = await Sale.create({ ...body, sale_date: Date(), status: 'pendente' });
   return saleCreated;
   };
 

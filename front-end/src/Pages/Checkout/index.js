@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DetailsDelivery from '../../components/DetailsDelivery';
 import Header from '../../components/NavBar';
-import TableRow from '../../components/TableRow';
+import TableRow from '../../components/Table/TableRow';
+import TableHead from '../../components/Table/TableHead';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 
@@ -21,10 +22,10 @@ function Checkout() {
       headers: { Authorization: token },
     };
     try {
-      const value = { ...sale, userId, totalPice: cartValue };
+      const value = { ...sale, userId, totalPrice: cartValue };
+      console.log(value);
       const { data } = await axiosInstance
-        .post('/sales', { ...value }, config);
-      console.log({ value });
+        .post('/sales', value, config);
       navigate(`/customer/orders/${data.id}`);
     } catch (error) {
       console.log(error);
@@ -55,32 +56,25 @@ function Checkout() {
       <Header userName={ name } />
       <span>Finalizar pedido</span>
       <section>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor unitário</th>
-            <th>Sub-total</th>
-            <th>Remover item</th>
-          </tr>
-        </thead>
-        {
-          cart.map((item, i) => {
-            const priceFormat = `${item.price}`.replace('.', ',');
-            return (
-              <TableRow
-                key={ i }
-                index={ i }
-                id={ item.id }
-                title={ item.title }
-                quantity={ item.quantity }
-                price={ priceFormat }
-                subTotal={ (item.quantity * item.price).toFixed(2).replace('.', ',') }
-              />
-            );
-          })
-        }
+        <table>
+          <TableHead />
+          {
+            cart.map((item, i) => {
+              const priceFormat = `${item.price}`.replace('.', ',');
+              return (
+                <TableRow
+                  key={ i }
+                  index={ i }
+                  id={ item.id }
+                  title={ item.title }
+                  quantity={ item.quantity }
+                  price={ priceFormat }
+                  subTotal={ (item.quantity * item.price).toFixed(2).replace('.', ',') }
+                />
+              );
+            })
+          }
+        </table>
 
         <section>
           Total: R$
