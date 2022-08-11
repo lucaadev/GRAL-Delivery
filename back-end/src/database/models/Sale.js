@@ -6,29 +6,35 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    user_id: {
+    userId: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      field: 'user_id',
     },
-    seller_id: {
+    sellerId: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      field: 'seller_id',
     },
-    total_price: {
+    totalPrice: {
       allowNull: false,
-      type: DataTypes.DECIMAL(9,2)
+      type: DataTypes.DECIMAL(9,2),
+      field: 'total_price',
     },
-    delivery_address: {
+    deliveryAddress: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      field: 'delivery_address',
     },
-    delivery_number: {
+    deliveryNumber: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      field: 'delivery_number',
     },
-    sale_date: {
+    saleDate: {
       allowNull: false,
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      field: 'sale_date',
     },
     status: {
       allowNull: false,
@@ -44,14 +50,14 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
       onUpdate: 'cascade', 
       foreignKey: 'user_id',
-      as: 'userId'
+      as: 'IdUser'
     })
     
     Sale.belongsTo(User, {
       onDelete: 'cascade',
       onUpdate: 'cascade', 
       foreignKey: 'seller_id',
-      as: 'sellerId'
+      as: 'IdSeller'
     })
   }
 
