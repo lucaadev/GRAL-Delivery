@@ -1,14 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
   const SaleProduct = sequelize.define('SaleProduct', {
-    sale_id: {
+    saleId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      // field: 'sale_id',
+      field: 'sale_id',
     },
-    product_id: {
+    productId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      // field: 'product_id',
+      field: 'product_id',
     },
     quantity: {
       allowNull: false,
@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       through: SaleProduct,
       onDelete: 'cascade',
       onUpdate: 'cascade', 
-      foreignKey: 'sale_id',
-      otherKey: 'product_id'
+      foreignKey: 'saleId',
+      otherKey: 'productId'
     })
     
     Product.belongsToMany(Sale, {
@@ -34,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
       through: SaleProduct,
       onDelete: 'cascade',
       onUpdate: 'cascade', 
-      foreignKey: 'product_id',
-      otherKey: 'sale_id'
+      foreignKey: 'productId',
+      otherKey: 'saleId'
     })
   }
 

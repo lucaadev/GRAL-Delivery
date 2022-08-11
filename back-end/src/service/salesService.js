@@ -4,7 +4,7 @@ const createNewSale = async (body) => {
   const { cart } = body;
   const saleCreated = await Sale.create({ ...body, saleDate: Date(), status: 'Pendente' });
   const saleProducts = cart.map((item) => SaleProduct
-    .create({ sale_id: saleCreated.id, product_id: item.id, quantity: item.quantity }));
+    .create({ saleId: saleCreated.id, productId: item.id, quantity: item.quantity }));
   await Promise.all(saleProducts);
   return saleCreated;
   };
