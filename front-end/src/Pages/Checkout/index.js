@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import DetailsDelivery from '../../components/DetailsDelivery';
 import Header from '../../components/NavBar';
 import TableRow from '../../components/TableRow';
+import axiosInstance from '../../utils/axios/axiosInstance';
 import cartContext from '../../utils/context/DeliveryContext';
 
 function Checkout() {
@@ -10,21 +11,33 @@ function Checkout() {
   const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
   const { name } = JSON.parse(localStorage.getItem('user'));
   const cart = JSON.parse(localStorage.getItem('cart'));
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const postSale = async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    const config = {
-      headers: { Authorization: token },
-    };
+  // const postSale = async () => {
+  //   const { token } = JSON.parse(localStorage.getItem('user'));
+  //   const config = {
+  //     headers: { Authorization: token },
+  //   };
+  //   try {
+  //     const { data } = await axiosInstance
+  //       .post('/sales', { ...saleBody }, config);
+  //     navigate(`/customer/orders/${data.id}`);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const getSellers = async () => {
     try {
       const { data } = await axiosInstance
-        .post('/sales', { ...saleBody }, config);
-      navigate(`/customer/orders/${data.id}`);
+        .get('/users');
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => getSellers());
 
   return (
     <section className="main-checkout">
@@ -70,7 +83,7 @@ function Checkout() {
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
-          onClick={ postSale }
+          // onClick={ postSale }
         >
           Finalizar pedido
         </button>

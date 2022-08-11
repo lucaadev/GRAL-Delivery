@@ -5,6 +5,11 @@ const getUserByEmail = async (email) => {
   return userByEmail;
 };
 
+const getAllUsers = async () => {
+  const allUsers = await User.findAll();
+  return allUsers;
+}
+
 const getUsersByRole = async (role) => {
   const userByRole = await User.findAll({ where: { role } });
   return userByRole;

@@ -21,4 +21,13 @@ const getUsersRole = async (req, res, next) => {
   }
 };
 
-module.exports = { getUserById, getUsersRole };
+const getAllUsers = async (req, res, next) => {
+  try {
+    const allUsers = await usersService.getAllUsers();
+    return res.status(201).json(allUsers)
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { getUserById, getUsersRole, getAllUsers };
