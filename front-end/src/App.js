@@ -6,7 +6,7 @@ import Register from './Pages/Register';
 import Products from './Pages/Products';
 import DeliveryProvider from './utils/context/DeliveryProvider';
 import Checkout from './Pages/Checkout';
-import Order from './components/Order';
+import Order from './Pages/Order';
 
 function App() {
   return (
