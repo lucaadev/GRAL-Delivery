@@ -7,7 +7,7 @@ const getUserByEmail = async (email) => {
 
 const getAllUsers = async () => {
   const allUsers = await User.findAll();
-  return allUsers;
+  return allUsers;  
 }
 
 const getUsersByRole = async (role) => {
@@ -16,7 +16,7 @@ const getUsersByRole = async (role) => {
 };
 
 const getUserById = async (id) => {
-  const userById = await User.findByPk({ where: { id } });
+  const userById = await User.findOne({ where: { id } });
   return userById;
 };
 
@@ -25,4 +25,4 @@ const createNewUser = async (data) => {
   return newUser;
 };
 
-module.exports = { getUserByEmail, createNewUser, getUserById, getUsersByRole };
+module.exports = { getUserByEmail, createNewUser, getUserById, getUsersByRole, getAllUsers };
