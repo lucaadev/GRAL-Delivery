@@ -68,7 +68,12 @@ function DetailsDelivery({
 }
 
 DetailsDelivery.propTypes = {
-  sellers: PropTypes.arrayOf(PropTypes.shape(PropTypes.string)).isRequired,
+  sellers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
+  })).isRequired,
   sellerId: PropTypes.string.isRequired,
   deliveryAddress: PropTypes.string.isRequired,
   deliveryNumber: PropTypes.string.isRequired,

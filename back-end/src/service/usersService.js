@@ -11,7 +11,7 @@ const getAllUsers = async () => {
 }
 
 const getUsersByRole = async (role) => {
-  const userByRole = await User.findAll({ where: { role } });
+  const userByRole = await User.findAll({ where: { role }, attributes: { exclude: ['password'] } });
   return userByRole;
 };
 

@@ -40,7 +40,7 @@ function Checkout() {
   };
 
   const handleChange = ({ target }) => {
-    console.log({ targetName: target.name, targetValue: target.value });
+    // console.log({ targetName: target.name, targetValue: target.value });
     setSale((prevState) => ({
       ...prevState,
       [target.name]: target.value,
@@ -48,7 +48,7 @@ function Checkout() {
   };
 
   useEffect(() => getSellers(), []);
-  console.log(sale);
+  console.log(sellers);
   return (
     <section className="main-checkout">
       <Header userName={ name } />
