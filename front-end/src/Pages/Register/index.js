@@ -2,6 +2,10 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import schemaRegister from '../../utils/schemas/schemaRegister';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import Span from '../../components/Span';
+import { saveStorage } from '../../utils/helpersFunctions/localStorage';
 
 function Register() {
   const navigate = useNavigate();
@@ -32,13 +36,14 @@ function Register() {
   const handleClickRegister = async () => {
     try {
       const { data } = await axiosInstance.post('/register', { ...register });
-      const storageInfo = {
-        name: data.name,
-        email: data.email,
-        role: data.role,
-        token: data.token,
-      };
-      localStorage.setItem('user', JSON.stringify(storageInfo));
+      // const storageInfo = {
+      //   name: data.name,
+      //   email: data.email,
+      //   role: data.role,
+      //   token: data.token,
+      // };
+      saveStorage('user', data);
+      // localStorage.setItem('user', JSON.stringify(storageInfo));
       navigate('/customer/products');
     } catch (error) {
       setErrorDB(error.response.data.message);
@@ -49,38 +54,52 @@ function Register() {
 
   return (
     <section>
-      <input
+      <Input
         type="text"
-        data-testid="common_register__input-name"
+        dataTestid="common_register__input-name"
+        labelText="Name"
         name="name"
         value={ register.name }
-        onChange={ handleChange }
+        onChangefn={ () => {
+          handleChange();
+        } }
       />
-      <input
+      <Input
         type="text"
-        data-testid="common_register__input-email"
+        dataTestid="common_register__input-email"
+        labelText="Email"
         name="email"
         value={ register.email }
-        onChange={ handleChange }
+        onChangefn={ () => {
+          handleChange();
+        } }
       />
-      <input
+      <Input
         type="password"
-        data-testid="common_register__input-password"
+        dataTestid="common_register__input-password"
+        labelText="Password"
         name="password"
         value={ register.password }
-        onChange={ handleChange }
+        onChangefn={ () => {
+          handleChange();
+        } }
       />
-      <button
-        type="button"
+      <Button
         data-testid="common_register__button-register"
-        onClick={ handleClickRegister }
+        onClick={ () => {
+          handleClickRegister();
+        } }
         disabled={ isDisabled }
       >
         Cadastrar
-      </button>
+      </Button>
       { errorDB !== '' && (
         <section>
-          <span data-testid="common_register__element-invalid_register">{errorDB}</span>
+          <Span
+            data-testid="common_register__element-invalid_register"
+          >
+            {errorDB}
+          </Span>
         </section>)}
     </section>
   );

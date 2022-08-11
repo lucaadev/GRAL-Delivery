@@ -2,7 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import Span from '../../components/Span';
 import axiosInstance from '../../utils/axios/axiosInstance';
+import { saveStorage } from '../../utils/helpersFunctions/localStorage';
 import schemaLogin from '../../utils/schemas/schemaLogin';
 
 function Login() {
@@ -33,14 +35,9 @@ function Login() {
   const handleClickLogin = async () => {
     try {
       const { data } = await axiosInstance.post('/login', { ...login });
-      const storageInfo = {
-        name: data.name,
-        email: data.email,
-        role: data.role,
-        token: data.token,
-      };
-      localStorage.setItem('user', JSON.stringify(storageInfo));
-      localStorage.setItem('userId', JSON.stringify(data.id)); // salvando o userId no localStorage, podemos mudar depois
+      // const {id, ...storageInfo} = data;
+      saveStorage('user', data);
+      // localStorage.setItem('userId', JSON.stringify(data.id)); // salvando o userId no localStorage, podemos mudar depois
       navigate('/customer/products');
     } catch (error) {
       console.log(error);
@@ -89,7 +86,7 @@ function Login() {
       </Button>
       { errorDB !== '' && (
         <section>
-          <span data-testid="common_login__element-invalid-email">{errorDB}</span>
+          <Span dataTestid="common_login__element-invalid-email">{errorDB}</Span>
         </section>)}
     </section>
   );

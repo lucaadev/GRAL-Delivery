@@ -1,32 +1,32 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button';
 import DetailsDelivery from '../../components/DetailsDelivery';
 import Header from '../../components/NavBar';
-import TableRow from '../../components/Table/TableRow';
+import Span from '../../components/Span';
 import TableHead from '../../components/Table/TableHead';
+import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
+import { readStorage } from '../../utils/helpersFunctions/localStorage';
 
 function Checkout() {
   const { cartValue, sale, setSale } = useContext(DeliveryContext);
-  const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
-  const { name } = JSON.parse(localStorage.getItem('user'));
-  const userId = JSON.parse(localStorage.getItem('userId'));
-  const cart = JSON.parse(localStorage.getItem('cart'));
   const [sellers, setSellers] = useState([]);
   const navigate = useNavigate();
+  const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
+  const { name, id: userId, token } = readStorage('user', {});
+  const cart = readStorage('cart', []);
 
   const postSale = async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
     const config = {
       headers: { Authorization: token },
     };
     try {
-      const value = { ...sale, userId, totalPrice: cartValue, cart };
-      console.log(value);
-      const { data } = await axiosInstance
-        .post('/sales', value, config);
-      navigate(`/customer/orders/${data.id}`);
+      const saleData = { ...sale, userId, totalPrice: cartValue, cart };
+      const { data: { id } } = await axiosInstance
+        .post('/sales', saleData, config);
+      navigate(`/customer/orders/${id}`);
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +43,6 @@ function Checkout() {
   };
 
   const handleChange = ({ target }) => {
-    // console.log({ targetName: target.name, targetValue: target.value });
     setSale((prevState) => ({
       ...prevState,
       [target.name]: target.value,
@@ -75,12 +74,11 @@ function Checkout() {
             })
           }
         </table>
-
         <section>
           Total: R$
-          <span data-testid="customer_checkout__element-order-total-price">
+          <Span dataTestid="customer_checkout__element-order-total-price">
             {cartValue ? cartValueFormat : 0.00}
-          </span>
+          </Span>
         </section>
       </section>
       <section className="details-checkout">
@@ -91,16 +89,15 @@ function Checkout() {
           sellers={ sellers }
           sellerId={ sale.sellerId }
         />
-        <button
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
+
+        <Button
+          dataTestid="customer_checkout__button-submit-order"
           onClick={ postSale }
         >
           Finalizar pedido
-        </button>
+        </Button>
       </section>
     </section>
-
   );
 }
 
