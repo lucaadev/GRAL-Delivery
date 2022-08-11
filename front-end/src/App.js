@@ -7,6 +7,7 @@ import Products from './Pages/Products';
 import DeliveryProvider from './utils/context/DeliveryProvider';
 import Checkout from './Pages/Checkout';
 import Order from './Pages/Order';
+import OrderDetails from './Pages/Order/orderDetails';
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Route path="/register" element={ <Register /> } />
         <Route path="/customer/products" element={ <Products /> } />
         <Route path="/customer/checkout" element={ <Checkout /> } />
-        <Route path="/customer/orders/:id" element={ <Order /> } />
+        <Route path="/customer/orders" element={ <Order /> } />
+        <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
       </Routes>
     </DeliveryProvider>
   );
