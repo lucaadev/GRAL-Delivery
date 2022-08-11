@@ -40,6 +40,7 @@ function Login() {
         token: data.token,
       };
       localStorage.setItem('user', JSON.stringify(storageInfo));
+      localStorage.setItem('userId', JSON.stringify(data.id)); // salvando o userId no localStorage, podemos mudar depois
       navigate('/customer/products');
     } catch (error) {
       console.log(error);

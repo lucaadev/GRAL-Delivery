@@ -4,6 +4,7 @@ const loginRoute = require('../routes/login.route');
 const registerRoute = require('../routes/register.route');
 const productsRoute = require('../routes/products.route');
 const salesRoute = require('../routes/sales.route');
+const usersRoute = require('../routes/users.route')
 const errorHandler = require('../middlewares/errorHandler');
 
 const app = express();
@@ -15,6 +16,7 @@ app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/products', productsRoute);
 app.use('/sales', salesRoute);
+app.use('/users', usersRoute);
 app.use(errorHandler);
 
 module.exports = app;
