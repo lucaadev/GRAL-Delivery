@@ -1,7 +1,11 @@
-const { Sale, User } = require('../database/models');
+ const { Sale, User, SaleProduct } = require('../database/models');
 
 const createNewSale = async (body) => {
+  const { cart } = body;
   const saleCreated = await Sale.create({ ...body, saleDate: Date(), status: 'Pendente' });
+  const saleProducts = cart.map((item) => SaleProduct
+    .create({ saleId: saleCreated.id, productId: item.id, quantity: item.quantity }));
+  await Promise.all(saleProducts);
   return saleCreated;
   };
 

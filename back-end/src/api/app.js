@@ -4,7 +4,7 @@ const loginRoute = require('../routes/login.route');
 const registerRoute = require('../routes/register.route');
 const productsRoute = require('../routes/products.route');
 const salesRoute = require('../routes/sales.route');
-const usersRoute = require('../routes/users.route')
+const usersRoute = require('../routes/users.route');
 const errorHandler = require('../middlewares/errorHandler');
 
 const app = express();

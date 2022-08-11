@@ -22,7 +22,7 @@ function Checkout() {
       headers: { Authorization: token },
     };
     try {
-      const value = { ...sale, userId, totalPrice: cartValue };
+      const value = { ...sale, userId, totalPrice: cartValue, cart };
       console.log(value);
       const { data } = await axiosInstance
         .post('/sales', value, config);
