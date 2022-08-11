@@ -4,9 +4,17 @@ import DeliveryContext from './DeliveryContext';
 
 function DeliveryProvider({ children }) {
   const [cartValue, setCartValue] = useState(0);
+  const [sale, setSale] = useState({
+    userId: '',
+    sellerId: '0',
+    totalPrice: '',
+    deliveryAddress: '',
+    deliveryNumber: '',
+    saleDate: Date(),
+  });
   const value = React.useMemo(() => ({
-    cartValue, setCartValue,
-  }), [cartValue]);
+    cartValue, setCartValue, sale, setSale,
+  }), [sale, cartValue]);
 
   return (
     <DeliveryContext.Provider value={ value }>

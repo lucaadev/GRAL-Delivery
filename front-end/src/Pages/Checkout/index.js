@@ -1,16 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import DetailsDelivery from '../../components/DetailsDelivery';
 import Header from '../../components/NavBar';
 import TableRow from '../../components/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
-import cartContext from '../../utils/context/DeliveryContext';
+import DeliveryContext from '../../utils/context/DeliveryContext';
 
 function Checkout() {
-  const { cartValue } = useContext(cartContext);
+  const { cartValue, sale, setSale } = useContext(DeliveryContext);
   const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
   const { name } = JSON.parse(localStorage.getItem('user'));
   const cart = JSON.parse(localStorage.getItem('cart'));
+  const [sellers, setSellers] = useState([]);
   // const navigate = useNavigate();
 
   // const postSale = async () => {
@@ -31,14 +32,23 @@ function Checkout() {
     try {
       const { data } = await axiosInstance
         .get('/users/search?role=seller');
-      console.log(data);
+      setSellers(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => getSellers());
+  const handleChange = ({ target }) => {
+    console.log({ targetName: target.name, targetValue: target.value });
+    setSale((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
+  };
 
+  useEffect(() => getSellers(), []);
+  console.log(sale);
   return (
     <section className="main-checkout">
       <Header userName={ name } />
@@ -79,7 +89,13 @@ function Checkout() {
         </section>
       </section>
       <section className="details-checkout">
-        <DetailsDelivery sellerName="Aqui recebe um array com vendedores" />
+        <DetailsDelivery
+          deliveryAddress={ sale.deliveryAddress }
+          deliveryNumber={ sale.deliveryNumber }
+          onChangefn={ handleChange }
+          sellers={ sellers }
+          sellerId={ sale.sellerId }
+        />
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
