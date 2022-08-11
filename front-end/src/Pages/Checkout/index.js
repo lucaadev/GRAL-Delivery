@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import DetailsDelivery from '../../components/DetailsDelivery';
 import Header from '../../components/NavBar';
 import TableRow from '../../components/TableRow';
@@ -10,30 +10,32 @@ function Checkout() {
   const { cartValue, sale, setSale } = useContext(DeliveryContext);
   const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
   const { name } = JSON.parse(localStorage.getItem('user'));
+  const userId = JSON.parse(localStorage.getItem('userId'));
   const cart = JSON.parse(localStorage.getItem('cart'));
   const [sellers, setSellers] = useState([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const postSale = async () => {
-  //   const { token } = JSON.parse(localStorage.getItem('user'));
-  //   const config = {
-  //     headers: { Authorization: token },
-  //   };
-  //   try {
-  //     const { data } = await axiosInstance
-  //       .post('/sales', { ...saleBody }, config);
-  //     navigate(`/customer/orders/${data.id}`);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const postSale = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const config = {
+      headers: { Authorization: token },
+    };
+    try {
+      const { data } = await axiosInstance
+        .post('/sales', { ...sale, userId, [sale.totalPice]: cartValue }, config);
+      const value = { ...sale, userId, [sale.totalPice]: cartValue };
+      console.log({ value });
+      navigate(`/customer/orders/${data.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getSellers = async () => {
     try {
       const { data } = await axiosInstance
         .get('/users/search?role=seller');
       setSellers(data);
-      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +50,6 @@ function Checkout() {
   };
 
   useEffect(() => getSellers(), []);
-  console.log(sellers);
   return (
     <section className="main-checkout">
       <Header userName={ name } />
@@ -99,7 +100,7 @@ function Checkout() {
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
-          // onClick={ postSale }
+          onClick={ postSale }
         >
           Finalizar pedido
         </button>

@@ -10,7 +10,6 @@ function DeliveryProvider({ children }) {
     totalPrice: '',
     deliveryAddress: '',
     deliveryNumber: '',
-    saleDate: Date(),
   });
   const value = React.useMemo(() => ({
     cartValue, setCartValue, sale, setSale,

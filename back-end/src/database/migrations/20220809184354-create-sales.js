@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.DECIMAL(9, 2)
       },
       delivery_address: {
-        allowNull: false,
+        allowNull: false,  
         type: Sequelize.STRING
       },
       delivery_number: {
@@ -42,6 +42,7 @@ module.exports = {
       },
       sale_date: {
         allowNull: false,
+        defaultValue: Sequelize.fn('NOW'), 
         type: Sequelize.DATE
       },
       status: {

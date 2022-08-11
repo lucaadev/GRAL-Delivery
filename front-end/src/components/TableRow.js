@@ -10,6 +10,7 @@ function TableRow({ index, id, title, quantity, price, subTotal }) {
     const newCart = cart.filter((item) => item.id !== id);
     localStorage.setItem('cart', JSON.stringify(newCart));
     const newTotal = sumCart(newCart);
+    localStorage.setItem('cartValue', newTotal);
     setCartValue(newTotal);
   };
   return (
