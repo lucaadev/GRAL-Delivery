@@ -23,7 +23,6 @@ function Checkout() {
     };
     try {
       const value = { ...sale, userId, totalPrice: cartValue, cart };
-      console.log(value);
       const { data } = await axiosInstance
         .post('/sales', value, config);
       navigate(`/customer/orders/${data.id}`);

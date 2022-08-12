@@ -4,8 +4,8 @@ const validateAuth = require('../middlewares/validateAuth');
 
 const sales = express.Router();
 
-sales.get('/', validateAuth, salesController.getAllSales);
-sales.get('/:id', validateAuth, salesController.getSaleById);
+// sales.get('/', validateAuth, salesController.getAllSales);
 sales.post('/', validateAuth, salesController.createNewSale);
+sales.get('/:id/:key', validateAuth, salesController.getSaleById);
 
 module.exports = sales;
