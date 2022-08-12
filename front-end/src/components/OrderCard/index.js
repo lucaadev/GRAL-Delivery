@@ -6,8 +6,8 @@ function OrderCard({ id, orderStatus, orderDate, price }) {
   return (
     <Link to={ `/customer/orders/${id}` }>
       <section className="order_card">
-        <span>Pedido</span>
         <span data-testid={ `customer_orders__element-order-id-${id}` }>
+          Pedido
           { id }
         </span>
         <span data-testid={ `customer_orders__element-delivery-status-${id}` }>
@@ -17,10 +17,12 @@ function OrderCard({ id, orderStatus, orderDate, price }) {
           <span data-testid={ `customer_orders__element-order-date-${id}` }>
             { orderDate }
           </span>
-          <span data-testid={ `customer_orders__element-card-price-${id}` }>
-            R$
+          <span>
+            R$:
             {' '}
-            { price }
+            <span data-testid={ `customer_orders__element-card-price-${id}` }>
+              { price }
+            </span>
           </span>
         </div>
       </section>

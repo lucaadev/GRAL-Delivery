@@ -3,6 +3,7 @@ import Header from '../../components/NavBar';
 import OrderCard from '../../components/OrderCard';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
+import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function Order() {
   const { name } = JSON.parse(localStorage.getItem('user'));
@@ -35,8 +36,8 @@ function Order() {
             key={ id }
             id={ id }
             orderStatus={ status }
-            orderDate={ saleDate }
-            price={ totalPrice }
+            orderDate={ formatDate(saleDate) }
+            price={ totalPrice.toString().replace('.', ',') }
           />
         ))
       }

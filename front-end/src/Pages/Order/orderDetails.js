@@ -4,6 +4,7 @@ import Header from '../../components/NavBar';
 import OrdersHeader from '../../components/OrdersHeader';
 import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
+import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function Order() {
   const [order, setOrder] = useState([]);
@@ -41,7 +42,7 @@ function Order() {
               id={ e.id }
               orderNum={ e.id }
               seller={ e.idSeller.name }
-              orderDate={ e.saleDate }
+              orderDate={ formatDate(e.saleDate) }
               orderStatus={ e.status }
             />
           ))
