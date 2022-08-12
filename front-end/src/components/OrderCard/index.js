@@ -29,7 +29,7 @@ function OrderCard({ id, orderStatus, orderDate, price }) {
 }
 
 OrderCard.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   orderStatus: PropTypes.string.isRequired,
   orderDate: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,

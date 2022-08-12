@@ -10,9 +10,15 @@ function DeliveryProvider({ children }) {
     deliveryAddress: '',
     deliveryNumber: '',
   });
+  const [orders, setOrders] = useState([]);
   const value = React.useMemo(() => ({
-    cartValue, setCartValue, sale, setSale,
-  }), [sale, cartValue]);
+    cartValue,
+    setCartValue,
+    sale,
+    setSale,
+    orders,
+    setOrders,
+  }), [sale, orders, cartValue]);
 
   return (
     <DeliveryContext.Provider value={ value }>

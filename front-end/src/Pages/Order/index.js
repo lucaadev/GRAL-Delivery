@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import Header from '../../components/NavBar';
 import OrderCard from '../../components/OrderCard';
 import axiosInstance from '../../utils/axios/axiosInstance';
+import DeliveryContext from '../../utils/context/DeliveryContext';
 
 function Order() {
   const { name } = JSON.parse(localStorage.getItem('user'));
   const userId = JSON.parse(localStorage.getItem('userId'));
-  const [orders, setOrders] = useState([]);
+  const { orders, setOrders } = useContext(DeliveryContext);
 
-  const getAllOrders = async () => {
+  const getAllOrders = useCallback(async () => {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const config = {
       headers: { Authorization: token },
     };
     try {
       const { data } = await axiosInstance
-        .get('/sales', config, { params: { userId, key: 'user_id' } });
+        .get(`/sales/${userId}/user_id`, config);
       setOrders(data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [userId, setOrders]);
 
-  useEffect(() => getAllOrders(), []);
-  console.log(orders);
+  useEffect(() => getAllOrders(), [getAllOrders]);
 
   return (
     <section>
