@@ -4,6 +4,6 @@ const validateAuth = require('../middlewares/validateAuth');
 
 const saleProducts = express.Router();
 
-saleProducts.get('/:id/:key', validateAuth, saleProductController.getSaleProducts);
+saleProducts.get('/:id/search', validateAuth, saleProductController.getSaleProducts);
 
 module.exports = saleProducts;

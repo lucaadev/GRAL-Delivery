@@ -7,9 +7,9 @@ import axiosInstance from '../../utils/axios/axiosInstance';
 
 function Order() {
   const [order, setOrder] = useState([]);
-  const [products, setProducts] = useState([]);
   const { name } = JSON.parse(localStorage.getItem('user'));
   const { id } = useParams();
+
   const getOrder = useCallback(async () => {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const config = {
@@ -17,22 +17,8 @@ function Order() {
     };
     try {
       const { data } = await axiosInstance
-        .get(`/sales/${id}/id`, config);
+        .get(`/sp/${id}/search?key=id`, config);
       setOrder(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [id]);
-
-  const getOrderProducts = useCallback(async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    const config = {
-      headers: { Authorization: token },
-    };
-    try {
-      const { data } = await axiosInstance
-        .get(`/sp/${id}/sale_id`, config);
-      setProducts(data);
     } catch (error) {
       console.log(error);
     }
@@ -40,10 +26,9 @@ function Order() {
 
   useEffect(() => {
     getOrder();
-    getOrderProducts();
-  }, [getOrder, getOrderProducts]);
+  }, [getOrder]);
 
-  console.log(products);
+  console.log(order);
 
   const { totalPrice } = order;
 
