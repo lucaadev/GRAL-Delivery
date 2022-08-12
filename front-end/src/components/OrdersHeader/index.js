@@ -4,41 +4,46 @@ import Button from '../Button';
 
 function OrdersHeader({ id, orderNum, seller, orderDate, orderStatus }) {
   return (
-    <section>
-      <span
-        data-testid="customer_order_details__element-order-details-label-order-id"
-      >
-        { orderNum }
-      </span>
+    <thead>
+      <tr>
 
-      <span
-        data-testid="customer_order_details__element-order-details-label-seller-name"
-      >
-        { seller }
-      </span>
+        <th
+          data-testid="customer_order_details__element-order-details-label-order-id"
+        >
+          { orderNum }
+        </th>
 
-      <span
-        data-testid="customer_order_details__element-order-details-label-order-date"
-      >
-        { orderDate }
-      </span>
-      <span data-testid={ `customer_orders__element-delivery-status-${id}` }>
-        { orderStatus }
-      </span>
+        <th
+          data-testid="customer_order_details__element-order-details-label-seller-name"
+        >
+          { seller }
+        </th>
 
-      <Button
-        dataTestid="customer_order_details__button-delivery-check"
-        // onClickfn={ }
-      >
-        Marcar como entregue
-      </Button>
-    </section>
+        <th
+          data-testid="customer_order_details__element-order-details-label-order-date"
+        >
+          { orderDate }
+        </th>
+        <th data-testid={ `customer_orders__element-delivery-status-${id}` }>
+          { orderStatus }
+        </th>
+
+        <th>
+          <Button
+            dataTestid="customer_order_details__button-delivery-check"
+          >
+            Marcar como entregue
+          </Button>
+        </th>
+
+      </tr>
+    </thead>
   );
 }
 
 OrdersHeader.propTypes = {
-  id: PropTypes.string.isRequired,
-  orderNum: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  orderNum: PropTypes.number.isRequired,
   seller: PropTypes.string.isRequired,
   orderDate: PropTypes.string.isRequired,
   orderStatus: PropTypes.string.isRequired,

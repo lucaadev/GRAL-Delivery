@@ -1,8 +1,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/NavBar';
-// import OrdersHeader from '../../components/OrdersHeader';
-import Button from '../../components/Button';
+import OrdersHeader from '../../components/OrdersHeader';
+import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
 
 function Order() {
@@ -28,30 +28,49 @@ function Order() {
     getOrder();
   }, [getOrder]);
 
-  console.log(order);
-
-  const { totalPrice } = order;
+  const { sale, products } = order;
 
   return (
     <section>
       <Header userName={ name } />
-      {/* {
-        order.map((e) => (
-          <OrdersHeader
-            key={ e.id }
-            id={ e.id }
-            orderNum={ e.id }
-            seller={ e.idSeller.name }
-            orderDate={ e.saleDate }
-            orderStatus={ e.status }
-          />
-        ))
-      } */}
-      <Button dataTestid="customer_order_details__element-order-total-price">
-        Total R$:
-        {' '}
-        { totalPrice }
-      </Button>
+      <table>
+        {
+          sale && sale.map((e) => (
+            <OrdersHeader
+              key={ e.id }
+              id={ e.id }
+              orderNum={ e.id }
+              seller={ e.idSeller.name }
+              orderDate={ e.saleDate }
+              orderStatus={ e.status }
+            />
+          ))
+        }
+        {
+          products && products.map((product, i) => {
+            const priceFormat = `${product.price}`.replace('.', ',');
+            return (
+              <TableRow
+                key={ i }
+                index={ i }
+                id={ product.id }
+                title={ product.name }
+                quantity={ product.quantity }
+                price={ priceFormat }
+                subTotal={
+                  (product.quantity * product.price).toFixed(2).replace('.', ',')
+                }
+              />
+            );
+          })
+        }
+      </table>
+      {sale && (
+        <span data-testid="customer_order_details__element-order-total-price">
+          Total R$:
+          {' '}
+          { (sale[0].totalPrice).toString().replace('.', ',') }
+        </span>)}
     </section>
   );
 }
