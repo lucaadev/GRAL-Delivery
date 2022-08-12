@@ -59,13 +59,6 @@ function Card({ id, title, price, floatPrice, image }) {
         onChangefn={ ({ target: { value } }) => { setItemValue(Number(value)); } }
         labelText=""
       />
-      {/* <input
-        type="number"
-        data-testid={ `customer_products__input-card-quantity-${id}` }
-        name="quantity"
-        value={ itemValue }
-        onChange={ ({ target: { value } }) => { setItemValue(Number(value)); } }
-      /> */}
       <button
         type="button"
         data-testid={ `customer_products__button-card-add-item-${id}` }

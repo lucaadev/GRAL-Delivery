@@ -60,9 +60,7 @@ function Register() {
         labelText="Name"
         name="name"
         value={ register.name }
-        onChangefn={ () => {
-          handleChange();
-        } }
+        onChangefn={ handleChange }
       />
       <Input
         type="text"
@@ -70,9 +68,7 @@ function Register() {
         labelText="Email"
         name="email"
         value={ register.email }
-        onChangefn={ () => {
-          handleChange();
-        } }
+        onChangefn={ handleChange }
       />
       <Input
         type="password"
@@ -80,15 +76,11 @@ function Register() {
         labelText="Password"
         name="password"
         value={ register.password }
-        onChangefn={ () => {
-          handleChange();
-        } }
+        onChangefn={ handleChange }
       />
       <Button
-        data-testid="common_register__button-register"
-        onClick={ () => {
-          handleClickRegister();
-        } }
+        dataTestid="common_register__button-register"
+        onClickfn={ handleClickRegister }
         disabled={ isDisabled }
       >
         Cadastrar
@@ -96,7 +88,7 @@ function Register() {
       { errorDB !== '' && (
         <section>
           <Span
-            data-testid="common_register__element-invalid_register"
+            dataTestid="common_register__element-invalid_register"
           >
             {errorDB}
           </Span>
