@@ -10,3 +10,5 @@ const getSaleProducts = async (id, key) => {
   })
   return saleProducts;
 }
+
+module.exports = { getSaleProducts };
