@@ -5,11 +5,17 @@ import sumCart from '../../utils/helpersFunctions/sumCart';
 import Input from '../Input';
 
 function Card({ id, title, price, floatPrice, image }) {
-  const { setCartValue } = useContext(DeliveryContext);
+  const { setCartValue, cart } = useContext(DeliveryContext);
   const [itemValue, setItemValue] = useState(0);
 
+  const updateCart = useCallback(() => cart
+    .forEach((item) => {
+      if (item.id === id) {
+        setItemValue(item.quantity);
+      }
+    }), [cart, id]);
+
   const updateLocalStorage = useCallback(() => {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const checkProductCart = cart.find((item) => item.id === id);
     const newItemCart = {
       id,
@@ -30,6 +36,7 @@ function Card({ id, title, price, floatPrice, image }) {
   }, [itemValue, id, floatPrice, title, setCartValue]);
 
   useEffect(() => updateLocalStorage(), [updateLocalStorage]);
+  useEffect(() => updateCart(), [updateCart]);
 
   return (
     <section className="product-card" key={ id }>

@@ -5,10 +5,7 @@ import DeliveryContext from './DeliveryContext';
 function DeliveryProvider({ children }) {
   const [cartValue, setCartValue] = useState(0);
   const [user, setUser] = useState({});
-  const [cart, setCart] = useState({
-    products: [],
-    totalValue: 0,
-  });
+  const [cart, setCart] = useState([]);
   // criar o useEffect do cart recebendo um array de produtos e o valor total
   // e fazer um get do localStorage;
   const [sale, setSale] = useState({

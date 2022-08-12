@@ -1,23 +1,22 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import DeliveryContext from '../../utils/context/DeliveryContext';
 import Span from '../Span';
 
 function Header() {
-  const { setUser } = useContext(DeliveryContext);
+  const [user, setUser] = useState('');
   const clearStorage = () => {
     localStorage.clear();
     localStorage.setItem('user', '');
   };
 
-  const getStorageDataAndSave = useCallback(() => {
+  const getUserStorageDataAndSave = useCallback(() => {
     const userData = JSON.parse(localStorage.getItem('user'));
     setUser(userData);
-  }, [setUser]);
+  }, []);
 
   useEffect(() => {
-    getStorageDataAndSave();
-  }, [getStorageDataAndSave]);
+    getUserStorageDataAndSave();
+  }, [getUserStorageDataAndSave]);
 
   return (
     <section>
@@ -37,7 +36,7 @@ function Header() {
         <Span
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          {user && user.name}
+          {user.name}
         </Span>
         <Link
           to="/login"

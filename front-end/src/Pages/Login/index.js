@@ -5,7 +5,6 @@ import Input from '../../components/Input';
 import Span from '../../components/Span';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-import { saveStorage } from '../../utils/helpersFunctions/localStorage';
 import schemaLogin from '../../utils/schemas/schemaLogin';
 
 function Login() {
@@ -36,8 +35,8 @@ function Login() {
 
   const saveDataAndRedirect = (data) => {
     setUser(data);
-    saveStorage('user', data);
     navigate('/customer/products');
+    return localStorage.setItem('user', JSON.stringify(data));
   };
 
   const handleClickLogin = async () => {
