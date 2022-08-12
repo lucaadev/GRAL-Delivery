@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
-function OrdersHeader({ id, orderNum, seller, orderDate, orderStatus }) {
+function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
+  const testid = 'customer_order_details__element-order-details-label-delivery-status';
   return (
     <thead>
       <tr>
@@ -24,14 +25,14 @@ function OrdersHeader({ id, orderNum, seller, orderDate, orderStatus }) {
         >
           { orderDate }
         </th>
-        <th data-testid={ `customer_orders__element-delivery-status-${id}` }>
+        <th
+          data-testid={ testid }
+        >
           { orderStatus }
         </th>
 
         <th>
-          <Button
-            dataTestid="customer_order_details__button-delivery-check"
-          >
+          <Button dataTestid="customer_order_details__button-delivery-check" disabled>
             Marcar como entregue
           </Button>
         </th>
@@ -42,7 +43,6 @@ function OrdersHeader({ id, orderNum, seller, orderDate, orderStatus }) {
 }
 
 OrdersHeader.propTypes = {
-  id: PropTypes.number.isRequired,
   orderNum: PropTypes.number.isRequired,
   seller: PropTypes.string.isRequired,
   orderDate: PropTypes.string.isRequired,
