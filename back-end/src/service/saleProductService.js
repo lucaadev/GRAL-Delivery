@@ -7,8 +7,11 @@ const getSaleProducts = async (id, key) => {
   const saleProducts = await SaleProduct.findAll({
     where: { sale_id: id },
   })
-  
-  const products = await Promise.all(saleProducts.map(async({productId}) => await productService.getProductById(productId)));
+  console.log(saleProducts);
+  const products = await Promise.all(saleProducts.map(async({productId, quantity}) => {
+    const {dataValues} = await productService.getProductById(productId);
+    return {...dataValues, quantity };
+  }));
   const obj = {
     sale,
     products
