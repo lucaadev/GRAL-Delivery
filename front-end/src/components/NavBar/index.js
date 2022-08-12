@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import DeliveryContext from '../../utils/context/DeliveryContext';
+import Span from '../Span';
 
-function Header({ userName }) {
+function Header() {
+  const { setUser } = useContext(DeliveryContext);
   const clearStorage = () => {
     localStorage.clear();
     localStorage.setItem('user', '');
   };
+
+  const getStorageDataAndSave = useCallback(() => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    setUser(userData);
+  }, [setUser]);
+
+  useEffect(() => {
+    getStorageDataAndSave();
+  }, [getStorageDataAndSave]);
+
   return (
     <section>
       <section className="navbar">
@@ -22,11 +34,11 @@ function Header({ userName }) {
         >
           Meus Pedidos
         </Link>
-        <span
+        <Span
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          {userName}
-        </span>
+          {user && user.name}
+        </Span>
         <Link
           to="/login"
           data-testid="customer_products__element-navbar-link-logout"
@@ -38,9 +50,5 @@ function Header({ userName }) {
     </section>
   );
 }
-
-Header.propTypes = {
-  userName: PropTypes.string.isRequired,
-};
 
 export default Header;

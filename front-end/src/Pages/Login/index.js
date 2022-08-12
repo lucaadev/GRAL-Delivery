@@ -1,14 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Span from '../../components/Span';
 import axiosInstance from '../../utils/axios/axiosInstance';
+import DeliveryContext from '../../utils/context/DeliveryContext';
 import { saveStorage } from '../../utils/helpersFunctions/localStorage';
 import schemaLogin from '../../utils/schemas/schemaLogin';
 
 function Login() {
   const navigate = useNavigate();
+  const { setUser } = useContext(DeliveryContext);
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -16,7 +18,7 @@ function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
-  const checkLogin = useCallback(async () => {
+  const checkLoginData = useCallback(async () => {
     try {
       await schemaLogin.validate(login);
       setIsDisabled(false);
@@ -32,20 +34,23 @@ function Login() {
     }));
   };
 
+  const saveDataAndRedirect = (data) => {
+    setUser(data);
+    saveStorage('user', data);
+    navigate('/customer/products');
+  };
+
   const handleClickLogin = async () => {
     try {
       const { data } = await axiosInstance.post('/login', { ...login });
-      // const {id, ...storageInfo} = data;
-      saveStorage('user', data);
-      // localStorage.setItem('userId', JSON.stringify(data.id)); // salvando o userId no localStorage, podemos mudar depois
-      navigate('/customer/products');
+      saveDataAndRedirect(data);
     } catch (error) {
-      console.log(error);
       setErrorDB(error?.response?.data?.message);
     }
   };
 
-  useEffect(() => checkLogin(), [checkLogin]);
+  useEffect(() => checkLoginData(), [checkLoginData]);
+  useEffect(() => localStorage.removeItem('user'));
 
   return (
     <section>
@@ -55,10 +60,7 @@ function Login() {
         labelText="Email"
         name="email"
         value={ login.email }
-        onChangefn={ (event) => {
-          handleChange(event);
-          checkLogin();
-        } }
+        onChangefn={ handleChange }
       />
       <Input
         type="password"
@@ -66,10 +68,7 @@ function Login() {
         labelText="Password"
         name="password"
         value={ login.password }
-        onChangefn={ (event) => {
-          handleChange(event);
-          checkLogin();
-        } }
+        onChangefn={ handleChange }
       />
       <Button
         dataTestid="common_login__button-login"

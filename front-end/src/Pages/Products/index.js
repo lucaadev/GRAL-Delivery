@@ -1,36 +1,35 @@
-import React, { useEffect, useState, useContext } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import CartBtn from '../../components/CartBtn';
 import Header from '../../components/NavBar';
 import Card from '../../components/ProductCard';
-import CartBtn from '../../components/CartBtn';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
+// import { readStorage } from '../../utils/helpersFunctions/localStorage';
 
 function Products() {
-  const { cartValue, setCartValue } = useContext(DeliveryContext);
-  const { name } = JSON.parse(localStorage.getItem('user'));
+  const { cartValue, setCartValue, user } = useContext(DeliveryContext);
+  console.log(user);
   const [products, setProducts] = useState([]);
-  const getAllProducts = async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    const config = {
-      headers: { Authorization: token },
-    };
-    try {
-      const { data } = await axiosInstance
-        .get('/products', config);
-      setProducts(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const user = readStorage('user', {});
+
+  const fetchApiAllProducts = useCallback(async () => {
+    const config = { headers: { Authorization: user.token } };
+    const { data } = await axiosInstance.get('/products', config);
+    setProducts([...data]);
+  }, [user.token]);
+
+  useEffect(() => {
+    fetchApiAllProducts();
+  }, [fetchApiAllProducts]);
+
   useEffect(() => {
     const totalPrice = JSON.parse(localStorage.getItem('cartValue'));
     setCartValue(totalPrice);
-    getAllProducts();
   }, [setCartValue]);
+
   return (
     <section className="main-products">
-      <Header userName={ name } />
+      <Header />
       <section className="main-products-cards">
         { products.length !== 0 && products
           .map(({ id, name: productName, price, url_image: urlImage }, i) => {

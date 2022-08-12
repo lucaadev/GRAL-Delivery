@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import React, { useMemo, useState } from 'react';
 import DeliveryContext from './DeliveryContext';
 
 function DeliveryProvider({ children }) {
   const [cartValue, setCartValue] = useState(0);
+  const [user, setUser] = useState({});
   const [cart, setCart] = useState({
     products: [],
     totalValue: 0,
@@ -21,10 +22,14 @@ function DeliveryProvider({ children }) {
     cart,
     cartValue,
     sale,
+    user,
     setCart,
     setCartValue,
     setSale,
-  }), [sale, cartValue, cart]);
+    setUser,
+  }), [cart, cartValue, sale, user]);
+
+  console.log('context', user);
 
   return (
     <DeliveryContext.Provider value={ value }>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import schemaRegister from '../../utils/schemas/schemaRegister';
@@ -6,9 +6,11 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Span from '../../components/Span';
 import { saveStorage } from '../../utils/helpersFunctions/localStorage';
+import DeliveryContext from '../../utils/context/DeliveryContext';
 
 function Register() {
   const navigate = useNavigate();
+  const { setUser } = useContext(DeliveryContext);
   const [register, setRegister] = useState({
     name: '',
     email: '',
@@ -17,7 +19,7 @@ function Register() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
-  const checkRegister = useCallback(async () => {
+  const checkRegisterData = useCallback(async () => {
     try {
       await schemaRegister.validate(register);
       setIsDisabled(false);
@@ -25,6 +27,12 @@ function Register() {
       setIsDisabled(true);
     }
   }, [register]);
+
+  const saveDataAndRedirect = (data) => {
+    setUser(data);
+    saveStorage('user', data);
+    navigate('/customer/products');
+  };
 
   const handleChange = ({ target }) => {
     setRegister((prevState) => ({
@@ -36,21 +44,13 @@ function Register() {
   const handleClickRegister = async () => {
     try {
       const { data } = await axiosInstance.post('/register', { ...register });
-      // const storageInfo = {
-      //   name: data.name,
-      //   email: data.email,
-      //   role: data.role,
-      //   token: data.token,
-      // };
-      saveStorage('user', data);
-      // localStorage.setItem('user', JSON.stringify(storageInfo));
-      navigate('/customer/products');
+      saveDataAndRedirect(data);
     } catch (error) {
       setErrorDB(error.response.data.message);
     }
   };
 
-  useEffect(() => checkRegister(), [checkRegister]);
+  useEffect(() => checkRegisterData(), [checkRegisterData]);
 
   return (
     <section>

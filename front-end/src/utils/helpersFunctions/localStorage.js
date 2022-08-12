@@ -6,7 +6,7 @@ const readStorage = (key, payload) => {
   if (!content) {
     saveStorage(key, payload);
     content = payload;
-    return JSON.parse(content);
+    return (content);
   }
   return JSON.parse(content);
 };
