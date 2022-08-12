@@ -24,6 +24,7 @@ function Order() {
   }, [userId, setOrders]);
 
   useEffect(() => getAllOrders(), [getAllOrders]);
+  console.log(orders);
 
   return (
     <section>
@@ -39,7 +40,6 @@ function Order() {
           />
         ))
       }
-      {/* <OrderCard id={ 1 } orderStatus="Entregue" orderDate="10/10/2020" price={ 100 } /> */}
     </section>
   );
 }

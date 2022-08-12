@@ -1,13 +1,11 @@
-import React, { useCallback, useState, useEffect, useContext } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/NavBar';
 import OrdersHeader from '../../components/OrdersHeader';
 import Button from '../../components/Button';
-import DeliveryContext from '../../utils/context/DeliveryContext';
 import axiosInstance from '../../utils/axios/axiosInstance';
 
 function Order() {
-  const { cartValue } = useContext(DeliveryContext);
   const [order, setOrder] = useState([]);
   const { name } = JSON.parse(localStorage.getItem('user'));
   const { id } = useParams();
@@ -27,7 +25,8 @@ function Order() {
   }, [id]);
 
   useEffect(() => getOrder(), [getOrder]);
-  const { totalPrice } = order[0];
+  console.log(order);
+  const { totalPrice } = order;
 
   return (
     <section>
@@ -38,7 +37,7 @@ function Order() {
             key={ e.id }
             id={ e.id }
             orderNum={ e.id }
-            seller={ e.IdSeller.name }
+            seller={ e.idSeller.name }
             orderDate={ e.saleDate }
             orderStatus={ e.status }
           />
