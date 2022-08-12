@@ -4,7 +4,6 @@ import Header from '../../components/NavBar';
 import Card from '../../components/ProductCard';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-// import { readStorage } from '../../utils/helpersFunctions/localStorage';
 
 function Products() {
   const { cartValue, setCartValue, setCart } = useContext(DeliveryContext);

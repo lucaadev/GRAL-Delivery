@@ -33,7 +33,7 @@ function Card({ id, title, price, floatPrice, image }) {
     const totalCartValue = sumCart(newCart);
     setCartValue(totalCartValue);
     localStorage.setItem('cartValue', totalCartValue);
-  }, [itemValue, id, floatPrice, title, setCartValue]);
+  }, [cart, id, title, floatPrice, itemValue, setCartValue]);
 
   useEffect(() => updateLocalStorage(), [updateLocalStorage]);
   useEffect(() => updateCart(), [updateCart]);

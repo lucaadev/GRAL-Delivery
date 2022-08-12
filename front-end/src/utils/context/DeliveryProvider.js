@@ -26,8 +26,6 @@ function DeliveryProvider({ children }) {
     setUser,
   }), [cart, cartValue, sale, user]);
 
-  console.log('context', user);
-
   return (
     <DeliveryContext.Provider value={ value }>
       {children}
