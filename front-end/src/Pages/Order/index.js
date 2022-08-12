@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/NavBar';
 import OrderCard from '../../components/OrderCard';
+import axiosInstance from '../../utils/axios/axiosInstance';
 
 function Order() {
   const { name } = JSON.parse(localStorage.getItem('user'));
+  const userId = JSON.parse(localStorage.getItem('userId'));
+  const [orders, setOrders] = useState([]);
+
+  const getAllOrders = async () => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const config = {
+      headers: { Authorization: token },
+    };
+    try {
+      const { data } = await axiosInstance
+        .get('/sales', config, { params: { userId, key: 'user_id' } });
+      setOrders(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => getAllOrders(), []);
+  console.log(orders);
+
   return (
     <section>
       <Header userName={ name } />
-      <OrderCard id={ 1 } orderStatus="Entregue" orderDate="10/10/2020" price={ 100 } />
+      {
+        orders && orders.map(({ id, status, saleDate, totalPrice }) => (
+          <OrderCard
+            key={ id }
+            id={ id }
+            orderStatus={ status }
+            orderDate={ saleDate }
+            price={ totalPrice }
+          />
+        ))
+      }
+      {/* <OrderCard id={ 1 } orderStatus="Entregue" orderDate="10/10/2020" price={ 100 } /> */}
     </section>
   );
 }
-
-// - 37: customer_order_details__element-order-details-label-order-id
-// - 38: customer_order_details__element-order-details-label-seller-name
-// - 39: customer_order_details__element-order-details-label-order-date
-// - 41: customer_order_details__element-order-table-item-number-<index>
-// - 42: customer_order_details__element-order-table-name-<index>
-// - 43: customer_order_details__element-order-table-quantity-<index>
-// - 44: customer_order_details__element-order-table-unit-price-<index>
-// - 45: customer_order_details__element-order-table-sub-total-<index>
-// - 46: customer_order_details__element-order-total-price
-// - 47: customer_order_details__button-delivery-check
 
 export default Order;

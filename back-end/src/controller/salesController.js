@@ -21,8 +21,9 @@ const getAllSales = async (req, res, next) => {
 
 const getSaleById = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { key } = req.body;
+    const { id, key } = req.params;
+    console.log(req.params);
+    // const { key } = req.body;
       const salesById = await salesService.getSaleById(id, key);
       return res.status(200).json(salesById);
   } catch (error) {
