@@ -17,7 +17,7 @@ function OrderCard({ id, orderStatus, orderDate, price }) {
           <span data-testid={ `customer_orders__element-order-date-${id}` }>
             { orderDate }
           </span>
-          <span data-testid={ `customer_orders__element-delivery-price-${id}` }>
+          <span data-testid={ `customer_orders__element-card-price-${id}` }>
             R$
             {' '}
             { price }
