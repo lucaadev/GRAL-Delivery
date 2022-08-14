@@ -50,14 +50,14 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
       onUpdate: 'cascade', 
       foreignKey: 'user_id',
-      as: 'IdUser'
+      as: 'idUser'
     })
     
     Sale.belongsTo(User, {
       onDelete: 'cascade',
       onUpdate: 'cascade', 
       foreignKey: 'seller_id',
-      as: 'IdSeller'
+      as: 'idSeller'
     })
   }
 

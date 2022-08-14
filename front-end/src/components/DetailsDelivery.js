@@ -54,7 +54,7 @@ function DetailsDelivery({
           Número:
           <input
             data-testid="customer_checkout__input-addressNumber"
-            type="number"
+            type="text"
             id="deliveryNumber"
             name="deliveryNumber"
             max="100"

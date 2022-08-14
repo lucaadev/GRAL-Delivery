@@ -4,27 +4,15 @@ import DeliveryContext from './DeliveryContext';
 
 function DeliveryProvider({ children }) {
   const [cartValue, setCartValue] = useState(0);
-  const [user, setUser] = useState({});
-  const [cart, setCart] = useState([]);
-  // criar o useEffect do cart recebendo um array de produtos e o valor total
-  // e fazer um get do localStorage;
   const [sale, setSale] = useState({
     userId: '',
     sellerId: '0',
     deliveryAddress: '',
     deliveryNumber: '',
   });
-
-  const value = useMemo(() => ({
-    cart,
-    cartValue,
-    sale,
-    user,
-    setCart,
-    setCartValue,
-    setSale,
-    setUser,
-  }), [cart, cartValue, sale, user]);
+  const value = React.useMemo(() => ({
+    cartValue, setCartValue, sale, setSale,
+  }), [sale, cartValue]);
 
   return (
     <DeliveryContext.Provider value={ value }>

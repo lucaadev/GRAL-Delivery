@@ -17,6 +17,11 @@ function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
+  const checkUser = useCallback(async () => {
+    const user = localStorage.getItem('user');
+    if (user) navigate('/customer/products');
+  }, [navigate]);
+
   const checkLoginData = useCallback(async () => {
     try {
       await schemaLogin.validate(login);
@@ -48,8 +53,7 @@ function Login() {
     }
   };
 
-  useEffect(() => checkLoginData(), [checkLoginData]);
-  useEffect(() => localStorage.removeItem('user'));
+  useEffect(() => checkLogin(), [checkLogin]);
 
   return (
     <section>

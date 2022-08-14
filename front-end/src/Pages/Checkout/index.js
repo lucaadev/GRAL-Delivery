@@ -23,10 +23,11 @@ function Checkout() {
       headers: { Authorization: token },
     };
     try {
-      const saleData = { ...sale, userId, totalPrice: cartValue, cart };
-      const { data: { id } } = await axiosInstance
-        .post('/sales', saleData, config);
-      navigate(`/customer/orders/${id}`);
+      const value = { ...sale, userId, totalPrice: cartValue, cart };
+      console.log(value);
+      const { data } = await axiosInstance
+        .post('/sales', value, config);
+      navigate(`/customer/orders/${data.id}`);
     } catch (error) {
       console.log(error);
     }

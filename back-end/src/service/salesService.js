@@ -13,8 +13,8 @@ const getAllSales = async (payload) => {
   const sales = await Sale.findAll({
     ...payload,
     include: [      
-      { model: User, as: 'IdUser', attributes: { exclude: ['password'] } },
-      { model: User, as: 'IdSeller', attributes: { exclude: ['password'] } },
+      { model: User, as: 'idUser', attributes: { exclude: ['password'] } },
+      { model: User, as: 'idSeller', attributes: { exclude: ['password'] } },
     ],
   });
   return sales;
