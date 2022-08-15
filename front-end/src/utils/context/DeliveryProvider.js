@@ -17,7 +17,6 @@ function DeliveryProvider({ children }) {
   });
 
   const updateCartItem = useCallback((product, quantity) => {
-    console.log(product.id, 'qt', quantity);
     const shouldDeleteItem = quantity < 1;
     let newCart = [...cart];
     const checkProductCart = newCart.find((item) => item.id === product.id);
@@ -62,7 +61,6 @@ function DeliveryProvider({ children }) {
     updateCartItem,
   }), [cart, cartValue, orders, sale, updateCartItem, user]);
 
-  console.log('context', orders);
   return (
     <DeliveryContext.Provider value={ value }>
       {children}

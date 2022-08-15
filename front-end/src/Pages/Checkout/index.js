@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import DetailsDelivery from '../../components/DetailsDelivery';
@@ -8,10 +9,12 @@ import TableHead from '../../components/Table/TableHead';
 import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
+import schemaCheckout from '../../utils/schemas/schemaCheckout';
 
 function Checkout() {
   const { setCartValue, cartValue, sale, setSale, cart } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
+  const alert = useAlert();
   const navigate = useNavigate();
   const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
 
@@ -45,6 +48,15 @@ function Checkout() {
       ...prevState,
       [target.name]: target.value,
     }));
+  };
+
+  const checkDeliveryForm = async () => {
+    try {
+      await schemaCheckout.validate(sale);
+      postSale();
+    } catch (error) {
+      alert.show(error.message);
+    }
   };
 
   useEffect(() => {
@@ -96,7 +108,7 @@ function Checkout() {
 
         <Button
           dataTestid="customer_checkout__button-submit-order"
-          onClickfn={ postSale }
+          onClickfn={ checkDeliveryForm }
         >
           Finalizar pedido
         </Button>

@@ -15,7 +15,6 @@ function Order() {
     try {
       const { data } = await axiosInstance
         .get(`/sales/${user.id}/user_id`, config);
-      console.log({ data });
       setOrders(data);
     } catch (error) {
       console.log(error);
