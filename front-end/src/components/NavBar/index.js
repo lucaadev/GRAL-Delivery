@@ -29,12 +29,22 @@ function Header() {
             Produtos
           </Link>
         )}
-        <Link
-          to="/customer/orders"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          Meus Pedidos
-        </Link>
+        {user.role && (
+          <Link
+            to="/customer/orders"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            Meus Pedidos
+          </Link>
+        )}
+        {user.role === 'seller' && (
+          <Link
+            to="/seller/orders"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            Meus Pedidos
+          </Link>
+        )}
         <Span
           dataTestid="customer_products__element-navbar-user-full-name"
         >

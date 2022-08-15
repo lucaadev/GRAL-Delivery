@@ -18,8 +18,9 @@ function Login() {
   const [errorDB, setErrorDB] = useState('');
 
   const checkUser = useCallback(async () => {
-    const user = localStorage.getItem('user');
-    if (user) navigate('/customer/products');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.role === 'customer') navigate('/customer/products');
+    if (user && user.role === 'seller') navigate('/seller/orders');
   }, [navigate]);
 
   const checkLoginData = useCallback(async () => {
@@ -40,7 +41,8 @@ function Login() {
 
   const saveDataAndRedirect = (data) => {
     setUser(data);
-    navigate('/customer/products');
+    if (data.role === 'seller') navigate('/seller/orders');
+    if (data.role === 'customer') navigate('/customer/products');
     return localStorage.setItem('user', JSON.stringify(data));
   };
 
