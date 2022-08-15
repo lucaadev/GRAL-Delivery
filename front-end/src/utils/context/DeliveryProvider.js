@@ -1,18 +1,63 @@
 import PropTypes from 'prop-types';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import sumCart from '../helpersFunctions/sumCart';
 import DeliveryContext from './DeliveryContext';
 
 function DeliveryProvider({ children }) {
   const [cartValue, setCartValue] = useState(0);
+  const [user, setUser] = useState({});
+  const [cart, setCart] = useState([]);
+
   const [sale, setSale] = useState({
     userId: '',
     sellerId: '0',
     deliveryAddress: '',
     deliveryNumber: '',
   });
-  const value = React.useMemo(() => ({
-    cartValue, setCartValue, sale, setSale,
-  }), [sale, cartValue]);
+
+  const updateCartItem = useCallback((product, quantity) => {
+    console.log(product.id, 'qt', quantity);
+    const shouldDeleteItem = quantity < 1;
+    let newCart = [...cart];
+    const checkProductCart = newCart.find((item) => item.id === product.id);
+    if (!checkProductCart) {
+      if (shouldDeleteItem) return;
+      const newItemCart = {
+        ...product,
+        quantity,
+      };
+      newCart.push(newItemCart);
+    } else if (shouldDeleteItem) {
+      newCart = cart.filter((item) => item.id !== product.id);
+    } else {
+      checkProductCart.quantity = quantity;
+    }
+    setCart([...newCart]);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+
+    const totalCartValue = sumCart(newCart);
+    setCartValue(totalCartValue);
+    localStorage.setItem('cartValue', totalCartValue);
+  }, [cart]);
+
+  useEffect(() => {
+    const cartDataStorage = JSON.parse(localStorage.getItem('cart'));
+    if (cartDataStorage) {
+      setCart([...cartDataStorage]);
+    }
+  }, []);
+
+  const value = useMemo(() => ({
+    cart,
+    cartValue,
+    sale,
+    user,
+    setCart,
+    setCartValue,
+    setSale,
+    setUser,
+    updateCartItem,
+  }), [cart, cartValue, sale, updateCartItem, user]);
 
   return (
     <DeliveryContext.Provider value={ value }>

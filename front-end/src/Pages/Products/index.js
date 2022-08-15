@@ -6,20 +6,18 @@ import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 
 function Products() {
-  const { cartValue, setCartValue, setCart } = useContext(DeliveryContext);
+  const { cartValue, setCartValue } = useContext(DeliveryContext);
   const [products, setProducts] = useState([]);
 
-  const fetchApiAllProducts = useCallback(async (user, cart) => {
+  const fetchApiAllProducts = useCallback(async (user) => {
     const config = { headers: { Authorization: user.token } };
     const { data } = await axiosInstance.get('/products', config);
     setProducts([...data]);
-    setCart(cart);
-  }, [setCart]);
+  }, []);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    fetchApiAllProducts(user, cart);
+    fetchApiAllProducts(user);
   }, [fetchApiAllProducts]);
 
   useEffect(() => {

@@ -34,7 +34,7 @@ function Header() {
           Meus Pedidos
         </Link>
         <Span
-          data-testid="customer_products__element-navbar-user-full-name"
+          dataTestid="customer_products__element-navbar-user-full-name"
         >
           {user.name}
         </Span>

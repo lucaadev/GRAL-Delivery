@@ -8,23 +8,20 @@ import TableHead from '../../components/Table/TableHead';
 import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-import { readStorage } from '../../utils/helpersFunctions/localStorage';
 
 function Checkout() {
-  const { cartValue, sale, setSale } = useContext(DeliveryContext);
+  const { setCartValue, cartValue, sale, setSale, cart } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const navigate = useNavigate();
   const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
-  const { name, id: userId, token } = readStorage('user', {});
-  const cart = readStorage('cart', []);
 
   const postSale = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
     const config = {
-      headers: { Authorization: token },
+      headers: { Authorization: user.token },
     };
     try {
-      const value = { ...sale, userId, totalPrice: cartValue, cart };
-      console.log(value);
+      const value = { ...sale, userId: user.id, totalPrice: cartValue, cart };
       const { data } = await axiosInstance
         .post('/sales', value, config);
       navigate(`/customer/orders/${data.id}`);
@@ -50,10 +47,15 @@ function Checkout() {
     }));
   };
 
-  useEffect(() => getSellers(), []);
+  useEffect(() => {
+    const cartValueStorage = JSON.parse(localStorage.getItem('cartValue'));
+    setCartValue(cartValueStorage);
+    getSellers();
+  }, [setCartValue]);
+
   return (
     <section className="main-checkout">
-      <Header userName={ name } />
+      <Header />
       <span>Finalizar pedido</span>
       <section>
         <table>
@@ -69,7 +71,8 @@ function Checkout() {
                   title={ item.title }
                   quantity={ item.quantity }
                   price={ priceFormat }
-                  subTotal={ (item.quantity * item.price).toFixed(2).replace('.', ',') }
+                  subTotal={ (item.quantity * item.floatPrice)
+                    .toFixed(2).replace('.', ',') }
                 />
               );
             })
@@ -93,7 +96,7 @@ function Checkout() {
 
         <Button
           dataTestid="customer_checkout__button-submit-order"
-          onClick={ postSale }
+          onClickfn={ postSale }
         >
           Finalizar pedido
         </Button>

@@ -1,20 +1,20 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/NavBar';
 import OrdersHeader from '../../components/OrdersHeader';
+import Span from '../../components/Span';
 import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function Order() {
+  // const { cart } = useContext(DeliveryContext);
   const [order, setOrder] = useState([]);
-  const { name } = JSON.parse(localStorage.getItem('user'));
   const { id } = useParams();
 
-  const getOrder = useCallback(async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
+  const getOrder = useCallback(async (user) => {
     const config = {
-      headers: { Authorization: token },
+      headers: { Authorization: user.token },
     };
     try {
       const { data } = await axiosInstance
@@ -26,14 +26,15 @@ function Order() {
   }, [id]);
 
   useEffect(() => {
-    getOrder();
+    const user = JSON.parse(localStorage.getItem('user'));
+    getOrder(user);
   }, [getOrder]);
 
   const { sale, products } = order;
 
   return (
     <section>
-      <Header userName={ name } />
+      <Header />
       <table>
         {
           sale && sale.map((e) => (
@@ -67,11 +68,11 @@ function Order() {
         }
       </table>
       {sale && (
-        <span data-testid="customer_order_details__element-order-total-price">
+        <Span dataTestid="customer_order_details__element-order-total-price">
           Total R$:
           {' '}
           { (sale[0].totalPrice).toString().replace('.', ',') }
-        </span>)}
+        </Span>)}
     </section>
   );
 }

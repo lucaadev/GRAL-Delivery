@@ -53,7 +53,8 @@ function Login() {
     }
   };
 
-  useEffect(() => checkLogin(), [checkLogin]);
+  useEffect(() => { checkLoginData(); checkUser(); }, [checkLoginData, checkUser]);
+  useEffect(() => localStorage.removeItem('user'));
 
   return (
     <section>

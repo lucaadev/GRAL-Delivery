@@ -25,7 +25,6 @@ function Order() {
   }, [userId, setOrders]);
 
   useEffect(() => getAllOrders(), [getAllOrders]);
-  console.log(orders);
 
   return (
     <section>
