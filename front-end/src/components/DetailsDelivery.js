@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import saleContext from '../utils/context/DeliveryContext';
+import Input from './Input';
 
 function DetailsDelivery({
   sellers,
@@ -33,35 +33,29 @@ function DetailsDelivery({
             ))}
           </select>
         </label>
-
-        <label htmlFor="deliveryAddress">
-          Endereço:
-          <input
-            data-testid="customer_checkout__input-address"
-            type="text"
-            id="deliveryAddress"
-            name="deliveryAddress"
-            required
-            minLength="4"
-            maxLength="100"
-            size="10"
-            value={ deliveryAddress }
-            onChange={ onChangefn }
-          />
-        </label>
-
-        <label htmlFor="deliveryNumber">
-          Número:
-          <input
-            data-testid="customer_checkout__input-addressNumber"
-            type="text"
-            id="deliveryNumber"
-            name="deliveryNumber"
-            max="100"
-            value={ deliveryNumber }
-            onChange={ onChangefn }
-          />
-        </label>
+        <Input
+          dataTestid="customer_checkout__input-address"
+          type="text"
+          id="deliveryAddress"
+          name="deliveryAddress"
+          labelText="Endereço: "
+          required
+          minLength="4"
+          maxLength="100"
+          size="10"
+          value={ deliveryAddress }
+          onChangefn={ onChangefn }
+        />
+        <Input
+          dataTestid="customer_checkout__input-addressNumber"
+          type="text"
+          id="deliveryNumber"
+          name="deliveryNumber"
+          max="100"
+          labelText="Número: "
+          value={ deliveryNumber }
+          onChangefn={ onChangefn }
+        />
       </form>
     </section>
   );

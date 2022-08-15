@@ -1,20 +1,13 @@
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import cartContext from '../../utils/context/DeliveryContext';
-import sumCart from '../../utils/helpersFunctions/sumCart';
+import React, { useContext } from 'react';
+import DeliveryContext from '../../utils/context/DeliveryContext';
+import Button from '../Button';
 
-function TableRow({ index, id, title, quantity, price, subTotal }) {
-  const { setCartValue } = useContext(cartContext);
-  const cart = JSON.parse(localStorage.getItem('cart'));
-  const removeItem = () => {
-    const newCart = cart.filter((item) => item.id !== id);
-    localStorage.setItem('cart', JSON.stringify(newCart));
-    const newTotal = sumCart(newCart);
-    localStorage.setItem('cartValue', newTotal);
-    setCartValue(newTotal);
-  };
+function TableRow(props) {
+  const { index, id, title, quantity, price, subTotal } = props;
+  const { updateCartItem } = useContext(DeliveryContext);
+
   return (
-    // <table className="products-table">
     <tbody>
       <tr key={ id }>
         <td
@@ -37,27 +30,25 @@ function TableRow({ index, id, title, quantity, price, subTotal }) {
           { subTotal}
         </td>
         <td>
-          <button
-            type="button"
-            data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-            onClick={ () => removeItem() }
+          <Button
+            dataTestid={ `customer_checkout__element-order-table-remove-${index}` }
+            onClickfn={ () => updateCartItem(props, 0) }
           >
             Remover
-          </button>
+          </Button>
         </td>
       </tr>
     </tbody>
-    // </table>
   );
 }
 
 TableRow.propTypes = {
-  index: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  quantity: PropTypes.number.isRequired,
-  price: PropTypes.string.isRequired,
-  subTotal: PropTypes.string.isRequired,
-};
+  index: PropTypes.number,
+  id: PropTypes.number,
+  title: PropTypes.string,
+  quantity: PropTypes.number,
+  price: PropTypes.string,
+  subTotal: PropTypes.string,
+}.isRequired;
 
 export default TableRow;

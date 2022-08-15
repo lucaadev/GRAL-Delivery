@@ -1,28 +1,30 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button';
 import DetailsDelivery from '../../components/DetailsDelivery';
 import Header from '../../components/NavBar';
-import TableRow from '../../components/Table/TableRow';
+import Span from '../../components/Span';
 import TableHead from '../../components/Table/TableHead';
+import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
+import schemaCheckout from '../../utils/schemas/schemaCheckout';
 
 function Checkout() {
-  const { cartValue, sale, setSale } = useContext(DeliveryContext);
-  const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
-  const { name } = JSON.parse(localStorage.getItem('user'));
-  const userId = JSON.parse(localStorage.getItem('userId'));
-  const cart = JSON.parse(localStorage.getItem('cart'));
+  const { setCartValue, cartValue, sale, setSale, cart } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
+  const alert = useAlert();
   const navigate = useNavigate();
+  const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
 
   const postSale = async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const config = {
-      headers: { Authorization: token },
+      headers: { Authorization: user.token },
     };
     try {
-      const value = { ...sale, userId, totalPrice: cartValue, cart };
+      const value = { ...sale, userId: user.id, totalPrice: cartValue, cart };
       const { data } = await axiosInstance
         .post('/sales', value, config);
       navigate(`/customer/orders/${data.id}`);
@@ -42,17 +44,30 @@ function Checkout() {
   };
 
   const handleChange = ({ target }) => {
-    // console.log({ targetName: target.name, targetValue: target.value });
     setSale((prevState) => ({
       ...prevState,
       [target.name]: target.value,
     }));
   };
 
-  useEffect(() => getSellers(), []);
+  const checkDeliveryForm = async () => {
+    try {
+      await schemaCheckout.validate(sale);
+      postSale();
+    } catch (error) {
+      alert.show(error.message);
+    }
+  };
+
+  useEffect(() => {
+    const cartValueStorage = JSON.parse(localStorage.getItem('cartValue'));
+    setCartValue(cartValueStorage);
+    getSellers();
+  }, [setCartValue]);
+
   return (
     <section className="main-checkout">
-      <Header userName={ name } />
+      <Header />
       <span>Finalizar pedido</span>
       <section>
         <table>
@@ -68,18 +83,18 @@ function Checkout() {
                   title={ item.title }
                   quantity={ item.quantity }
                   price={ priceFormat }
-                  subTotal={ (item.quantity * item.price).toFixed(2).replace('.', ',') }
+                  subTotal={ (item.quantity * item.floatPrice)
+                    .toFixed(2).replace('.', ',') }
                 />
               );
             })
           }
         </table>
-
         <section>
           Total: R$
-          <span data-testid="customer_checkout__element-order-total-price">
+          <Span dataTestid="customer_checkout__element-order-total-price">
             {cartValue ? cartValueFormat : 0.00}
-          </span>
+          </Span>
         </section>
       </section>
       <section className="details-checkout">
@@ -90,16 +105,15 @@ function Checkout() {
           sellers={ sellers }
           sellerId={ sale.sellerId }
         />
-        <button
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
-          onClick={ postSale }
+
+        <Button
+          dataTestid="customer_checkout__button-submit-order"
+          onClickfn={ checkDeliveryForm }
         >
           Finalizar pedido
-        </button>
+        </Button>
       </section>
     </section>
-
   );
 }
 
