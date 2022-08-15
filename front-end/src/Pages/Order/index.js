@@ -6,31 +6,32 @@ import DeliveryContext from '../../utils/context/DeliveryContext';
 import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function Order() {
-  const { name } = JSON.parse(localStorage.getItem('user'));
-  const userId = JSON.parse(localStorage.getItem('userId'));
   const { orders, setOrders } = useContext(DeliveryContext);
 
-  const getAllOrders = useCallback(async () => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
+  const getAllOrders = useCallback(async (user) => {
     const config = {
-      headers: { Authorization: token },
+      headers: { Authorization: user.token },
     };
     try {
       const { data } = await axiosInstance
-        .get(`/sales/${userId}/user_id`, config);
+        .get(`/sales/${user.id}/user_id`, config);
+      console.log({ data });
       setOrders(data);
     } catch (error) {
       console.log(error);
     }
-  }, [userId, setOrders]);
+  }, [setOrders]);
 
-  useEffect(() => getAllOrders(), [getAllOrders]);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    getAllOrders(user);
+  }, [getAllOrders]);
 
   return (
     <section>
-      <Header userName={ name } />
+      <Header />
       {
-        orders && orders.map(({ id, status, saleDate, totalPrice }) => (
+        orders.length !== 0 && orders.map(({ id, status, saleDate, totalPrice }) => (
           <OrderCard
             key={ id }
             id={ id }

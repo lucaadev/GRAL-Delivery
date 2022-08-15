@@ -52,7 +52,7 @@ function DetailsDelivery({
           id="deliveryNumber"
           name="deliveryNumber"
           max="100"
-          labelText="Endereço: "
+          labelText="Número: "
           value={ deliveryNumber }
           onChangefn={ onChangefn }
         />

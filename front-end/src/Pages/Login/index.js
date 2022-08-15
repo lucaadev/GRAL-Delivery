@@ -54,7 +54,6 @@ function Login() {
   };
 
   useEffect(() => { checkLoginData(); checkUser(); }, [checkLoginData, checkUser]);
-  useEffect(() => localStorage.removeItem('user'));
 
   return (
     <section>

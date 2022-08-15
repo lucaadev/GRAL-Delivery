@@ -7,6 +7,7 @@ function DeliveryProvider({ children }) {
   const [cartValue, setCartValue] = useState(0);
   const [user, setUser] = useState({});
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const [sale, setSale] = useState({
     userId: '',
@@ -50,15 +51,18 @@ function DeliveryProvider({ children }) {
   const value = useMemo(() => ({
     cart,
     cartValue,
+    orders,
     sale,
     user,
     setCart,
     setCartValue,
+    setOrders,
     setSale,
     setUser,
     updateCartItem,
-  }), [cart, cartValue, sale, updateCartItem, user]);
+  }), [cart, cartValue, orders, sale, updateCartItem, user]);
 
+  console.log('context', orders);
   return (
     <DeliveryContext.Provider value={ value }>
       {children}
