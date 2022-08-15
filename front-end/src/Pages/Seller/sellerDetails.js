@@ -7,7 +7,7 @@ import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import formatDate from '../../utils/helpersFunctions/formatDate';
 
-function OrderDetails() {
+function SellerDetails() {
   // const { cart } = useContext(DeliveryContext);
   const [order, setOrder] = useState([]);
   const { id } = useParams();
@@ -77,4 +77,4 @@ function OrderDetails() {
   );
 }
 
-export default OrderDetails;
+export default SellerDetails;
