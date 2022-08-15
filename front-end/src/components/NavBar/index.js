@@ -29,7 +29,7 @@ function Header() {
             Produtos
           </Link>
         )}
-        {user.role && (
+        {user.role === 'customer' && (
           <Link
             to="/customer/orders"
             data-testid="customer_products__element-navbar-link-orders"

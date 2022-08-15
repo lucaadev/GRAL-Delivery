@@ -55,8 +55,7 @@ function Login() {
     }
   };
 
-  useEffect(() => checkLoginData(), [checkLoginData]);
-  useEffect(() => checkUser());
+  useEffect(() => { checkLoginData(); checkUser(); }, [checkLoginData, checkUser]);
 
   return (
     <section>

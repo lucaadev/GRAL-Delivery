@@ -1,9 +1,9 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import Header from '../../components/NavBar';
-// import SellerOrderCard from '../../components/SellerCard';
+import SellerOrderCard from '../../components/SellerCard';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-// import formatDate from '../../utils/helpersFunctions/formatDate';
+import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function SellerOrder() {
   const { orders, setOrders } = useContext(DeliveryContext);
@@ -31,17 +31,22 @@ function SellerOrder() {
   return (
     <section>
       <Header />
-      {/* {
-        orders.length !== 0 && orders.map(({ id, status, saleDate, totalPrice }) => (
+      {
+        orders.length !== 0 && orders.map((
+          {
+            id, status, saleDate, totalPrice, deliveryAddress,
+          },
+        ) => (
           <SellerOrderCard
             key={ id }
             id={ id }
             orderStatus={ status }
             orderDate={ formatDate(saleDate) }
+            orderAddress={ deliveryAddress }
             price={ totalPrice.toString().replace('.', ',') }
           />
         ))
-      } */}
+      }
     </section>
   );
 }
