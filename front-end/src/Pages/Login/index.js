@@ -9,7 +9,7 @@ import schemaLogin from '../../utils/schemas/schemaLogin';
 
 function Login() {
   const navigate = useNavigate();
-  const { setUser } = useContext(DeliveryContext);
+  const { user, setUser } = useContext(DeliveryContext);
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -17,11 +17,11 @@ function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
-  const checkUser = useCallback(async () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user && user.role === 'customer') navigate('/customer/products');
-    if (user && user.role === 'seller') navigate('/seller/orders');
-  }, [navigate]);
+  // const checkUser = useCallback(async () => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   if (user && user.role === 'customer') navigate('/customer/products');
+  //   if (user && user.role === 'seller') navigate('/seller/orders');
+  // }, [navigate]);
 
   const checkLoginData = useCallback(async () => {
     try {
@@ -39,23 +39,23 @@ function Login() {
     }));
   };
 
-  const saveDataAndRedirect = (data) => {
-    setUser(data);
+  const saveDataAndRedirect = useCallback((data) => {
     if (data.role === 'seller') navigate('/seller/orders');
     if (data.role === 'customer') navigate('/customer/products');
-    return localStorage.setItem('user', JSON.stringify(data));
-  };
+  }, [navigate]);
 
   const handleClickLogin = async () => {
     try {
       const { data } = await axiosInstance.post('/login', { ...login });
-      saveDataAndRedirect(data);
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
     } catch (error) {
       setErrorDB(error?.response?.data?.message);
     }
   };
 
-  useEffect(() => { checkLoginData(); checkUser(); }, [checkLoginData, checkUser]);
+  useEffect(() => checkLoginData(), [checkLoginData]);
+  useEffect(() => saveDataAndRedirect(user), [user, saveDataAndRedirect]);
 
   return (
     <section>
