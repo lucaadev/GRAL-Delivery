@@ -27,14 +27,14 @@ function SellerOrderCard({ id, orderStatus, orderDate, price, orderAddress }) {
           </Span>
         </div>
         <Span dataTestid={ `seller_orders__element-card-address-${id}` }>
-          { ororderAddress
+          { orderAddress}
         </Span>
       </section>
     </Link>
   );
 }
 
-OrderCard.propTypes = {
+SellerOrderCard.propTypes = {
   id: PropTypes.number.isRequired,
   orderStatus: PropTypes.string.isRequired,
   orderDate: PropTypes.string.isRequired,
