@@ -42,8 +42,12 @@ function DeliveryProvider({ children }) {
 
   useEffect(() => {
     const cartDataStorage = JSON.parse(localStorage.getItem('cart'));
+    const userDataStorage = localStorage.getItem('user');
     if (cartDataStorage) {
       setCart([...cartDataStorage]);
+    }
+    if (userDataStorage && userDataStorage !== '') {
+      setUser(JSON.parse(userDataStorage));
     }
   }, []);
 

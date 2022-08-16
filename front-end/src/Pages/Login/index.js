@@ -9,7 +9,7 @@ import schemaLogin from '../../utils/schemas/schemaLogin';
 
 function Login() {
   const navigate = useNavigate();
-  const { setUser } = useContext(DeliveryContext);
+  const { user, setUser } = useContext(DeliveryContext);
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -17,10 +17,15 @@ function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
-  const checkUser = useCallback(async () => {
-    const user = localStorage.getItem('user');
-    if (user) navigate('/customer/products');
-  }, [navigate]);
+  const checkUser = () => {
+    const userStorage = localStorage.getItem('user');
+    if (userStorage && userStorage !== '') {
+      const userData = JSON.parse(userStorage);
+      setUser(userData);
+      if (userData.role === 'customer') navigate('/customer/products');
+      if (userData.role === 'seller') navigate('/seller/orders');
+    }
+  };
 
   const checkLoginData = useCallback(async () => {
     try {
@@ -38,22 +43,24 @@ function Login() {
     }));
   };
 
-  const saveDataAndRedirect = (data) => {
-    setUser(data);
-    navigate('/customer/products');
-    return localStorage.setItem('user', JSON.stringify(data));
-  };
+  const saveDataAndRedirect = useCallback((data) => {
+    if (data.role === 'seller') navigate('/seller/orders');
+    if (data.role === 'customer') navigate('/customer/products');
+  }, [navigate]);
 
   const handleClickLogin = async () => {
     try {
       const { data } = await axiosInstance.post('/login', { ...login });
-      saveDataAndRedirect(data);
+      localStorage.setItem('user', JSON.stringify(data));
+      setUser(data);
     } catch (error) {
       setErrorDB(error?.response?.data?.message);
     }
   };
 
-  useEffect(() => { checkLoginData(); checkUser(); }, [checkLoginData, checkUser]);
+  useEffect(() => checkUser());
+  useEffect(() => checkLoginData(), [checkLoginData]);
+  useEffect(() => saveDataAndRedirect(user), [user, saveDataAndRedirect]);
 
   return (
     <section>

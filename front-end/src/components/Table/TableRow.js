@@ -4,7 +4,7 @@ import DeliveryContext from '../../utils/context/DeliveryContext';
 import Button from '../Button';
 
 function TableRow(props) {
-  const { index, id, title, quantity, price, subTotal } = props;
+  const { index, id, title, quantity, price, subTotal, showRemoveBtn } = props;
   const { updateCartItem } = useContext(DeliveryContext);
 
   return (
@@ -29,14 +29,16 @@ function TableRow(props) {
         <td data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
           { subTotal}
         </td>
-        <td>
-          <Button
-            dataTestid={ `customer_checkout__element-order-table-remove-${index}` }
-            onClickfn={ () => updateCartItem(props, 0) }
-          >
-            Remover
-          </Button>
-        </td>
+        {!showRemoveBtn && (
+          <td>
+            <Button
+              dataTestid={ `customer_checkout__element-order-table-remove-${index}` }
+              onClickfn={ () => updateCartItem(props, 0) }
+            >
+              Remover
+            </Button>
+          </td>
+        )}
       </tr>
     </tbody>
   );
