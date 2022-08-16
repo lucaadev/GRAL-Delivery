@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '../Button';
 
 function TableRowAdmin(props) {
-  const { user, index, removeUserFn } = props;
+  const { user, index } = props;
 
   return (
     <tr>
@@ -25,7 +25,7 @@ function TableRowAdmin(props) {
       </td>
       <td>
         <Button
-          dataTestid={ `admin_manage__element-user-table-remove-${index}` }
+          dataTestid={ `admin_manage__element-user-table-remove-${user.id - 1}` }
           onClickfn={ () => removeUserFn(user.id) }
         >
           Excluir
