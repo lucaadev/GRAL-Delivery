@@ -16,8 +16,7 @@ function Products() {
   }, []);
 
   useEffect(() => {
-    // const user = JSON.parse(localStorage.getItem('user'));
-    fetchApiAllProducts(user);
+    if (Object.keys(user).length !== 0) fetchApiAllProducts(user);
   }, [user, fetchApiAllProducts]);
 
   useEffect(() => {

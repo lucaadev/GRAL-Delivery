@@ -8,7 +8,6 @@ import axiosInstance from '../../utils/axios/axiosInstance';
 import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function OrderDetails() {
-  // const { cart } = useContext(DeliveryContext);
   const [order, setOrder] = useState([]);
   const { id } = useParams();
 

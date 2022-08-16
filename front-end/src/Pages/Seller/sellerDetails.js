@@ -1,20 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/NavBar';
-import OrdersHeader from '../../components/OrdersHeader';
-import Span from '../../components/Span';
-import TableRow from '../../components/Table/TableRow';
+import DeliveryContext from '../../utils/context/DeliveryContext';
+// import OrdersHeader from '../../components/OrdersHeader';
+// import Span from '../../components/Span';
+// import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';
-import formatDate from '../../utils/helpersFunctions/formatDate';
+// import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function SellerDetails() {
   // const { cart } = useContext(DeliveryContext);
+  const { user } = useContext(DeliveryContext);
   const [order, setOrder] = useState([]);
   const { id } = useParams();
 
-  const getOrder = useCallback(async (user) => {
+  const getOrder = useCallback(async (userData) => {
     const config = {
-      headers: { Authorization: user.token },
+      headers: { Authorization: userData.token },
     };
     try {
       const { data } = await axiosInstance
@@ -25,17 +27,18 @@ function SellerDetails() {
     }
   }, [id]);
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    getOrder(user);
-  }, [getOrder]);
+  console.log(order);
 
-  const { sale, products } = order;
+  useEffect(() => {
+    getOrder(user);
+  }, [user, getOrder]);
+
+  // const { sale, products } = order;
 
   return (
     <section>
       <Header />
-      <table>
+      {/* <table>
         {
           sale && sale.map((e) => (
             <OrdersHeader
@@ -72,7 +75,7 @@ function SellerDetails() {
           Total R$:
           {' '}
           { (sale[0].totalPrice).toString().replace('.', ',') }
-        </Span>)}
+        </Span>)} */}
     </section>
   );
 }

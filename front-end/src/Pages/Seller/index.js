@@ -6,7 +6,7 @@ import DeliveryContext from '../../utils/context/DeliveryContext';
 import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function SellerOrder() {
-  const { user, orders, setOrders } = useContext(DeliveryContext);
+  const { user, setUser, orders, setOrders } = useContext(DeliveryContext);
 
   const getAllOrders = useCallback(async (userData) => {
     const config = {
@@ -22,9 +22,8 @@ function SellerOrder() {
   }, [setOrders]);
 
   useEffect(() => {
-    // const user = JSON.parse(localStorage.getItem('user'));
-    getAllOrders(user);
-  }, [user, getAllOrders]);
+    if (Object.keys(user).length !== 0) getAllOrders(user);
+  }, [user, setUser, getAllOrders]);
 
   return (
     <section>

@@ -5,9 +5,10 @@ import Span from '../Span';
 
 function Header() {
   // const [user, setUser] = useState('');
-  const { user, setUser } = useContext(DeliveryContext);
+  const { user, setUser, setCart } = useContext(DeliveryContext);
   const clearStorage = () => {
     setUser({});
+    setCart([]);
     localStorage.clear();
     localStorage.setItem('user', '');
   };
