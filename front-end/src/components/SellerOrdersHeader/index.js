@@ -1,8 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import Button from '../Button';
+import axiosInstance from '../../utils/axios/axiosInstance';
+// import DeliveryContext from '../../utils/context/DeliveryContext';
 
 function SellerOrdersHeader({ orderNum, orderDate, orderStatus }) {
+  // const { user } = useContext(DeliveryContext);
+  // const config = {
+  //   headers: { Authorization: user.token },
+  // };
+  const { id } = useParams();
+  const updateStatus = async (status) => {
+    try {
+      await axiosInstance
+        .patch(`/sales/search?id=${id}&key=id&value=${status}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deliveryStatus = 'Em Trânsito';
   return (
     <thead>
       <tr>
@@ -24,7 +41,15 @@ function SellerOrdersHeader({ orderNum, orderDate, orderStatus }) {
         </th>
 
         <th>
-          <Button dataTestid="seller_order_details__button-preparing-check">
+          <Button
+            dataTestid="seller_order_details__button-preparing-check"
+            disabled={
+              orderStatus === 'Preparando'
+              || orderStatus === deliveryStatus
+              || orderStatus === 'Entregue'
+            }
+            onClickfn={ () => updateStatus('Preparando') }
+          >
             Preparar pedido
           </Button>
         </th>
@@ -32,7 +57,12 @@ function SellerOrdersHeader({ orderNum, orderDate, orderStatus }) {
         <th>
           <Button
             dataTestid="seller_order_details__button-dispatch-check"
-            disabled={ orderStatus === 'Pendente' }
+            disabled={
+              orderStatus === 'Pendente'
+              || orderStatus === deliveryStatus
+              || orderStatus === 'Entregue'
+            }
+            onClickfn={ () => updateStatus(deliveryStatus) }
           >
             Saiu pra entrega
           </Button>
