@@ -4,12 +4,12 @@ import Header from '../../components/NavBar';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 import SallesHeader from '../../components/SellerOrdersHeader';
 import Span from '../../components/Span';
-// import TableRow from '../../components/Table/TableRow';
+import TableRow from '../../components/Table/TableRowSeller';
+import TableHead from '../../components/Table/TableHead';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function SellerDetails() {
-  // const { cart } = useContext(DeliveryContext);
   const { user } = useContext(DeliveryContext);
   const [order, setOrder] = useState([]);
   const { id } = useParams();
@@ -33,7 +33,7 @@ function SellerDetails() {
     if (Object.keys(user).length !== 0) getOrder(user);
   }, [user, getOrder]);
 
-  const { sale } = order;
+  const { sale, products } = order;
 
   return (
     <section>
@@ -50,7 +50,10 @@ function SellerDetails() {
             />
           ))
         }
-        {/* {
+      </table>
+      <table>
+        <TableHead />
+        {
           products && products.map((product, i) => {
             const priceFormat = `${product.price}`.replace('.', ',');
             return (
@@ -67,7 +70,7 @@ function SellerDetails() {
               />
             );
           })
-        } */}
+        }
       </table>
       {sale && (
         <Span dataTestid="seller_order_details__element-order-total-price">

@@ -71,7 +71,7 @@ function Checkout() {
       <span>Finalizar pedido</span>
       <section>
         <table>
-          <TableHead />
+          <TableHead removeCol />
           {
             cart.map((item, i) => {
               const priceFormat = `${item.price}`.replace('.', ',');

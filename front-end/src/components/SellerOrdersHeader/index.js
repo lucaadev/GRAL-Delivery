@@ -30,7 +30,10 @@ function SellerOrdersHeader({ orderNum, orderDate, orderStatus }) {
         </th>
 
         <th>
-          <Button dataTestid="seller_order_details__button-dispatch-check">
+          <Button
+            dataTestid="seller_order_details__button-dispatch-check"
+            disabled={ orderStatus === 'Pendente' }
+          >
             Saiu pra entrega
           </Button>
         </th>
