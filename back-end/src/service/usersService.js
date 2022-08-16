@@ -1,6 +1,6 @@
+const md5 = require('md5');
 const { User } = require('../database/models');
 const errorThrow = require('../utils/errorThrow');
-const md5 = require('md5');
 
 const getUserByEmail = async (email) => {
   const userByEmail = await User.findOne({ where: { email } });
@@ -29,24 +29,27 @@ const createNewUser = async (data) => {
 
 const createNewRegistration = async (userToken, data) => {
   const { name, email, password, role } = data;
-  if(!userToken || userToken.payload.role !== 'administrator') throw errorThrow(401, 'User does not have permission for this operation');
+  if (!userToken || userToken.payload.role !== 'administrator') {
+    throw errorThrow(401, 'User does not have permission');
+  }
   const userByEmail = await getUserByEmail(email);
-  if(userByEmail) throw errorThrow(409, 'User already exists');
+  if (userByEmail) throw errorThrow(409, 'User already exists');
 
   const cryptoPassword = md5(password);
-  const newUser = { name, email, password: cryptoPassword, role};
+  const newUser = { name, email, password: cryptoPassword, role };
   const userCreated = await createNewUser(newUser);
   return userCreated;
 };
 
 const deleteUser = async (userToken, id) => {
-  if(!userToken || userToken.payload.role !== 'administrator') throw errorThrow(401, 'User does not have permission for this operation');
+  if (!userToken || userToken.payload.role !== 'administrator') {
+    throw errorThrow(401, 'User does not have permission for this operation');
+  }
   const userById = await getUserById(id);
-  if(!userById) throw errorThrow(404, 'User not found');
+  if (!userById) throw errorThrow(404, 'User not found');
 
-  await User.destroy({ where: { id }})
-  return;
-}
+  await User.destroy({ where: { id } });
+};
 
 module.exports = {
   getUserByEmail,
