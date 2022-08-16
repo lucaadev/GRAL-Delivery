@@ -44,6 +44,7 @@ function OrderDetails() {
               seller={ e.idSeller.name }
               orderDate={ formatDate(e.saleDate) }
               orderStatus={ e.status }
+              receivedBtn
             />
           ))
         }

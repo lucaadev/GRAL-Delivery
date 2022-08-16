@@ -36,7 +36,6 @@ function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
             Marcar como entregue
           </Button>
         </th>
-
       </tr>
     </thead>
   );
