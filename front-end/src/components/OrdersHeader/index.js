@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import axiosInstance from '../../utils/axios/axiosInstance';
@@ -6,6 +6,7 @@ import Button from '../Button';
 
 function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
   const { id } = useParams();
+  const [btnStatus, setBtnStatus] = useState(orderStatus);
   const updateStatus = async (status) => {
     try {
       await axiosInstance
@@ -39,14 +40,17 @@ function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
         <th
           data-testid={ testid }
         >
-          { orderStatus }
+          { btnStatus }
         </th>
 
         <th>
           <Button
             dataTestid="customer_order_details__button-delivery-check"
-            disabled={ orderStatus !== 'Em Trânsito' }
-            onClickfn={ () => updateStatus('Entregue') }
+            disabled={ btnStatus !== 'Em Trânsito' }
+            onClickfn={ () => {
+              setBtnStatus('Entregue');
+              updateStatus('Entregue');
+            } }
           >
             Marcar como entregue
           </Button>
