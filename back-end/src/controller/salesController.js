@@ -37,6 +37,6 @@ const updateStatus = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 module.exports = { createNewSale, getAllSales, getSaleById, updateStatus };

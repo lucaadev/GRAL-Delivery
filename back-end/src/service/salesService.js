@@ -28,10 +28,10 @@ const getSaleById = async (id, key) => {
 const updateStatus = async (id, key, value) => {
   const updatedSale = await Sale.update({ status: value }, {
     where: {
-      [key]: id
-    }
+      [key]: id,
+    },
   });
   return updatedSale;
-}
+};
 
 module.exports = { createNewSale, getAllSales, getSaleById, updateStatus };

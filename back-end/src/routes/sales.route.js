@@ -7,7 +7,6 @@ const sales = express.Router();
 // sales.get('/', validateAuth, salesController.getAllSales);
 sales.post('/', validateAuth, salesController.createNewSale);
 sales.get('/:id/:key', validateAuth, salesController.getSaleById);
-sales.patch('/search', validateAuth, salesController.updateStatus);
-
+sales.patch('/search', salesController.updateStatus);
 
 module.exports = sales;
