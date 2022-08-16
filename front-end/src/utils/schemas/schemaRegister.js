@@ -9,4 +9,11 @@ const schemaRegister = object().shape({
   password: string().min(pwMin).required(),
 });
 
-export default schemaRegister;
+const schemaRegistration = object().shape({
+  name: string().min(nameMin).required(),
+  email: string().email().required(),
+  password: string().min(pwMin).required(),
+  role: string().required(),
+});
+
+export { schemaRegister, schemaRegistration };

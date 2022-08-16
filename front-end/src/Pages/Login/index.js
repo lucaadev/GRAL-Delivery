@@ -24,6 +24,7 @@ function Login() {
       setUser(userData);
       if (userData.role === 'customer') navigate('/customer/products');
       if (userData.role === 'seller') navigate('/seller/orders');
+      if (userData.role === 'administrator') navigate('/admin/manage');
     }
   };
 
@@ -43,9 +44,10 @@ function Login() {
     }));
   };
 
-  const saveDataAndRedirect = useCallback((data) => {
+  const performTheRedirect = useCallback((data) => {
     if (data.role === 'seller') navigate('/seller/orders');
     if (data.role === 'customer') navigate('/customer/products');
+    if (data.role === 'administrator') navigate('/admin/manage');
   }, [navigate]);
 
   const handleClickLogin = async () => {
@@ -60,7 +62,7 @@ function Login() {
 
   useEffect(() => checkUser());
   useEffect(() => checkLoginData(), [checkLoginData]);
-  useEffect(() => saveDataAndRedirect(user), [user, saveDataAndRedirect]);
+  useEffect(() => performTheRedirect(user), [user, performTheRedirect]);
 
   return (
     <section>

@@ -29,4 +29,32 @@ const getAllUsers = async (_req, res, next) => {
   }
 };
 
-module.exports = { getUserById, getUsersRole, getAllUsers };
+const createNewRegistration = async (req, res, next) => {
+  try {
+    const userToken = req.body.userInfoToken;
+    const { userInforToken, ...newbody } = req.body;
+      const userCreated = await usersService.createNewRegistration(userToken, newbody);
+      return res.status(201).json(userCreated);
+  } catch (error) {
+      next(error);
+  }
+};
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const userToken = req.body.userInfoToken;
+    const { id } = req.params;
+    await usersService.deleteUser(userToken, id);
+    res.status(200).end();
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {
+  createNewRegistration,
+  deleteUser,
+  getUserById,
+  getUsersRole,
+  getAllUsers,
+};
