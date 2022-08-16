@@ -6,15 +6,15 @@ import DeliveryContext from '../../utils/context/DeliveryContext';
 import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function SellerOrder() {
-  const { orders, setOrders } = useContext(DeliveryContext);
+  const { user, orders, setOrders } = useContext(DeliveryContext);
 
-  const getAllOrders = useCallback(async (user) => {
+  const getAllOrders = useCallback(async (userData) => {
     const config = {
-      headers: { Authorization: user.token },
+      headers: { Authorization: userData.token },
     };
     try {
       const { data } = await axiosInstance
-        .get(`/sales/${user.id}/seller_id`, config);
+        .get(`/sales/${userData.id}/seller_id`, config);
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -22,11 +22,9 @@ function SellerOrder() {
   }, [setOrders]);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    // const user = JSON.parse(localStorage.getItem('user'));
     getAllOrders(user);
-  }, [getAllOrders]);
-
-  console.log(orders);
+  }, [user, getAllOrders]);
 
   return (
     <section>

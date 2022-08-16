@@ -1,22 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import DeliveryContext from '../../utils/context/DeliveryContext';
 import Span from '../Span';
 
 function Header() {
-  const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
+  const { user, setUser } = useContext(DeliveryContext);
   const clearStorage = () => {
+    setUser({});
     localStorage.clear();
     localStorage.setItem('user', '');
   };
 
-  const getUserStorageDataAndSave = useCallback(() => {
-    const userData = JSON.parse(localStorage.getItem('user'));
-    setUser(userData);
-  }, []);
+  // const getUserStorageDataAndSave = useCallback(() => {
+  //   const userData = JSON.parse(localStorage.getItem('user'));
+  //   setUser(userData);
+  // }, []);
 
-  useEffect(() => {
-    getUserStorageDataAndSave();
-  }, [getUserStorageDataAndSave]);
+  // useEffect(() => {
+  //   getUserStorageDataAndSave();
+  // }, [getUserStorageDataAndSave]);
 
   return (
     <section>

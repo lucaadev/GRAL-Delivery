@@ -17,11 +17,15 @@ function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
-  // const checkUser = useCallback(async () => {
-  //   const user = JSON.parse(localStorage.getItem('user'));
-  //   if (user && user.role === 'customer') navigate('/customer/products');
-  //   if (user && user.role === 'seller') navigate('/seller/orders');
-  // }, [navigate]);
+  const checkUser = () => {
+    const userStorage = localStorage.getItem('user');
+    if (userStorage && userStorage !== '') {
+      const userData = JSON.parse(userStorage);
+      setUser(userData);
+      if (userData.role === 'customer') navigate('/customer/products');
+      if (userData.role === 'seller') navigate('/seller/orders');
+    }
+  };
 
   const checkLoginData = useCallback(async () => {
     try {
@@ -54,6 +58,7 @@ function Login() {
     }
   };
 
+  useEffect(() => checkUser());
   useEffect(() => checkLoginData(), [checkLoginData]);
   useEffect(() => saveDataAndRedirect(user), [user, saveDataAndRedirect]);
 
