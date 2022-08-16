@@ -61,6 +61,7 @@ function OrderDetails() {
                 subTotal={
                   (product.quantity * product.price).toFixed(2).replace('.', ',')
                 }
+                showRemoveBtn
               />
             );
           })
