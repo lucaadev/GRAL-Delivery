@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/NavBar';
 import SellerOrderCard from '../../components/SellerCard';
 import axiosInstance from '../../utils/axios/axiosInstance';
@@ -7,7 +8,7 @@ import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function SellerOrder() {
   const { user, setUser, orders, setOrders } = useContext(DeliveryContext);
-
+  const navigate = useNavigate();
   const getAllOrders = useCallback(async (userData) => {
     const config = {
       headers: { Authorization: userData.token },
@@ -23,7 +24,8 @@ function SellerOrder() {
 
   useEffect(() => {
     if (Object.keys(user).length !== 0) getAllOrders(user);
-  }, [user, setUser, getAllOrders]);
+    if (Object.keys(user).length === 0) navigate('/login');
+  }, [user, setUser, navigate, getAllOrders]);
 
   return (
     <section>

@@ -27,8 +27,6 @@ function SellerDetails() {
     }
   }, [id]);
 
-  console.log(order);
-
   useEffect(() => {
     if (Object.keys(user).length !== 0) getOrder(user);
   }, [user, getOrder]);
