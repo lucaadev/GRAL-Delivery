@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+import axiosInstance from '../../utils/axios/axiosInstance';
 import Button from '../Button';
 
 function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
+  const { id } = useParams();
+  const [btnStatus, setBtnStatus] = useState(orderStatus);
+  const updateStatus = async (status) => {
+    try {
+      await axiosInstance
+        .patch(`/sales/search?id=${id}&key=id&value=${status}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const testid = 'customer_order_details__element-order-details-label-delivery-status';
   return (
     <thead>
@@ -28,15 +40,21 @@ function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
         <th
           data-testid={ testid }
         >
-          { orderStatus }
+          { btnStatus }
         </th>
 
         <th>
-          <Button dataTestid="customer_order_details__button-delivery-check" disabled>
+          <Button
+            dataTestid="customer_order_details__button-delivery-check"
+            disabled={ btnStatus !== 'Em Trânsito' }
+            onClickfn={ () => {
+              setBtnStatus('Entregue');
+              updateStatus('Entregue');
+            } }
+          >
             Marcar como entregue
           </Button>
         </th>
-
       </tr>
     </thead>
   );

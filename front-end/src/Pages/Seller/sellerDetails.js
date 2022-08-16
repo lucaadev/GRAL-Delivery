@@ -2,14 +2,14 @@ import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/NavBar';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-// import OrdersHeader from '../../components/OrdersHeader';
-// import Span from '../../components/Span';
-// import TableRow from '../../components/Table/TableRow';
+import SallesHeader from '../../components/SellerOrdersHeader';
+import Span from '../../components/Span';
+import TableRow from '../../components/Table/TableRowSeller';
+import TableHead from '../../components/Table/TableHead';
 import axiosInstance from '../../utils/axios/axiosInstance';
-// import formatDate from '../../utils/helpersFunctions/formatDate';
+import formatDate from '../../utils/helpersFunctions/formatDate';
 
 function SellerDetails() {
-  // const { cart } = useContext(DeliveryContext);
   const { user } = useContext(DeliveryContext);
   const [order, setOrder] = useState([]);
   const { id } = useParams();
@@ -27,30 +27,30 @@ function SellerDetails() {
     }
   }, [id]);
 
-  console.log(order);
-
   useEffect(() => {
-    getOrder(user);
+    if (Object.keys(user).length !== 0) getOrder(user);
   }, [user, getOrder]);
 
-  // const { sale, products } = order;
+  const { sale, products } = order;
 
   return (
     <section>
       <Header />
-      {/* <table>
+      <table>
         {
           sale && sale.map((e) => (
-            <OrdersHeader
+            <SallesHeader
               key={ e.id }
               id={ e.id }
               orderNum={ e.id }
-              seller={ e.idSeller.name }
               orderDate={ formatDate(e.saleDate) }
               orderStatus={ e.status }
             />
           ))
         }
+      </table>
+      <table>
+        <TableHead />
         {
           products && products.map((product, i) => {
             const priceFormat = `${product.price}`.replace('.', ',');
@@ -71,11 +71,11 @@ function SellerDetails() {
         }
       </table>
       {sale && (
-        <Span dataTestid="customer_order_details__element-order-total-price">
+        <Span dataTestid="seller_order_details__element-order-total-price">
           Total R$:
           {' '}
           { (sale[0].totalPrice).toString().replace('.', ',') }
-        </Span>)} */}
+        </Span>)}
     </section>
   );
 }
