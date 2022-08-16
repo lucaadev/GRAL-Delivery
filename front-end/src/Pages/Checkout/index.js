@@ -12,14 +12,19 @@ import DeliveryContext from '../../utils/context/DeliveryContext';
 import schemaCheckout from '../../utils/schemas/schemaCheckout';
 
 function Checkout() {
-  const { setCartValue, cartValue, sale, setSale, cart } = useContext(DeliveryContext);
+  const {
+    user,
+    setCartValue,
+    cartValue,
+    sale,
+    setSale,
+    cart } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const alert = useAlert();
   const navigate = useNavigate();
   const cartValueFormat = cartValue.toFixed(2).replace('.', ',');
 
   const postSale = async () => {
-    const user = JSON.parse(localStorage.getItem('user'));
     const config = {
       headers: { Authorization: user.token },
     };
@@ -60,10 +65,11 @@ function Checkout() {
   };
 
   useEffect(() => {
+    if (Object.keys(user).length === 0) navigate('/login');
     const cartValueStorage = JSON.parse(localStorage.getItem('cartValue'));
     setCartValue(cartValueStorage);
     getSellers();
-  }, [setCartValue]);
+  }, [user, navigate, setCartValue]);
 
   return (
     <section className="main-checkout">
@@ -71,7 +77,7 @@ function Checkout() {
       <span>Finalizar pedido</span>
       <section>
         <table>
-          <TableHead />
+          <TableHead removeCol />
           {
             cart.map((item, i) => {
               const priceFormat = `${item.price}`.replace('.', ',');

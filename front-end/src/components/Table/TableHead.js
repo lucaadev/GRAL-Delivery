@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function TableHead() {
+function TableHead({ removeCol }) {
   return (
     <thead>
       <tr>
@@ -9,10 +10,14 @@ function TableHead() {
         <th>Quantidade</th>
         <th>Valor unitário</th>
         <th>Sub-total</th>
-        <th>Remover item</th>
+        {removeCol && (<th>Remover item</th>)}
       </tr>
     </thead>
   );
 }
+
+TableHead.propTypes = {
+  removeCol: PropTypes.bool,
+}.isRequired;
 
 export default TableHead;
