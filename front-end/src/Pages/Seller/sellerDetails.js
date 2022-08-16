@@ -70,7 +70,7 @@ function SellerDetails() {
         } */}
       </table>
       {sale && (
-        <Span dataTestid="customer_order_details__element-order-total-price">
+        <Span dataTestid="seller_order_details__element-order-total-price">
           Total R$:
           {' '}
           { (sale[0].totalPrice).toString().replace('.', ',') }
