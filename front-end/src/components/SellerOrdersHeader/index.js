@@ -3,13 +3,8 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import Button from '../Button';
 import axiosInstance from '../../utils/axios/axiosInstance';
-// import DeliveryContext from '../../utils/context/DeliveryContext';
 
 function SellerOrdersHeader({ orderNum, orderDate, orderStatus }) {
-  // const { user } = useContext(DeliveryContext);
-  // const config = {
-  //   headers: { Authorization: user.token },
-  // };
   const { id } = useParams();
   const updateStatus = async (status) => {
     try {
