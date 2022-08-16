@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axios/axiosInstance';
-import schemaRegister from '../../utils/schemas/schemaRegister';
+import { schemaRegister } from '../../utils/schemas/schemaRegister';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Span from '../../components/Span';
