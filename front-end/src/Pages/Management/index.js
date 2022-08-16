@@ -23,8 +23,6 @@ function Management() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errorDB, setErrorDB] = useState('');
 
-  // --adm2@21!!--
-
   const handleChange = ({ target }) => {
     setRegistration((prevState) => ({
       ...prevState,
