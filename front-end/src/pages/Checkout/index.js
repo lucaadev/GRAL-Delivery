@@ -18,7 +18,8 @@ function Checkout() {
     cartValue,
     sale,
     setSale,
-    cart } = useContext(DeliveryContext);
+    cart,
+    setCart } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const alert = useAlert();
   const navigate = useNavigate();
@@ -33,6 +34,9 @@ function Checkout() {
       const { data } = await axiosInstance
         .post('/sales', value, config);
       navigate(`/customer/orders/${data.id}`);
+      setCart([]);
+      setCartValue(0);
+      localStorage.setItem('cartValue', 0);
     } catch (error) {
       console.log(error);
     }
