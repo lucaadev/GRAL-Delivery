@@ -17,7 +17,7 @@ function OrderDetails() {
     };
     try {
       const { data } = await axiosInstance
-        .get(`/sp/${id}/search?key=id`, config);
+        .get(`/sale_products/${id}/search?key=id`, config);
       setOrder(data);
     } catch (error) {
       console.log(error);
