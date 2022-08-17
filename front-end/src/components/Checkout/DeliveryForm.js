@@ -12,8 +12,8 @@ function DeliveryForm({
   return (
     <section className="delivery-details">
       <form>
-        <label htmlFor="sellerId">
-          P.Vendedor Responsável:
+        <label htmlFor="sellerId" className="font-medium ml-4 mb-1">
+          Vendedor:
           {' '}
           <select
             data-testid="customer_checkout__select-seller"
@@ -21,6 +21,7 @@ function DeliveryForm({
             id="sellerId"
             value={ sellerId }
             onChange={ onChangefn }
+            className="input ml-2"
           >
             <option value="0">Selecione o vendedor</option>
             {sellers.map((seller) => (
@@ -45,6 +46,7 @@ function DeliveryForm({
           size="10"
           value={ deliveryAddress }
           onChangefn={ onChangefn }
+          inputClass="input-checkout"
         />
         <Input
           dataTestid="customer_checkout__input-addressNumber"
@@ -55,6 +57,7 @@ function DeliveryForm({
           labelText="Número: "
           value={ deliveryNumber }
           onChangefn={ onChangefn }
+          inputClass="input-checkout"
         />
       </form>
     </section>

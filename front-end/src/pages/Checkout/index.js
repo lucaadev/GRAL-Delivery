@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { useContext, useEffect, useState } from 'react';
 import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
@@ -76,52 +77,60 @@ function Checkout() {
   }, [user, navigate, setCartValue]);
 
   return (
-    <section className="main-checkout">
+    <section>
       <Header />
-      <span>Finalizar pedido</span>
-      <section>
-        <table>
-          <TableHead removeCol />
-          {
-            cart.map((item, i) => {
-              const priceFormat = `${item.price}`.replace('.', ',');
-              return (
-                <TableRow
-                  key={ i }
-                  index={ i }
-                  id={ item.id }
-                  title={ item.title }
-                  quantity={ item.quantity }
-                  price={ priceFormat }
-                  subTotal={ (item.quantity * item.floatPrice)
-                    .toFixed(2).replace('.', ',') }
-                />
-              );
-            })
-          }
-        </table>
-        <section>
-          Total: R$
-          <Span dataTestid="customer_checkout__element-order-total-price">
-            {cartValue ? cartValueFormat : 0.00}
-          </Span>
+      <section className="main-checkout">
+        <section className="checkout-table">
+          <table className="table-auto text-center">
+            <TableHead removeCol />
+            {
+              cart.map((item, i) => {
+                const priceFormat = `${item.price}`.replace('.', ',');
+                return (
+                  <TableRow
+                    key={ i }
+                    index={ i }
+                    id={ item.id }
+                    title={ item.title }
+                    quantity={ item.quantity }
+                    price={ priceFormat }
+                    subTotal={ (item.quantity * item.floatPrice)
+                      .toFixed(2).replace('.', ',') }
+                  />
+                );
+              })
+            }
+          </table>
         </section>
-      </section>
-      <section className="details-checkout">
-        <DetailsDelivery
-          deliveryAddress={ sale.deliveryAddress }
-          deliveryNumber={ sale.deliveryNumber }
-          onChangefn={ handleChange }
-          sellers={ sellers }
-          sellerId={ sale.sellerId }
-        />
+        <section className="checkout-form">
+          <DetailsDelivery
+            deliveryAddress={ sale.deliveryAddress }
+            deliveryNumber={ sale.deliveryNumber }
+            onChangefn={ handleChange }
+            sellers={ sellers }
+            sellerId={ sale.sellerId }
+          />
+          <section className="send-order">
 
-        <Button
-          dataTestid="customer_checkout__button-submit-order"
-          onClickfn={ checkDeliveryForm }
-        >
-          Finalizar pedido
-        </Button>
+            <Span
+              dataTestid="customer_checkout__element-order-total-price"
+              spanClass="checkout-total"
+            >
+              Total: R$
+              { ' '}
+              {cartValue ? cartValueFormat : 0.00}
+            </Span>
+
+            <Button
+              dataTestid="customer_checkout__button-submit-order"
+              onClickfn={ checkDeliveryForm }
+              classNameBtn="checkout-button"
+            >
+              Finalizar pedido
+            </Button>
+          </section>
+        </section>
+
       </section>
     </section>
   );

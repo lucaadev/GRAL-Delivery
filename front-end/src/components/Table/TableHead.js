@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 function TableHead({ removeCol }) {
   return (
-    <thead>
+    <thead className="border">
       <tr>
-        <th>Item</th>
-        <th>Descrição</th>
-        <th>Quantidade</th>
-        <th>Valor unitário</th>
-        <th>Sub-total</th>
-        {removeCol && (<th>Remover item</th>)}
+        <th className="table-headers">Item</th>
+        <th className="table-headers">Descrição</th>
+        <th className="table-headers">Quantidade</th>
+        <th className="table-headers">Valor unitário</th>
+        <th className="table-headers">Sub-total</th>
+        {removeCol && (<th className="table-headers">Remover item</th>)}
       </tr>
     </thead>
   );
