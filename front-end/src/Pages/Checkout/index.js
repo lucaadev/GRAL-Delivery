@@ -6,7 +6,7 @@ import DetailsDelivery from '../../components/DetailsDelivery';
 import Header from '../../components/Header';
 import Span from '../../components/Span';
 import TableHead from '../../components/Table/TableHead';
-import TableRow from '../../components/Table/TableRow';
+import TableRow from '../../components/Table/TableRowOrder';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 import schemaCheckout from '../../utils/schemas/schemaCheckout';

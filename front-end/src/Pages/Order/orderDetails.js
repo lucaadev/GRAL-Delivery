@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
 import OrdersHeader from '../../components/Order/header';
 import Span from '../../components/Span';
-import TableRow from '../../components/Table/TableRow';
+import TableRow from '../../components/Table/TableRowOrder';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import formatDate from '../../utils/helpersFunctions/formatDate';
 
