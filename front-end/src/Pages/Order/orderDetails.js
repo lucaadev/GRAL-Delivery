@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
-import OrdersHeader from '../../components/OrdersHeader';
+import OrdersHeader from '../../components/Order/header';
 import Span from '../../components/Span';
 import TableRow from '../../components/Table/TableRow';
 import axiosInstance from '../../utils/axios/axiosInstance';

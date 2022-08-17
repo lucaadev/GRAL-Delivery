@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
-import OrderCard from '../../components/OrderCard';
+import OrderCard from '../../components/Order/card';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 import formatDate from '../../utils/helpersFunctions/formatDate';
