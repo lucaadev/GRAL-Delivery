@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../../components/NavBar';
+import Header from '../../components/Header';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 import SallesHeader from '../../components/SellerOrdersHeader';
 import Span from '../../components/Span';

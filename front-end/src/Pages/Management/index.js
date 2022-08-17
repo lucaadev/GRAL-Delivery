@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import Header from '../../components/NavBar';
+import Header from '../../components/Header';
 import Span from '../../components/Span';
 import TableRowAdmin from '../../components/Table/TableRowAdmin';
 import axiosInstance from '../../utils/axios/axiosInstance';

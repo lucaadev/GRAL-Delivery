@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/NavBar';
+import Header from '../../components/Header';
 import SellerOrderCard from '../../components/SellerCard';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';

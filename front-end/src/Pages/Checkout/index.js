@@ -3,7 +3,7 @@ import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import DetailsDelivery from '../../components/DetailsDelivery';
-import Header from '../../components/NavBar';
+import Header from '../../components/Header';
 import Span from '../../components/Span';
 import TableHead from '../../components/Table/TableHead';
 import TableRow from '../../components/Table/TableRow';

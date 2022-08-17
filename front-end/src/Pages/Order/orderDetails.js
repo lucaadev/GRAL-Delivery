@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../../components/NavBar';
+import Header from '../../components/Header';
 import OrdersHeader from '../../components/OrdersHeader';
 import Span from '../../components/Span';
 import TableRow from '../../components/Table/TableRow';
