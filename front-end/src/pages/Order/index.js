@@ -1,13 +1,13 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../components/NavBar';
-import SellerOrderCard from '../../components/SellerCard';
+import Header from '../../components/Header';
+import OrderCard from '../../components/Order/card';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-import formatDate from '../../utils/helpersFunctions/formatDate';
+import formatDate from '../../utils/helpers/formatDate';
 
-function SellerOrder() {
-  const { user, setUser, orders, setOrders } = useContext(DeliveryContext);
+function Order() {
+  const { user, orders, setOrders } = useContext(DeliveryContext);
   const navigate = useNavigate();
   const getAllOrders = useCallback(async (userData) => {
     const config = {
@@ -15,7 +15,7 @@ function SellerOrder() {
     };
     try {
       const { data } = await axiosInstance
-        .get(`/sales/${userData.id}/seller_id`, config);
+        .get(`/sales/${userData.id}/user_id`, config);
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -23,25 +23,19 @@ function SellerOrder() {
   }, [setOrders]);
 
   useEffect(() => {
-    if (Object.keys(user).length !== 0) getAllOrders(user);
-    if (Object.keys(user).length === 0) navigate('/login');
-  }, [user, setUser, navigate, getAllOrders]);
+    if (user && Object.keys(user).length !== 0) getAllOrders(user);
+  }, [user, navigate, getAllOrders]);
 
   return (
     <section>
       <Header />
       {
-        orders.length !== 0 && orders.map((
-          {
-            id, status, saleDate, totalPrice, deliveryAddress,
-          },
-        ) => (
-          <SellerOrderCard
+        orders.length !== 0 && orders.map(({ id, status, saleDate, totalPrice }) => (
+          <OrderCard
             key={ id }
             id={ id }
             orderStatus={ status }
             orderDate={ formatDate(saleDate) }
-            orderAddress={ deliveryAddress }
             price={ totalPrice.toString().replace('.', ',') }
           />
         ))
@@ -50,4 +44,4 @@ function SellerOrder() {
   );
 }
 
-export default SellerOrder;
+export default Order;

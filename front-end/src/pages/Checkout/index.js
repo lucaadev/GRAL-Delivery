@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
-import DetailsDelivery from '../../components/DetailsDelivery';
-import Header from '../../components/NavBar';
+import DetailsDelivery from '../../components/Checkout/DeliveryForm';
+import Header from '../../components/Header';
 import Span from '../../components/Span';
 import TableHead from '../../components/Table/TableHead';
-import TableRow from '../../components/Table/TableRow';
+import TableRow from '../../components/Table/TableRowOrder';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 import schemaCheckout from '../../utils/schemas/schemaCheckout';
@@ -18,7 +18,8 @@ function Checkout() {
     cartValue,
     sale,
     setSale,
-    cart } = useContext(DeliveryContext);
+    cart,
+    setCart } = useContext(DeliveryContext);
   const [sellers, setSellers] = useState([]);
   const alert = useAlert();
   const navigate = useNavigate();
@@ -33,6 +34,9 @@ function Checkout() {
       const { data } = await axiosInstance
         .post('/sales', value, config);
       navigate(`/customer/orders/${data.id}`);
+      setCart([]);
+      setCartValue(0);
+      localStorage.setItem('cartValue', 0);
     } catch (error) {
       console.log(error);
     }

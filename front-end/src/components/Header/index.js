@@ -4,23 +4,20 @@ import DeliveryContext from '../../utils/context/DeliveryContext';
 import Span from '../Span';
 
 function Header() {
-  // const [user, setUser] = useState('');
-  const { user, setUser, setCart } = useContext(DeliveryContext);
+  const { user, setUser, setCart, setOrders, setSale } = useContext(DeliveryContext);
   const clearStorage = () => {
     setUser({});
     setCart([]);
+    setOrders([]);
+    setSale({
+      userId: '',
+      sellerId: '0',
+      deliveryAddress: '',
+      deliveryNumber: '',
+    });
     localStorage.clear();
     localStorage.setItem('user', '');
   };
-
-  // const getUserStorageDataAndSave = useCallback(() => {
-  //   const userData = JSON.parse(localStorage.getItem('user'));
-  //   setUser(userData);
-  // }, []);
-
-  // useEffect(() => {
-  //   getUserStorageDataAndSave();
-  // }, [getUserStorageDataAndSave]);
 
   return (
     <section>

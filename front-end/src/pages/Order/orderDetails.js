@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../../components/NavBar';
-import OrdersHeader from '../../components/OrdersHeader';
+import Header from '../../components/Header';
+import OrdersHeader from '../../components/Order/header';
 import Span from '../../components/Span';
-import TableRow from '../../components/Table/TableRow';
+import TableRow from '../../components/Table/TableRowOrder';
 import axiosInstance from '../../utils/axios/axiosInstance';
-import formatDate from '../../utils/helpersFunctions/formatDate';
+import formatDate from '../../utils/helpers/formatDate';
 
 function OrderDetails() {
   const [order, setOrder] = useState([]);
@@ -17,7 +17,7 @@ function OrderDetails() {
     };
     try {
       const { data } = await axiosInstance
-        .get(`/sp/${id}/search?key=id`, config);
+        .get(`/sale_products/${id}/search?key=id`, config);
       setOrder(data);
     } catch (error) {
       console.log(error);

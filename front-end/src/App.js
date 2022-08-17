@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Login from './Pages/Login';
-import Register from './Pages/Register';
-import Products from './Pages/Products';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Products from './pages/Products';
 import DeliveryProvider from './utils/context/DeliveryProvider';
-import Checkout from './Pages/Checkout';
-import Order from './Pages/Order';
-import OrderDetails from './Pages/Order/orderDetails';
-import Seller from './Pages/Seller';
-import SellerDetails from './Pages/Seller/sellerDetails';
-import Management from './Pages/Management';
+import Checkout from './pages/Checkout';
+import Order from './pages/Order';
+import OrderDetails from './pages/Order/orderDetails';
+import Seller from './pages/Seller';
+import SellerDetails from './pages/Seller/sellerDetails';
+import Management from './pages/Management';
 
 function App() {
   return (

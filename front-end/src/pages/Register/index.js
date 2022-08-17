@@ -5,7 +5,7 @@ import { schemaRegister } from '../../utils/schemas/schemaRegister';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Span from '../../components/Span';
-import { saveStorage } from '../../utils/helpersFunctions/localStorage';
+import { saveStorage } from '../../utils/helpers/localStorage';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 
 function Register() {

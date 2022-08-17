@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../../components/NavBar';
+import Header from '../../components/Header';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-import SallesHeader from '../../components/SellerOrdersHeader';
+import SallesHeader from '../../components/Seller/header';
 import Span from '../../components/Span';
 import TableRow from '../../components/Table/TableRowSeller';
 import TableHead from '../../components/Table/TableHead';
 import axiosInstance from '../../utils/axios/axiosInstance';
-import formatDate from '../../utils/helpersFunctions/formatDate';
+import formatDate from '../../utils/helpers/formatDate';
 
 function SellerDetails() {
   const { user } = useContext(DeliveryContext);
@@ -20,7 +20,7 @@ function SellerDetails() {
     };
     try {
       const { data } = await axiosInstance
-        .get(`/sp/${id}/search?key=id`, config);
+        .get(`/sale_products/${id}/search?key=id`, config);
       setOrder(data);
     } catch (error) {
       console.log(error);

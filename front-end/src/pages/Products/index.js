@@ -1,8 +1,8 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CartBtn from '../../components/CartBtn';
-import Header from '../../components/NavBar';
-import Card from '../../components/ProductCard';
+import CartBtn from '../../components/CartButton';
+import Header from '../../components/Header';
+import Card from '../../components/Product/card';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 
