@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
-import DetailsDelivery from '../../components/DetailsDelivery';
+import DetailsDelivery from '../../components/Checkout/DeliveryForm';
 import Header from '../../components/Header';
 import Span from '../../components/Span';
 import TableHead from '../../components/Table/TableHead';

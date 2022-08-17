@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Input from './Input';
+import Input from '../Input';
 
-function DetailsDelivery({
+function DeliveryForm({
   sellers,
   onChangefn,
   sellerId,
@@ -61,7 +61,7 @@ function DetailsDelivery({
   );
 }
 
-DetailsDelivery.propTypes = {
+DeliveryForm.propTypes = {
   sellers: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -74,4 +74,4 @@ DetailsDelivery.propTypes = {
   onChangefn: PropTypes.func.isRequired,
 };
 
-export default DetailsDelivery;
+export default DeliveryForm;
