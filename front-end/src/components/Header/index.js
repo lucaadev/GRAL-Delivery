@@ -4,7 +4,6 @@ import DeliveryContext from '../../utils/context/DeliveryContext';
 import Span from '../Span';
 
 function Header() {
-  // const [user, setUser] = useState('');
   const { user, setUser, setCart } = useContext(DeliveryContext);
   const clearStorage = () => {
     setUser({});
@@ -12,15 +11,6 @@ function Header() {
     localStorage.clear();
     localStorage.setItem('user', '');
   };
-
-  // const getUserStorageDataAndSave = useCallback(() => {
-  //   const userData = JSON.parse(localStorage.getItem('user'));
-  //   setUser(userData);
-  // }, []);
-
-  // useEffect(() => {
-  //   getUserStorageDataAndSave();
-  // }, [getUserStorageDataAndSave]);
 
   return (
     <section>
