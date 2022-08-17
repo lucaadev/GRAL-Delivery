@@ -7,7 +7,7 @@ import Span from '../../components/Span';
 import TableRow from '../../components/Table/TableRowSeller';
 import TableHead from '../../components/Table/TableHead';
 import axiosInstance from '../../utils/axios/axiosInstance';
-import formatDate from '../../utils/helpersFunctions/formatDate';
+import formatDate from '../../utils/helpers/formatDate';
 
 function SellerDetails() {
   const { user } = useContext(DeliveryContext);

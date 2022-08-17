@@ -5,7 +5,7 @@ import OrdersHeader from '../../components/Order/header';
 import Span from '../../components/Span';
 import TableRow from '../../components/Table/TableRowOrder';
 import axiosInstance from '../../utils/axios/axiosInstance';
-import formatDate from '../../utils/helpersFunctions/formatDate';
+import formatDate from '../../utils/helpers/formatDate';
 
 function OrderDetails() {
   const [order, setOrder] = useState([]);

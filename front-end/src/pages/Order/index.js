@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 import OrderCard from '../../components/Order/card';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
-import formatDate from '../../utils/helpersFunctions/formatDate';
+import formatDate from '../../utils/helpers/formatDate';
 
 function Order() {
   const { user, orders, setOrders } = useContext(DeliveryContext);

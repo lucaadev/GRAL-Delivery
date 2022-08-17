@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import sumCart from '../helpersFunctions/sumCart';
+import sumCart from '../helpers/sumCart';
 import DeliveryContext from './DeliveryContext';
 
 function DeliveryProvider({ children }) {
