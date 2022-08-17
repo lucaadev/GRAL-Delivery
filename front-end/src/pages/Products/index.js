@@ -27,25 +27,29 @@ function Products() {
   }, [setCartValue]);
 
   return (
-    <section className="main-products">
+    <section>
       <Header />
-      <section className="main-products-cards">
-        { products.length !== 0 && products
-          .map(({ id, name: productName, price, url_image: urlImage }, i) => {
-            const priceFormat = `${price}`.replace('.', ',');
-            return (
-              <Card
-                key={ i }
-                id={ id }
-                title={ productName }
-                price={ priceFormat }
-                floatPrice={ price }
-                image={ urlImage }
-              />
-            );
-          })}
+      <section className="main-products">
+        <section className="main-products-cards">
+          { products.length !== 0 && products
+            .map(({ id, name: productName, price, url_image: urlImage }, i) => {
+              const priceFormat = `${price}`.replace('.', ',');
+              return (
+                <Card
+                  key={ i }
+                  id={ id }
+                  title={ productName }
+                  price={ priceFormat }
+                  floatPrice={ price }
+                  image={ urlImage }
+                />
+              );
+            })}
+        </section>
       </section>
-      <CartBtn price={ cartValue || 0.00 } />
+      <section className="cart-section">
+        <CartBtn price={ cartValue || 0.00 } />
+      </section>
     </section>
   );
 }

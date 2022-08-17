@@ -26,36 +26,45 @@ function Card(props) {
 
   return (
     <section className="product-card" key={ id }>
-      <Span dataTestid={ `customer_products__element-card-title-${id}` }>{title}</Span>
-      <Span dataTestid={ `customer_products__element-card-price-${id}` }>
-        {priceFormat}
-      </Span>
       <img
         src={ image }
         alt="product-card"
-        style={ { width: '50px' } }
+        className="card-image"
         data-testid={ `customer_products__img-card-bg-image-${id}` }
       />
-      <Button
-        dataTestid={ `customer_products__button-card-rm-item-${id}` }
-        onClickfn={ () => updateItemValue(itemValue - 1) }
-      >
-        -
-      </Button>
-      <Input
-        type="number"
-        dataTestid={ `customer_products__input-card-quantity-${id}` }
-        name="quantity"
-        value={ itemValue }
-        onChangefn={ ({ target: { value } }) => { updateItemValue(value); } }
-        labelText=""
-      />
-      <Button
-        dataTestid={ `customer_products__button-card-add-item-${id}` }
-        onClickfn={ () => updateItemValue(itemValue + 1) }
-      >
-        +
-      </Button>
+      <section className="product-card-bottom">
+        <Span dataTestid={ `customer_products__element-card-title-${id}` }>{title}</Span>
+        <Span dataTestid={ `customer_products__element-card-price-${id}` }>
+          R$:
+          { ' ' }
+          {priceFormat}
+        </Span>
+        <section className="product-card-bottom-buttons">
+          <Button
+            dataTestid={ `customer_products__button-card-rm-item-${id}` }
+            onClickfn={ () => updateItemValue(itemValue - 1) }
+            classNameBtn="product-card-button"
+          >
+            -
+          </Button>
+          <Input
+            inputClass="product-card-input"
+            type="number"
+            dataTestid={ `customer_products__input-card-quantity-${id}` }
+            name="quantity"
+            value={ itemValue }
+            onChangefn={ ({ target: { value } }) => { updateItemValue(value); } }
+            labelText=""
+          />
+          <Button
+            dataTestid={ `customer_products__button-card-add-item-${id}` }
+            onClickfn={ () => updateItemValue(itemValue + 1) }
+            classNameBtn="product-card-button"
+          >
+            +
+          </Button>
+        </section>
+      </section>
     </section>
   );
 }

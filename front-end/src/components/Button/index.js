@@ -6,9 +6,11 @@ function Button({
   dataTestid,
   onClickfn,
   disabled,
+  classNameBtn,
 }) {
   return (
     <button
+      className={ disabled ? 'button-disabled' : classNameBtn }
       type="button"
       data-testid={ dataTestid }
       disabled={ disabled || '' }
@@ -20,6 +22,7 @@ function Button({
 }
 
 Button.propTypes = {
+  classNameBtn: PropTypes.string,
   dataTestid: PropTypes.string,
   disabled: PropTypes.bool,
   onClickfn: PropTypes.func,

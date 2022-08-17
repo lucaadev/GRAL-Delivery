@@ -8,11 +8,15 @@ function Input({
   onChangefn,
   type,
   value,
+  inputClass,
 }) {
   return (
-    <label htmlFor={ name }>
-      { labelText }
+    <section className="flex flex-col m-4">
+      <label htmlFor={ name } className="font-medium mb-1">
+        { labelText }
+      </label>
       <input
+        className={ inputClass }
         id={ name }
         type={ type }
         data-testid={ dataTestid }
@@ -20,7 +24,7 @@ function Input({
         value={ value }
         onChange={ onChangefn }
       />
-    </label>
+    </section>
   );
 }
 
@@ -31,6 +35,7 @@ Input.propTypes = {
   onChangefn: PropTypes.func,
   type: PropTypes.string,
   value: PropTypes.string,
+  inputClass: PropTypes.string,
 }.isRequired;
 
 export default Input;

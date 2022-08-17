@@ -79,6 +79,7 @@ function Register() {
         onChangefn={ handleChange }
       />
       <Button
+        classNameBtn="button-login"
         dataTestid="common_register__button-register"
         onClickfn={ handleClickRegister }
         disabled={ isDisabled }

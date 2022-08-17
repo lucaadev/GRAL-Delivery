@@ -22,42 +22,58 @@ function Header() {
   return (
     <section>
       <section className="navbar">
-        {user.role === 'customer' && (
-          <Link
-            to="/customer/products"
-            data-testid="customer_products__element-navbar-link-products"
+        <section className="navbar-elements">
+
+          {user.role === 'customer' && (
+
+            <Link
+              to="/customer/products"
+              data-testid="customer_products__element-navbar-link-products"
+              className="navbar-link"
+            >
+              Produtos
+            </Link>
+
+          )}
+          {user.role === 'customer' && (
+
+            <Link
+              to="/customer/orders"
+              data-testid="customer_products__element-navbar-link-orders"
+              className="navbar-link"
+            >
+              Meus Pedidos
+            </Link>
+
+          )}
+          {user.role === 'seller' && (
+
+            <Link
+              to="/seller/orders"
+              data-testid="customer_products__element-navbar-link-orders"
+              className="navbar-link"
+            >
+              Meus Pedidos
+            </Link>
+
+          )}
+        </section>
+        <section className="navbar-elements">
+          <Span
+            dataTestid="customer_products__element-navbar-user-full-name"
+            spanClass="navbar-name"
           >
-            Produtos
-          </Link>
-        )}
-        {user.role === 'customer' && (
+            {user.name}
+          </Span>
           <Link
-            to="/customer/orders"
-            data-testid="customer_products__element-navbar-link-orders"
+            to="/login"
+            data-testid="customer_products__element-navbar-link-logout"
+            onClick={ clearStorage }
+            className="navbar-link"
           >
-            Meus Pedidos
+            Sair
           </Link>
-        )}
-        {user.role === 'seller' && (
-          <Link
-            to="/seller/orders"
-            data-testid="customer_products__element-navbar-link-orders"
-          >
-            Meus Pedidos
-          </Link>
-        )}
-        <Span
-          dataTestid="customer_products__element-navbar-user-full-name"
-        >
-          {user.name}
-        </Span>
-        <Link
-          to="/login"
-          data-testid="customer_products__element-navbar-link-logout"
-          onClick={ clearStorage }
-        >
-          Sair
-        </Link>
+        </section>
       </section>
     </section>
   );

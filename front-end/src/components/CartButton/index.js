@@ -12,11 +12,12 @@ function CartBtn({ price }) {
     <Button
       dataTestid="customer_products__button-cart"
       disabled={ price === 0 }
+      classNameBtn="cart-button"
       onClickfn={ () => {
         navigate('/customer/checkout');
       } }
     >
-      Ver Carrinho: R$
+      Total:
       { ' ' }
       <Span dataTestid="customer_products__checkout-bottom-value">{priceFormat}</Span>
     </Button>

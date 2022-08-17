@@ -67,40 +67,44 @@ function Login() {
   useEffect(() => performTheRedirect(user), [user, performTheRedirect]);
 
   return (
-    <section>
-      <Input
-        type="text"
-        dataTestid="common_login__input-email"
-        labelText="Email"
-        name="email"
-        value={ login.email }
-        onChangefn={ handleChange }
-      />
-      <Input
-        type="password"
-        dataTestid="common_login__input-password"
-        labelText="Password"
-        name="password"
-        value={ login.password }
-        onChangefn={ handleChange }
-      />
-      <Button
-        dataTestid="common_login__button-login"
-        disabled={ isDisabled }
-        onClickfn={ handleClickLogin }
-      >
-        Login
-      </Button>
-      <Button
-        dataTestid="common_login__button-register"
-        onClickfn={ () => navigate('/register') }
-      >
-        Ainda não tenho conta
-      </Button>
-      { errorDB !== '' && (
-        <section>
-          <Span dataTestid="common_login__element-invalid-email">{errorDB}</Span>
-        </section>)}
+    <section className="main-login">
+      <section className="main-login-bg">
+        <Input
+          type="text"
+          dataTestid="common_login__input-email"
+          labelText="Email"
+          name="email"
+          value={ login.email }
+          onChangefn={ handleChange }
+        />
+        <Input
+          type="password"
+          dataTestid="common_login__input-password"
+          labelText="Password"
+          name="password"
+          value={ login.password }
+          onChangefn={ handleChange }
+        />
+        <Button
+          classNameBtn="button-login"
+          dataTestid="common_login__button-login"
+          disabled={ isDisabled }
+          onClickfn={ handleClickLogin }
+        >
+          Login
+        </Button>
+        <Button
+          classNameBtn="button-login"
+          dataTestid="common_login__button-register"
+          onClickfn={ () => navigate('/register') }
+        >
+          Ainda não tenho conta
+        </Button>
+        { errorDB !== '' && (
+          <section className="text-red-600 font-light mt-2">
+            <Span dataTestid="common_login__element-invalid-email">{errorDB}</Span>
+          </section>)}
+      </section>
     </section>
   );
 }
