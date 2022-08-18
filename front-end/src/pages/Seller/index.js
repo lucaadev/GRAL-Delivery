@@ -30,22 +30,26 @@ function SellerOrder() {
   return (
     <section>
       <Header />
-      {
-        orders.length !== 0 && orders.map((
+      <section className="main-seller">
+        <section className="main-seller-cards">
           {
-            id, status, saleDate, totalPrice, deliveryAddress,
-          },
-        ) => (
-          <SellerOrderCard
-            key={ id }
-            id={ id }
-            orderStatus={ status }
-            orderDate={ formatDate(saleDate) }
-            orderAddress={ deliveryAddress }
-            price={ totalPrice.toString().replace('.', ',') }
-          />
-        ))
-      }
+            orders.length !== 0 && orders.map((
+              {
+                id, status, saleDate, totalPrice, deliveryAddress,
+              },
+            ) => (
+              <SellerOrderCard
+                key={ id }
+                id={ id }
+                orderStatus={ status }
+                orderDate={ formatDate(saleDate) }
+                orderAddress={ deliveryAddress }
+                price={ totalPrice.toString().replace('.', ',') }
+              />
+            ))
+          }
+        </section>
+      </section>
     </section>
   );
 }

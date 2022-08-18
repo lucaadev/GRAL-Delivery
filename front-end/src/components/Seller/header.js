@@ -21,24 +21,28 @@ function SellerOrdersHeader({ orderNum, orderDate, orderStatus }) {
       <tr>
         <th
           data-testid="seller_order_details__element-order-details-label-order-id"
+          className="order-details-header"
         >
           { orderNum }
         </th>
 
         <th
           data-testid="seller_order_details__element-order-details-label-order-date"
+          className="order-details-header"
         >
           { orderDate }
         </th>
         <th
           data-testid="seller_order_details__element-order-details-label-delivery-status"
+          className="order-details-header"
         >
           { btnStatus }
         </th>
 
-        <th>
+        <th className="order-details-header">
           <Button
             dataTestid="seller_order_details__button-preparing-check"
+            classNameBtn="order-header-button"
             disabled={
               btnStatus === 'Preparando'
               || btnStatus === deliveryStatus
@@ -53,9 +57,10 @@ function SellerOrdersHeader({ orderNum, orderDate, orderStatus }) {
           </Button>
         </th>
 
-        <th>
+        <th className="order-details-header">
           <Button
             dataTestid="seller_order_details__button-dispatch-check"
+            classNameBtn="order-header-button"
             disabled={
               btnStatus === 'Pendente'
               || btnStatus === deliveryStatus

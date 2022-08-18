@@ -61,7 +61,7 @@ function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
               setBtnStatus('Entregue');
               updateStatus('Entregue');
             } }
-            classNameBtn="button-login"
+            classNameBtn="order-header-button"
           >
             Entregue
           </Button>

@@ -36,46 +36,50 @@ function SellerDetails() {
   return (
     <section>
       <Header />
-      <table>
-        {
-          sale && sale.map((e) => (
-            <SallesHeader
-              key={ e.id }
-              id={ e.id }
-              orderNum={ e.id }
-              orderDate={ formatDate(e.saleDate) }
-              orderStatus={ e.status }
-            />
-          ))
-        }
-      </table>
-      <table>
-        <TableHead />
-        {
-          products && products.map((product, i) => {
-            const priceFormat = `${product.price}`.replace('.', ',');
-            return (
-              <TableRow
-                key={ i }
-                index={ i }
-                id={ product.id }
-                title={ product.name }
-                quantity={ product.quantity }
-                price={ priceFormat }
-                subTotal={
-                  (product.quantity * product.price).toFixed(2).replace('.', ',')
-                }
+      <section className="main-order-details">
+        <table className="table-auto text-center">
+          {
+            sale && sale.map((e) => (
+              <SallesHeader
+                key={ e.id }
+                id={ e.id }
+                orderNum={ e.id }
+                orderDate={ formatDate(e.saleDate) }
+                orderStatus={ e.status }
               />
-            );
-          })
-        }
-      </table>
-      {sale && (
-        <Span dataTestid="seller_order_details__element-order-total-price">
-          Total R$:
-          {' '}
-          { (sale[0].totalPrice).toString().replace('.', ',') }
-        </Span>)}
+            ))
+          }
+
+          <TableHead />
+          {
+            products && products.map((product, i) => {
+              const priceFormat = `${product.price}`.replace('.', ',');
+              return (
+                <TableRow
+                  key={ i }
+                  index={ i }
+                  id={ product.id }
+                  title={ product.name }
+                  quantity={ product.quantity }
+                  price={ priceFormat }
+                  subTotal={
+                    (product.quantity * product.price).toFixed(2).replace('.', ',')
+                  }
+                />
+              );
+            })
+          }
+        </table>
+        {sale && (
+          <Span
+            dataTestid="seller_order_details__element-order-total-price"
+            spanClass="order-details-total"
+          >
+            Total R$:
+            {' '}
+            { (sale[0].totalPrice).toString().replace('.', ',') }
+          </Span>)}
+      </section>
     </section>
   );
 }

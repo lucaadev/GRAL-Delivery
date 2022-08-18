@@ -67,57 +67,64 @@ function Management() {
     <section className="management-screen">
       <section>
         <Header doNotDisplayLinkProducts="" />
-        <Input
-          type="name"
-          dataTestid="admin_manage__input-name"
-          name="name"
-          value={ registration.name }
-          onChangefn={ handleChange }
-          labelText="Nome"
-        />
-        <Input
-          type="email"
-          dataTestid="admin_manage__input-email"
-          name="email"
-          value={ registration.email }
-          onChangefn={ handleChange }
-          labelText="Email"
-        />
-        <Input
-          type="password"
-          dataTestid="admin_manage__input-password"
-          name="password"
-          value={ registration.password }
-          onChangefn={ handleChange }
-          labelText="Password"
-        />
-        <label htmlFor="role">
-          Tipo:
-          {' '}
-          <select
-            data-testid="admin_manage__select-role"
-            name="role"
-            id="role"
-            value={ registration.role }
-            onChange={ handleChange }
+        <section className="admin-form">
+          <Input
+            type="name"
+            dataTestid="admin_manage__input-name"
+            name="name"
+            value={ registration.name }
+            onChangefn={ handleChange }
+            labelText="Nome"
+            inputClass="input"
+          />
+          <Input
+            type="email"
+            dataTestid="admin_manage__input-email"
+            name="email"
+            value={ registration.email }
+            onChangefn={ handleChange }
+            labelText="Email"
+            inputClass="input"
+          />
+          <Input
+            type="password"
+            dataTestid="admin_manage__input-password"
+            name="password"
+            value={ registration.password }
+            onChangefn={ handleChange }
+            labelText="Password"
+            inputClass="input"
+          />
+          <label htmlFor="role" className="font-medium ml-4 mb-1">
+            Tipo:
+            {' '}
+            <select
+              data-testid="admin_manage__select-role"
+              name="role"
+              id="role"
+              value={ registration.role }
+              onChange={ handleChange }
+              className="input-admin"
+            >
+              {selectRole.map((role, i) => (
+                <option
+                  key={ i }
+                  value={ role }
+                >
+                  {role}
+                </option>
+              ))}
+            </select>
+          </label>
+          <Button
+            dataTestid="admin_manage__button-register"
+            onClickfn={ () => handleRegister() }
+            disabled={ isDisabled }
+            classNameBtn="button-login"
           >
-            {selectRole.map((role, i) => (
-              <option
-                key={ i }
-                value={ role }
-              >
-                {role}
-              </option>
-            ))}
-          </select>
-        </label>
-        <Button
-          dataTestid="admin_manage__button-register"
-          onClickfn={ () => handleRegister() }
-          disabled={ isDisabled }
-        >
-          Cadastrar
-        </Button>
+            Cadastrar
+          </Button>
+        </section>
       </section>
       <section>
         <thead>

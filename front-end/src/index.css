@@ -21,15 +21,19 @@
   }
 
   .button-disabled {
-    @apply rounded-md p-2 mx-4 my-3  bg-slate-400 text-white w-52 ease-in-out duration-300;
+    @apply rounded-md p-2 mx-4 my-3  bg-slate-400 text-slate-100  w-52 ease-in-out duration-300;
   }
 
   .button-login {
-    @apply rounded-md p-2 mx-4 my-3 bg-[#1A1940] text-white w-52 ease-in-out duration-300;
+    @apply rounded-md p-2 mx-4 my-3 bg-[#1A1940] text-slate-100 w-52 ease-in-out duration-300;
   }
   
   .input {
     @apply border text-black text-base font-light rounded-md p-2 w-80 focus:outline-none;
+  }
+
+  .input-admin {
+    @apply border text-black text-base font-light rounded-md p-2 w-28 focus:outline-none;
   }
 
   .input-checkout {
@@ -108,7 +112,7 @@
   }
 
   .table-headers {
-    @apply font-light bg-[#F2C12E] text-2xl text-[#1A1940] p-4 border;
+    @apply font-light bg-[#1A1940] text-2xl text-slate-100 p-4 border;
   }
 
   .table-row {
@@ -147,6 +151,48 @@
   }
   
   .order-details-header {
-    @apply font-light bg-[#1A1940] text-xl text-slate-100 p-4;
+    @apply font-light bg-[#F2C12E] text-xl text-[#1A1940] p-4;
   }
+
+  .order-header-button {
+    @apply rounded-md p-2 mx-4 my-3 bg-[#1A1940] text-slate-100 w-52 ease-in-out duration-300;
+  }
+
+  /* ORDER  */
+
+  .main-order {
+    @apply flex justify-center;
+  }
+
+  .main-order-cards {
+    @apply mt-10 grid grid-cols-4 gap-16;
+  }
+  .order-card {
+    @apply flex flex-row justify-around items-center bg-slate-100 min-w-[420px] border rounded-md shadow-md p-3 text-lg text-[#1A1940] font-light;
+  }
+
+  .card-date-price {
+    @apply flex flex-col justify-center items-center bg-slate-50 p-2 rounded-md;
+  }
+
+  /* SELLER  */
+
+  .main-seller {
+    @apply flex justify-center;
+  }
+
+  .seller-card {
+    @apply flex flex-col justify-around items-center bg-slate-100 w-[400px] h-40 border rounded-md shadow-md p-3 text-lg text-[#1A1940] font-light;
+  }
+
+  .main-seller-cards {
+    @apply mt-10 grid grid-cols-4 gap-16;
+  }
+
+  /* ADMING PAGE */
+
+  .admin-form {
+    @apply flex justify-center items-center w-3/4;
+  }
+
 }

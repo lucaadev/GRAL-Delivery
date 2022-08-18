@@ -29,17 +29,21 @@ function Order() {
   return (
     <section>
       <Header />
-      {
-        orders.length !== 0 && orders.map(({ id, status, saleDate, totalPrice }) => (
-          <OrderCard
-            key={ id }
-            id={ id }
-            orderStatus={ status }
-            orderDate={ formatDate(saleDate) }
-            price={ totalPrice.toString().replace('.', ',') }
-          />
-        ))
-      }
+      <section className="main-order">
+        <section className="main-order-cards">
+          {
+            orders.length !== 0 && orders.map(({ id, status, saleDate, totalPrice }) => (
+              <OrderCard
+                key={ id }
+                id={ id }
+                orderStatus={ status }
+                orderDate={ formatDate(saleDate) }
+                price={ totalPrice.toString().replace('.', ',') }
+              />
+            ))
+          }
+        </section>
+      </section>
     </section>
   );
 }
