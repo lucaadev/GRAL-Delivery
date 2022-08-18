@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import { schemaRegister } from '../../utils/schemas/schemaRegister';
 import Input from '../../components/Input';
-import Button from '../../components/Button';
+// import Button from '../../components/Button';
 import Span from '../../components/Span';
 import { saveStorage } from '../../utils/helpers/localStorage';
 import DeliveryContext from '../../utils/context/DeliveryContext';
+import logo from '../../images_/logoGral.png';
+import backgroundLogo from '../../images_/backgroundUp.png';
 
 function Register() {
   const navigate = useNavigate();
@@ -53,48 +55,76 @@ function Register() {
   useEffect(() => checkRegisterData(), [checkRegisterData]);
 
   return (
-    <section>
-      <Input
-        type="text"
-        dataTestid="common_register__input-name"
-        labelText="Name"
-        name="name"
-        value={ register.name }
-        onChangefn={ handleChange }
-      />
-      <Input
-        type="text"
-        dataTestid="common_register__input-email"
-        labelText="Email"
-        name="email"
-        value={ register.email }
-        onChangefn={ handleChange }
-      />
-      <Input
-        type="password"
-        dataTestid="common_register__input-password"
-        labelText="Password"
-        name="password"
-        value={ register.password }
-        onChangefn={ handleChange }
-      />
-      <Button
-        classNameBtn="button-login"
-        dataTestid="common_register__button-register"
-        onClickfn={ handleClickRegister }
-        disabled={ isDisabled }
+    <div
+      style={ { backgroundImage: `url(${backgroundLogo})` } }
+      className="login-main-div"
+    >
+      <div className="img-login-screen">
+        <div className="sub-img-login-screen">
+          <img
+            style={ { objectFit: 'cover' } }
+            src={ logo }
+            alt="logo"
+          />
+        </div>
+      </div>
+      <section
+        className="register-main"
       >
-        Cadastrar
-      </Button>
-      { errorDB !== '' && (
-        <section>
-          <Span
-            dataTestid="common_register__element-invalid_register"
+        <div />
+        <div className="inputs-login font-bold">
+          <Input
+            type="text"
+            dataTestid="common_register__input-name"
+            labelText="Name"
+            name="name"
+            value={ register.name }
+            onChangefn={ handleChange }
+            inputClass="input-login"
+          />
+          <Input
+            type="text"
+            dataTestid="common_register__input-email"
+            labelText="Email"
+            name="email"
+            value={ register.email }
+            onChangefn={ handleChange }
+            inputClass="input-login"
+          />
+          <Input
+            type="password"
+            dataTestid="common_register__input-password"
+            labelText="Password"
+            name="password"
+            value={ register.password }
+            onChangefn={ handleChange }
+            inputClass="input-login"
+          />
+          <button
+            type="button"
+            style={ {
+              backgroundColor: '#1a1940',
+            } }
+            className={ isDisabled ? 'btn-login-disabled' : 'btn-login' }
+            dataTestid="common_register__button-register"
+            onClick={ handleClickRegister }
+            disabled={ isDisabled }
           >
-            {errorDB}
-          </Span>
-        </section>)}
-    </section>
+            Cadastrar
+          </button>
+
+        </div>
+        { errorDB !== '' && (
+          <section>
+            <Span
+              dataTestid="common_register__element-invalid_register"
+            >
+              {errorDB}
+            </Span>
+          </section>)}
+      </section>
+    </div>
+
   );
 }
 

@@ -12,7 +12,7 @@ function DeliveryForm({
   return (
     <section className="delivery-details">
       <form>
-        <label htmlFor="sellerId" className="font-medium ml-4 mb-1">
+        <label htmlFor="sellerId" className="label-text ml-4 mb-1">
           Vendedor:
           {' '}
           <select

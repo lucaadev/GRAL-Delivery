@@ -34,7 +34,10 @@ function SellerDetails() {
   const { sale, products } = order;
 
   return (
-    <section>
+    <section
+      style={ { backgroundColor: 'rgba(242,210,46, 0.85)' } }
+      className="w-full h-screen"
+    >
       <Header />
       <section className="main-order-details">
         <table className="table-auto text-center">

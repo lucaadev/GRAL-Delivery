@@ -12,7 +12,7 @@ function Input({
 }) {
   return (
     <section className="flex flex-col m-4">
-      <label htmlFor={ name } className="font-medium mb-1">
+      <label htmlFor={ name } className="label-text">
         { labelText }
       </label>
       <input

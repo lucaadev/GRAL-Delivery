@@ -66,7 +66,7 @@ function Management() {
   useEffect(() => checkRegistrationData(), [checkRegistrationData]);
 
   return (
-    <section>
+    <section style={ { backgroundColor: 'rgba(242,210,46, 0.85)' } } className="w-full h-screen">
       <Header doNotDisplayLinkProducts="" />
       <section className="main-admin">
         <section className="admin-form">

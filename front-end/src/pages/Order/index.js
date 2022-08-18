@@ -27,7 +27,10 @@ function Order() {
   }, [user, navigate, getAllOrders]);
 
   return (
-    <section>
+    <section
+      style={ { backgroundColor: 'rgba(242,210,46, 0.85)' } }
+      className="w-full h-screen"
+    >
       <Header />
       <section className="main-order">
         <section className="main-order-cards">
