@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-max-depth */
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -64,9 +66,9 @@ function Management() {
   useEffect(() => checkRegistrationData(), [checkRegistrationData]);
 
   return (
-    <section className="management-screen">
-      <section>
-        <Header doNotDisplayLinkProducts="" />
+    <section>
+      <Header doNotDisplayLinkProducts="" />
+      <section className="main-admin">
         <section className="admin-form">
           <Input
             type="name"
@@ -125,26 +127,28 @@ function Management() {
             Cadastrar
           </Button>
         </section>
-      </section>
-      <section>
-        <thead>
-          <tr>
-            <th data-testid="admin_manage__element-user-table-item-number-">(index)</th>
-            <th data-testid="admin_manage__element-user-table-name-">name</th>
-            <th data-testid="admin_manage__element-user-table-email-">email</th>
-            <th data-testid="admin_manage__element-user-table-role-">role</th>
-            <th data-testid="admin_manage__element-user-table-remove-">excluir</th>
-          </tr>
-        </thead>
-        <tbody>
-          {userCreated && userCreated.map((person, index) => (
-            <TableRowAdmin
-              key={ person.id }
-              user={ person }
-              index={ index }
-              removeUserFn={ removeUser }
-            />))}
-        </tbody>
+        <section>
+          <table className="table-auto text-center">
+            <thead>
+              <tr>
+                {/* <th data-testid="admin_manage__element-user-table-item-number-" className="table-headers-admin">(index)</th> */}
+                <th data-testid="admin_manage__element-user-table-name-" className="table-headers-admin">Nome</th>
+                <th data-testid="admin_manage__element-user-table-email-" className="table-headers-admin">Email</th>
+                <th data-testid="admin_manage__element-user-table-role-" className="table-headers-admin">Atribuição</th>
+                <th data-testid="admin_manage__element-user-table-remove-" className="table-headers-admin">Excluir</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userCreated && userCreated.map((person, index) => (
+                <TableRowAdmin
+                  key={ person.id }
+                  user={ person }
+                  index={ index }
+                  removeUserFn={ removeUser }
+                />))}
+            </tbody>
+          </table>
+        </section>
       </section>
       { errorDB && (
         <Span dataTestid="admin_manage__element-invalid-register">{errorDB}</Span>
