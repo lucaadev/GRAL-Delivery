@@ -76,6 +76,7 @@ function Login() {
           name="email"
           value={ login.email }
           onChangefn={ handleChange }
+          inputClass="input"
         />
         <Input
           type="password"
@@ -84,6 +85,7 @@ function Login() {
           name="password"
           value={ login.password }
           onChangefn={ handleChange }
+          inputClass="input"
         />
         <Button
           classNameBtn="button-login"

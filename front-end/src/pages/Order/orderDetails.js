@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
 import OrdersHeader from '../../components/Order/header';
 import Span from '../../components/Span';
+import TableHead from '../../components/Table/TableHead';
 import TableRow from '../../components/Table/TableRowOrder';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import formatDate from '../../utils/helpers/formatDate';
@@ -34,46 +35,53 @@ function OrderDetails() {
   return (
     <section>
       <Header />
-      <table>
-        {
-          sale && sale.map((e) => (
-            <OrdersHeader
-              key={ e.id }
-              id={ e.id }
-              orderNum={ e.id }
-              seller={ e.idSeller.name }
-              orderDate={ formatDate(e.saleDate) }
-              orderStatus={ e.status }
-              receivedBtn
-            />
-          ))
-        }
-        {
-          products && products.map((product, i) => {
-            const priceFormat = `${product.price}`.replace('.', ',');
-            return (
-              <TableRow
-                key={ i }
-                index={ i }
-                id={ product.id }
-                title={ product.name }
-                quantity={ product.quantity }
-                price={ priceFormat }
-                subTotal={
-                  (product.quantity * product.price).toFixed(2).replace('.', ',')
-                }
-                showRemoveBtn
+      <section className="main-order-details">
+        <table className="table-auto text-center">
+          {
+            sale && sale.map((e) => (
+              <OrdersHeader
+                key={ e.id }
+                id={ e.id }
+                orderNum={ e.id }
+                seller={ e.idSeller.name }
+                orderDate={ formatDate(e.saleDate) }
+                orderStatus={ e.status }
+                receivedBtn
               />
-            );
-          })
-        }
-      </table>
-      {sale && (
-        <Span dataTestid="customer_order_details__element-order-total-price">
-          Total R$:
-          {' '}
-          { (sale[0].totalPrice).toString().replace('.', ',') }
-        </Span>)}
+            ))
+          }
+          <TableHead />
+          {
+            products && products.map((product, i) => {
+              const priceFormat = `${product.price}`.replace('.', ',');
+              return (
+                <TableRow
+                  key={ i }
+                  index={ i }
+                  id={ product.id }
+                  title={ product.name }
+                  quantity={ product.quantity }
+                  price={ priceFormat }
+                  subTotal={
+                    (product.quantity * product.price).toFixed(2).replace('.', ',')
+                  }
+                  showRemoveBtn
+                />
+              );
+            })
+          }
+        </table>
+        {sale && (
+          <Span
+            dataTestid="customer_order_details__element-order-total-price"
+            spanClass="order-details-total"
+          >
+            Total R$:
+            {' '}
+            { (sale[0].totalPrice).toString().replace('.', ',') }
+          </Span>)}
+
+      </section>
     </section>
   );
 }

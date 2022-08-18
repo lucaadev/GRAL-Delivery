@@ -22,28 +22,38 @@ function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
 
         <th
           data-testid="customer_order_details__element-order-details-label-order-id"
+          className="order-details-header"
         >
+          Pedido
+          {' '}
           { orderNum }
         </th>
 
         <th
           data-testid="customer_order_details__element-order-details-label-seller-name"
+          className="order-details-header"
         >
+          Vend:
+          {' '}
           { seller }
         </th>
 
         <th
           data-testid="customer_order_details__element-order-details-label-order-date"
+          className="order-details-header"
         >
           { orderDate }
         </th>
         <th
           data-testid={ testid }
+          className="order-details-header"
         >
+          Status:
+          {' '}
           { btnStatus }
         </th>
 
-        <th>
+        <th className="order-details-header">
           <Button
             dataTestid="customer_order_details__button-delivery-check"
             disabled={ btnStatus !== 'Em Trânsito' }
@@ -51,8 +61,9 @@ function OrdersHeader({ orderNum, seller, orderDate, orderStatus }) {
               setBtnStatus('Entregue');
               updateStatus('Entregue');
             } }
+            classNameBtn="button-login"
           >
-            Marcar como entregue
+            Entregue
           </Button>
         </th>
       </tr>
