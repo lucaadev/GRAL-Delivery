@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-max-depth */
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import DeliveryContext from '../../utils/context/DeliveryContext';
@@ -45,7 +47,9 @@ function Card(props) {
             onClickfn={ () => updateItemValue(itemValue - 1) }
             classNameBtn="product-card-button"
           >
-            -
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
+            </svg>
           </Button>
           <Input
             inputClass="product-card-input"
@@ -61,7 +65,9 @@ function Card(props) {
             onClickfn={ () => updateItemValue(itemValue + 1) }
             classNameBtn="product-card-button"
           >
-            +
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#1a1940" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
           </Button>
         </section>
       </section>

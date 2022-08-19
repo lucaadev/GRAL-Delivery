@@ -104,16 +104,17 @@
   }
 
   .navbar-elements {
-    @apply flex gap-10 font-normal text-slate-100 text-2xl;
+    @apply flex gap-10 font-semibold text-slate-100 text-2xl;
   }
 
   .navbar-link {
-    @apply p-4 rounded-md hover:bg-[#F2C12E] ease-in-out duration-300;
+    @apply  p-4 transition duration-300;
   }
 
   .navbar-name {
-    @apply p-4 font-bold text-[#F2C12E];
+    @apply flex items-center gap-2 p-4 font-bold text-[#F2C12E];
   }
+
   
   /* PRODUCT CARD CLASSES */
 
@@ -130,7 +131,7 @@
   }
 
   .product-card-input {
-    @apply border border-[#F2C12E] text-black text-base font-light rounded-md p-2 w-16 focus:outline-none text-center mx-0;
+    @apply border-2 border-[#F2C12E] text-black text-base font-light rounded-md p-2 w-16 focus:outline-none text-center mx-0;
   }
 
   .card-image {

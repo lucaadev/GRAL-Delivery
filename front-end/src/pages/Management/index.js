@@ -15,7 +15,7 @@ const INITIAL_VALUE_REGISTRATION = {
   name: '',
   email: '',
   password: '',
-  role: 'Selecione',
+  role: 'customer',
 };
 
 function Management() {
