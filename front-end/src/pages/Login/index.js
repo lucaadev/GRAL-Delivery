@@ -1,17 +1,14 @@
-/* eslint-disable react/jsx-max-depth */
+/* eslint-disable max-len */
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import Button from '../../components/Button';
-// import Input from '../../components/Input';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 // import Span from '../../components/Span';
 import axiosInstance from '../../utils/axios/axiosInstance';
 import DeliveryContext from '../../utils/context/DeliveryContext';
 import schemaLogin from '../../utils/schemas/schemaLogin';
-import logoMobile from '../../images_/logoMobile.png';
-import logo from '../../images_/logoGral.png';
 import backgroundLogo from '../../images_/backgroundUp.png';
-
-// teste
+import logo from '../../images_/logoGral.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -71,108 +68,81 @@ function Login() {
   useEffect(() => performTheRedirect(user), [user, performTheRedirect]);
 
   return (
-    <div
+    <section
+      className="main-login"
       style={ { backgroundImage: `url(${backgroundLogo})` } }
-      className="login-main-div"
     >
-      <div className="img-login-screen">
-        <div className="sub-img-login-screen">
-          <img
-            style={ { objectFit: 'cover' } }
-            src={ logo }
-            alt="logo"
-          />
-        </div>
-      </div>
-      <div className="inputs-login">
-        <div className="sub-inputs-login">
-          <div className="grid justify-items-center">
-            <img src={ logoMobile } alt="logo" className="mobile-img-logo" />
-          </div>
-          <div className="flex-col">
-            <h2 className="welcome-h2">Seja Bem-Vindo!</h2>
-            <p className="new-around-here">
-              Novo por aqui?
-              <button
-                className="to-register-button"
-                type="button"
-                data-testid="common_login__button-register"
-                onClick={ () => navigate('/register') }
-              >
-                Criar nova conta
-              </button>
-            </p>
-          </div>
-          <div className="mt-6">
-            <div className="mb-4">
-              <label
-                htmlFor="Email"
-                className="label-text"
-              >
-                Email
-                <input
-                  className="input-login"
-                  type="text"
-                  data-testid="common_login__input-email"
-                  name="email"
-                  value={ Login.email }
-                  onChange={ handleChange }
-                />
-              </label>
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="Password"
-                className="label-text"
-              >
-                Password
-                <input
-                  className="input-login"
-                  type="password"
-                  data-testid="common_login__input-password"
-                  name="password"
-                  value={ Login.password }
-                  onChange={ handleChange }
-                />
-              </label>
-            </div>
-
-            <div className="mb-4">
-              <button
-                style={ { backgroundColor: '#1a1940' } }
-                className={ isDisabled ? 'btn-login-disabled' : 'btn-login' }
-                type="button"
-                data-testid="common_login__button-login"
-                disabled={ isDisabled }
-                onClick={ handleClickLogin }
-              >
-                Entrar
-              </button>
-            </div>
-          </div>
-        </div>
+      <section className="flex w-full h-full justify-start">
+        <img
+          style={ { objectFit: 'fill' } }
+          src={ logo }
+          alt="logo"
+        />
+      </section>
+      <section className="main-login-form">
+        <section>
+          <h2 className="welcome-h2">Seja Bem-Vindo!</h2>
+          <p className="new-around-here">
+            Novo por aqui?
+            <button
+              className="to-register-button"
+              type="button"
+              data-testid="common_login__button-register"
+              onClick={ () => navigate('/register') }
+            >
+              Criar nova conta
+            </button>
+          </p>
+        </section>
+        <Input
+          type="text"
+          dataTestid="common_login__input-email"
+          labelText="Email"
+          name="email"
+          value={ login.email }
+          onChangefn={ handleChange }
+          inputClass="input-login"
+        />
+        <Input
+          type="password"
+          dataTestid="common_login__input-password"
+          labelText="Password"
+          name="password"
+          value={ login.password }
+          onChangefn={ handleChange }
+          inputClass="input-login"
+        />
+        <Button
+          dataTestid="common_login__button-login"
+          disabled={ isDisabled }
+          onClickfn={ handleClickLogin }
+          classNameBtn="btn-login"
+        >
+          Login
+        </Button>
         {(errorDB !== '') && (
-          <div role="alert">
-            <div
+          <section role="alert">
+            <section
               style={ { backgroundColor: '#F27C38' } }
-              className="text-white font-bold rounded-t px-4 py-2"
+              className="text-slate-100 font-semibold rounded-t mt-4 px-4 py-2"
             >
               Dados inválidos
-            </div>
-            <div
+            </section>
+            <section
               style={ {
                 border: '#F27C38',
                 backgroundColor: 'rgba(242, 124, 56, 0.6)',
               } }
               className="border border-t-0 rounded-b px-4 py-3 text-red-700"
             >
-              <p className="text-white font-semibold"> Usuário e/ou senha incorretos</p>
-            </div>
-          </div>
+              <p className="text-slate-100 font-semibold">
+                Usuário e/ou senha incorretos
+              </p>
+            </section>
+          </section>
         )}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }
 
