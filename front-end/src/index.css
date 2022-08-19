@@ -46,7 +46,62 @@
     @apply flex flex-col w-full h-screen justify-center items-center bg-transparent leading-tight;
   }
 
-  
+  .welcome-h2 {
+    @apply text-center text-3xl font-semibold text-indigo-900 ;
+  }
+
+  .new-around-here {
+    @apply text-center m-2 mt-2 text-sm text-gray-600 max-w-sm ;
+  }
+
+  .input-login {
+    @apply w-full py-3 px-4 leading-tight text-black bg-transparent border-b-2 focus:border-blue-900 focus:outline-none ;
+  }
+
+  .btn-login {
+    @apply w-52 px-2 py-3 mx-4 my-3 text-slate-100 bg-indigo-900 font-semibold rounded-md shadow-md ease-in-out duration-300;
+  }
+
+  .button-disabled {
+    @apply rounded-md px-2 py-3 mx-4 my-3  bg-slate-400 text-slate-100  w-52 ease-in-out duration-300;
+  }
+
+  .to-register-button {
+
+    @apply m-2 font-medium text-blue-700 ;
+  }
+
+  .label-text {
+    @apply text-indigo-900 font-bold ;
+  }.welcome-h2 {
+    @apply text-center text-3xl font-semibold text-indigo-900 ;
+  }
+
+  .new-around-here {
+    @apply text-center m-2 mt-2 text-sm text-gray-600 max-w-sm ;
+  }
+
+  .input-login {
+    @apply w-full py-3 px-4 leading-tight text-black bg-transparent border-b-2 focus:border-blue-900 focus:outline-none ;
+  }
+
+  .btn-login {
+    @apply w-52 px-2 py-3 mx-4 my-3 text-slate-100 bg-indigo-900 font-semibold rounded-md shadow-md ease-in-out duration-300;
+  }
+
+  .button-disabled {
+    @apply rounded-md px-2 py-3 mx-4 my-3  bg-slate-400 text-slate-100  w-52 ease-in-out duration-300;
+  }
+
+  .to-register-button {
+
+    @apply m-2 font-medium text-blue-700 ;
+  }
+
+  .label-text {
+    @apply text-indigo-900 font-bold ;
+  }
+
   /* HEADER */
   .navbar {
     @apply flex justify-between items-center p-3 mb-8 bg-[#1A1940] shadow-md;
@@ -105,7 +160,7 @@
   }
 
   .cart-button {
-    @apply font-bold rounded-md p-4 m-4 bg-[#1A1940] text-white w-64 ease-in-out duration-300;
+    @apply flex justify-center items-center gap-4 font-bold rounded-md p-4 m-4 bg-[#1A1940] text-white w-64 ease-in-out duration-300;
   }
 
   /* CHECKOUT PAGE */
@@ -208,41 +263,6 @@
 
   .table-headers-admin {
     @apply font-light bg-[#F2C12E] text-2xl text-[#1A1940] p-4 border;
-  }
-
-  /* NOVO CSS LOGIN */
-
-
-  .welcome-h2 {
-
-    @apply text-center text-3xl font-semibold text-indigo-900 ;
-  }
-
-  .new-around-here {
-
-    @apply text-center m-2 mt-2 text-sm text-gray-600 max-w-sm ;
-  }
-
-  .input-login {
-
-    @apply w-full py-3 px-4 leading-tight text-black bg-transparent border-b-2 focus:border-blue-900 focus:outline-none ;
-  }
-
-  .btn-login {
-    @apply w-52 px-2 py-3 mx-4 my-3 text-slate-100 bg-indigo-900 font-semibold rounded-md shadow-md ease-in-out duration-300;
-  }
-
-  .button-disabled {
-    @apply rounded-md px-2 py-3 mx-4 my-3  bg-slate-400 text-slate-100  w-52 ease-in-out duration-300;
-  }
-
-  .to-register-button {
-
-    @apply m-2 font-medium text-blue-700 ;
-  }
-
-  .label-text {
-    @apply text-indigo-900 font-bold ;
   }
 
 }

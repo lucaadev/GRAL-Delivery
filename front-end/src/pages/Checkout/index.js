@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/jsx-max-depth */
 import React, { useContext, useEffect, useState } from 'react';
 import { useAlert } from 'react-alert';
@@ -77,7 +78,7 @@ function Checkout() {
   }, [user, navigate, setCartValue]);
 
   return (
-    <section>
+    <section style={ { backgroundColor: 'rgba(242,210,46, 0.95)' } } className="w-full h-screen">
       <Header />
       <section className="main-checkout">
         <section className="checkout-table">

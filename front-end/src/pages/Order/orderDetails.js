@@ -34,7 +34,7 @@ function OrderDetails() {
 
   return (
     <section
-      style={ { backgroundColor: 'rgba(242,210,46, 0.85)' } }
+      style={ { backgroundColor: 'rgba(242,210,46, 0.95)' } }
       className="w-full h-screen"
     >
       <Header />
