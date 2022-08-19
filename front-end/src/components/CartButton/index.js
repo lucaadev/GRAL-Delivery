@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../Button';
+// import Button from '../Button';
 import Span from '../Span';
 
 function CartBtn({ price }) {
@@ -10,11 +10,11 @@ function CartBtn({ price }) {
   const priceFormat = price.toFixed(2).replace('.', ',');
 
   return (
-    <Button
-      dataTestid="customer_products__button-cart"
+    <button
+      type="button"
       disabled={ price === 0 }
-      classNameBtn={ price === 0 ? 'cart-button-disabled' : 'cart-button' }
-      onClickfn={ () => {
+      className={ price === 0 ? 'cart-button-disabled' : 'cart-button' }
+      onClick={ () => {
         navigate('/customer/checkout');
       } }
     >
@@ -23,7 +23,7 @@ function CartBtn({ price }) {
       </svg>
       {' '}
       <Span dataTestid="customer_products__checkout-bottom-value">{`R$ ${priceFormat}`}</Span>
-    </Button>
+    </button>
   );
 }
 
