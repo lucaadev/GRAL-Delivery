@@ -46,7 +46,7 @@ function DeliveryForm({
           size="10"
           value={ deliveryAddress }
           onChangefn={ onChangefn }
-          inputClass="input-checkout"
+          inputClass="input-login"
         />
         <Input
           dataTestid="customer_checkout__input-addressNumber"
@@ -57,7 +57,7 @@ function DeliveryForm({
           labelText="Número: "
           value={ deliveryNumber }
           onChangefn={ onChangefn }
-          inputClass="input-checkout"
+          inputClass="input-login"
         />
       </form>
     </section>

@@ -8,6 +8,8 @@ function Button({
   disabled,
   classNameBtn,
 }) {
+  if (classNameBtn === 'cart-button-disabled') disabled = false;
+
   return (
     <button
       className={ disabled ? 'button-disabled' : classNameBtn }

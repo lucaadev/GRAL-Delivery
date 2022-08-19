@@ -77,7 +77,7 @@ function Management() {
             value={ registration.name }
             onChangefn={ handleChange }
             labelText="Nome"
-            inputClass="input"
+            inputClass="input-login"
           />
           <Input
             type="email"
@@ -86,7 +86,7 @@ function Management() {
             value={ registration.email }
             onChangefn={ handleChange }
             labelText="Email"
-            inputClass="input"
+            inputClass="input-login"
           />
           <Input
             type="password"
@@ -95,7 +95,7 @@ function Management() {
             value={ registration.password }
             onChangefn={ handleChange }
             labelText="Password"
-            inputClass="input"
+            inputClass="input-login"
           />
           <label htmlFor="role" className="font-medium ml-4 mb-1">
             Tipo:
@@ -122,7 +122,7 @@ function Management() {
             dataTestid="admin_manage__button-register"
             onClickfn={ () => handleRegister() }
             disabled={ isDisabled }
-            classNameBtn="button-login"
+            classNameBtn="btn-login"
           >
             Cadastrar
           </Button>

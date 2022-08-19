@@ -40,7 +40,7 @@ function SellerDetails() {
     >
       <Header />
       <section className="main-order-details">
-        <table className="table-auto text-center">
+        <table className="table-auto text-center shadow-md">
           {
             sale && sale.map((e) => (
               <SallesHeader

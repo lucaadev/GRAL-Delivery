@@ -13,7 +13,7 @@ function CartBtn({ price }) {
     <Button
       dataTestid="customer_products__button-cart"
       disabled={ price === 0 }
-      classNameBtn="cart-button"
+      classNameBtn={ price === 0 ? 'cart-button-disabled' : 'cart-button' }
       onClickfn={ () => {
         navigate('/customer/checkout');
       } }

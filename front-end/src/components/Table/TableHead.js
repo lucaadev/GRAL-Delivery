@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function TableHead({ removeCol }) {
   return (
-    <thead className="border">
+    <thead>
       <tr>
         <th className="table-headers">Item</th>
         <th className="table-headers">Descrição</th>

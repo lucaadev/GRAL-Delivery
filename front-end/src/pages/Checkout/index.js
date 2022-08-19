@@ -82,7 +82,7 @@ function Checkout() {
       <Header />
       <section className="main-checkout">
         <section className="checkout-table">
-          <table className="table-auto text-center">
+          <table className="table-auto text-center shadow-md">
             <TableHead removeCol />
             {
               cart.map((item, i) => {
