@@ -25,7 +25,7 @@ Mencione as ferramentas que você usou para criar seu projeto
 * [Md5](https://www.npmjs.com/package/md5)
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 * [Eslint](https://eslint.org/)
-* [Tailwind]([https://jestjs.io/pt-BR/](https://tailwindcss.com/))
+* [Tailwind](https://tailwindcss.com/)
 * [React](https://reactjs.org/)
 
 ## 📌 Versão
