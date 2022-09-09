@@ -8,7 +8,7 @@ Nessa aplicação, o grupo foi responsável por criar e integrar tanto o back-en
 
 *Fazer a transparência de logística para o cliente e o vendedor.
 
-### 🔧 Demonstração
+### 🔧 Demonstração - o carregamento costuma demorar.
 
 ![Demonstração](https://github.com/lucaadev/GRAL-Delivery/blob/main/Demonstra%C3%A7%C3%A3o%20App.gif)
 
