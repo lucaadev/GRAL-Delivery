@@ -14,8 +14,6 @@ Nessa aplicação, o grupo foi responsável por criar e integrar tanto o back-en
 
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
-
 * [Express](https://expressjs.com/pt-br/)
 * [NodeJs](https://nodejs.org/en/)
 * [Docker](https://www.docker.com/)
@@ -31,6 +29,7 @@ Mencione as ferramentas que você usou para criar seu projeto
 ## 📌 Versão
 
 Usamos [Git](https://git-scm.com/) para controle de versão.
+
 ## ✒️ Autores
 
 * **Lucas Junqueira** - [GitHub](https://github.com/lucaadev)
