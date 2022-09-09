@@ -10,7 +10,7 @@ Nessa aplicação, o grupo foi responsável por criar e integrar tanto o back-en
 
 ### 🔧 Demonstração
 
-![Demonstração](https://github.com/lucaadev/TFC/blob/main/Demonstra%C3%A7%C3%A3o.gif)
+![Demonstração](https://github.com/lucaadev/GRAL-Delivery/blob/main/Demonstra%C3%A7%C3%A3o%20App.gif)
 
 ## 🛠️ Construído com
 
